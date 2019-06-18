@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Blorc.Core</AssemblyName>
     <RootNamespace>Blorc</RootNamespace>
+    <PackageId>Blorc.Core</PackageId>
+    <PackageVersion>1.0.0-alpha0001</PackageVersion>
     <IsPackable>true</IsPackable>
     <RestoreAdditionalProjectSources>
       https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;

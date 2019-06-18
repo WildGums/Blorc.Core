@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Blorc.Example</AssemblyName>
+    <AssemblyName>Blorc.Core.Example</AssemblyName>
     <RootNamespace>Blorc.Example</RootNamespace>
     <RestoreAdditionalProjectSources>
       https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
