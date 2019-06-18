@@ -1,7 +1,6 @@
-﻿namespace Blorc.PatternFly.Example.Components.Example
+﻿namespace Blorc.Example.Components.Example
 {
     using Microsoft.AspNetCore.Components;
-    using Blorc.PatternFly.Components;
     using Blorc.Components;
 
     public class ExampleComponent : BlorcComponentBase

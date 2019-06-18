@@ -1,4 +1,4 @@
-﻿namespace Blorc.PatternFly.Example
+﻿namespace Blorc.Example
 {
     using Microsoft.AspNetCore.Blazor.Hosting;
 

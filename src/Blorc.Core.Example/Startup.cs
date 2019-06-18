@@ -1,5 +1,6 @@
-﻿namespace Blorc.PatternFly.Example
+﻿namespace Blorc.Example
 {
+    using Blorc.Example;
     using Microsoft.AspNetCore.Components.Builder;
     using Microsoft.Extensions.DependencyInjection;
     using Services;

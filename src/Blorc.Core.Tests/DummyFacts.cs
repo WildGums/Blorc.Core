@@ -1,4 +1,4 @@
-﻿namespace Blorc.PatternFly.Tests
+﻿namespace Blorc.Tests
 {
     using NUnit.Framework;
 

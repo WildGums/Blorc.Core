@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <AssemblyName>Blorc.Core.Tests</AssemblyName>
-    <RootNamespace>Blorc.Core.Tests</RootNamespace>
+    <RootNamespace>Blorc.Tests</RootNamespace>
     <PackageId>WebGums.Tests</PackageId>
     <PackageVersion>1.0.0-alpha0001</PackageVersion>
     <Description></Description>
