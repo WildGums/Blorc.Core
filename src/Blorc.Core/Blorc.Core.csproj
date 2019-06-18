@@ -6,6 +6,8 @@
     <RootNamespace>Blorc</RootNamespace>
     <PackageId>Blorc.Core</PackageId>
     <PackageVersion>1.0.0-alpha0001</PackageVersion>
+    <Description>Core library for Blazor libraries and apps.</Description>
+    <PackageTags>blazor;core</PackageTags>
     <IsPackable>true</IsPackable>
     <RestoreAdditionalProjectSources>
       https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
