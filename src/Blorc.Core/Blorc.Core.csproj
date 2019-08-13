@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Catel.Analyzers" Version="1.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview5-19227-01" />
   </ItemGroup>
 
