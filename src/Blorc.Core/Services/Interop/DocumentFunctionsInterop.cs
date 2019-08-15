@@ -5,14 +5,14 @@
 
     internal static class DocumentFunctionsInterop
     {
-        public static Task<Rect> GetBoundingClientRect(IJSRuntime jsRuntime, long x, long y)
+        public static Task<Rect> GetBoundingClientRect(IJSRuntime jsRuntime, double x, double y)
         {
             return jsRuntime.InvokeAsync<Rect>(
                 "DocumentFunctions.getBoundingClientRect",
                 x, y);
         }
 
-        public static Task<Rect> GetOffsetBoundingClientRect(IJSRuntime jsRuntime, long x, long y)
+        public static Task<Rect> GetOffsetBoundingClientRect(IJSRuntime jsRuntime, double x, double y)
         {
             return jsRuntime.InvokeAsync<Rect>(
                 "DocumentFunctions.getOffsetBoundingClientRect",

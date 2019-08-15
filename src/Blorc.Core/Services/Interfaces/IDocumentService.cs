@@ -8,9 +8,9 @@
     {
         Task<Rect> GetBoundingClientRectById(string id);
 
-        Task<Rect> GetOffsetBoundingClientRect(long x, long y);
+        Task<Rect> GetOffsetBoundingClientRect(double x, double y);
 
-        Task<Rect> GetBoundingClientRect(long x, long y);
+        Task<Rect> GetBoundingClientRect(double x, double y);
 
         void InjectHead(IInjectorValueProvider injectorValueProvider);
     }

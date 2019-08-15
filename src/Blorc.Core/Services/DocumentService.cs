@@ -19,12 +19,12 @@
             return DocumentFunctionsInterop.GetBoundingClientRectById(_jsRuntime, id);
         }
 
-        public Task<Rect> GetOffsetBoundingClientRect(long x, long y)
+        public Task<Rect> GetOffsetBoundingClientRect(double x, double y)
         {
             return DocumentFunctionsInterop.GetOffsetBoundingClientRect(_jsRuntime, x, y);
         }
 
-        public Task<Rect> GetBoundingClientRect(long x, long y)
+        public Task<Rect> GetBoundingClientRect(double x, double y)
         {
             return DocumentFunctionsInterop.GetBoundingClientRect(_jsRuntime, x, y);
         }
