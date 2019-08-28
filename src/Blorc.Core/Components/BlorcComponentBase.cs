@@ -37,10 +37,11 @@
             return container;
         }
 
-        protected override void OnInit()
+        protected override void OnInitialized()
         {
-            base.OnInit();
+            base.OnInitialized();
         }
+
 
         protected virtual void CreateBindings()
         {
