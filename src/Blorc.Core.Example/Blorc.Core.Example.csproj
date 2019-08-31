@@ -19,8 +19,8 @@
     <ProjectGuid>3D467864-4A28-485A-ADB2-80875974A273</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Catel.Fody" Version="4.0.0" PrivateAssets="all" />
-    <PackageReference Include="Fody" Version="5.0.6" PrivateAssets="all">
+    <PackageReference Include="Catel.Fody" Version="4.2.0" PrivateAssets="all" />
+    <PackageReference Include="Fody" Version="6.0.0" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview7.19365.7" />
