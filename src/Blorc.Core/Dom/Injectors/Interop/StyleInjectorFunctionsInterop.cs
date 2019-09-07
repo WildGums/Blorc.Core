@@ -13,7 +13,7 @@
             // Implemented in exampleJsInterop.js
             return jsRuntime.InvokeAsync<string>(
                 "StyleInjectorFunctions.injectHead",
-                value);
+                value).AsTask();
         }
     }
 }

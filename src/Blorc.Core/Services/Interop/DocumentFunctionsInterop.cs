@@ -9,21 +9,21 @@
         {
             return jsRuntime.InvokeAsync<Rect>(
                 "DocumentFunctions.getBoundingClientRect",
-                x, y);
+                x, y).AsTask();
         }
 
         public static Task<Rect> GetOffsetBoundingClientRect(IJSRuntime jsRuntime, double x, double y)
         {
             return jsRuntime.InvokeAsync<Rect>(
                 "DocumentFunctions.getOffsetBoundingClientRect",
-                x, y);
+                x, y).AsTask();
         }
 
         public static Task<Rect> GetBoundingClientRectById(IJSRuntime jsRuntime, string id)
         {
             return jsRuntime.InvokeAsync<Rect>(
                 "DocumentFunctions.getBoundingClientRectById",
-                id);
+                id).AsTask();
         }
     }
 
