@@ -4,7 +4,7 @@
     <AssemblyName>Blorc.Core</AssemblyName>
     <RootNamespace>Blorc</RootNamespace>
     <PackageId>Blorc.Core</PackageId>
-    <PackageVersion>1.0.0-alpha0116</PackageVersion>
+    <PackageVersion>1.0.0-alpha0117</PackageVersion>
     <Description>Core library for Blazor libraries and apps.</Description>
     <PackageTags>blazor;core</PackageTags>
     <IsPackable>true</IsPackable>
@@ -33,7 +33,7 @@
     <!--
     <PackageReference Include="Catel.Analyzers" Version="1.0.0" PrivateAssets="all" />
     -->
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0-preview9.19424.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="content\elementsFunctionsInterop.js">

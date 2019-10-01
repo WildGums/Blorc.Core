@@ -13,7 +13,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <PackageVersion>1.0.0-alpha0116</PackageVersion>
+    <PackageVersion>1.0.0-alpha0117</PackageVersion>
   </PropertyGroup>
   <PropertyGroup>
     <!-- SonarQube requires a project guid -->
