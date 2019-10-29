@@ -1,14 +1,19 @@
 ﻿namespace Blorc.Components
 {
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using Microsoft.AspNetCore.Components;
 
     public abstract partial class BlorcComponentBase
     {
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IDictionary<string, object> AdditionalAttributes { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public TValue GetPropertyValue<TValue>(string propertyName)
         {
-            return _propertyBag.GetPropertyValue<TValue>(propertyName, default(TValue));
+            return _propertyBag.GetPropertyValue(propertyName, default(TValue));
         }
 
         public void SetPropertyValue(string propertyName, object value)
@@ -23,7 +28,6 @@
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-
         }
 
         protected virtual void RaisePropertyChanged(string propertyName)
