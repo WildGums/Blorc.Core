@@ -10,10 +10,15 @@
 
     public abstract partial class BlorcComponentBase
     {
+        private static readonly Dictionary<string, Type> EventCallbackTypeCache = new Dictionary<string, Type>();
+
         private static readonly Dictionary<string, MethodInfo> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo>();
 
         [Parameter(CaptureUnmatchedValues = true)]
         public IDictionary<string, object> AdditionalAttributes { get; set; }
+        
+        [Parameter]
+        public bool DisableAutomaticRaiseEventCallback { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -39,37 +44,6 @@
         protected virtual void RaisePropertyChanged(string propertyName)
         {
             RaisePropertyChanged(new PropertyChangedEventArgs(propertyName));
-
-            Console.WriteLine("RaisePropertyChanged");
-            var propertyInfo = PropertyHelper.GetPropertyInfo(this, propertyName);
-            if (propertyInfo == null)
-            {
-                Console.WriteLine("Property is null");
-                return;
-            }
-
-            string key = $"{GetType().FullName}-{propertyName}}}";
-            if (!CallbackInvokeAsyncCache.TryGetValue(key, out var invokeAsyncMethod))
-            {
-                var propertyChangedEventCallback = PropertyHelper.GetPropertyValue(this, $"{propertyName}Changed");
-                if (propertyChangedEventCallback == null)
-                {
-                    return;
-                }
-               
-                var callbackType = propertyChangedEventCallback.GetType();
-                invokeAsyncMethod = callbackType.GetMethod("InvokeAsync", new[] {propertyInfo.PropertyType});
-                if (invokeAsyncMethod == null)
-                {
-                    return;
-                }
-            }
-
-            Console.WriteLine("Invoking event via reflection");
-            CallbackInvokeAsyncCache.Add(key, invokeAsyncMethod);
-            var propertyValue = propertyInfo.GetValue(this);
-            var callbackTask = invokeAsyncMethod.Invoke(this, new[] { propertyValue }) as Task;
-            callbackTask?.GetAwaiter().GetResult();
         }
 
         protected virtual void RaisePropertyChanged(PropertyChangedEventArgs eventArgs)
@@ -77,6 +51,49 @@
             OnPropertyChanged(eventArgs);
 
             PropertyChanged?.Invoke(this, eventArgs);
+
+            RaiseEventCallback(eventArgs);
+        }
+
+        private void RaiseEventCallback(PropertyChangedEventArgs eventArgs)
+        {
+            if (DisableAutomaticRaiseEventCallback)
+            {
+                return;
+            }
+
+            var propertyName = eventArgs.PropertyName;
+            var propertyInfo = PropertyHelper.GetPropertyInfo(this, propertyName);
+            if (propertyInfo == null)
+            {
+                return;
+            }
+
+            var propertyTypeFullName = propertyInfo.PropertyType.FullName;
+            if (!EventCallbackTypeCache.TryGetValue(propertyTypeFullName ?? throw new InvalidOperationException(), out var eventCallbackType))
+            {
+                eventCallbackType = typeof(EventCallback<>).MakeGenericType(propertyInfo.PropertyType);
+                EventCallbackTypeCache.Add(propertyTypeFullName, eventCallbackType);
+            }
+
+            var propertyChangedEventCallback = PropertyHelper.GetPropertyValue(this, $"{propertyName}Changed");
+            if (propertyChangedEventCallback == null || !eventCallbackType.IsInstanceOfType(propertyChangedEventCallback))
+            {
+                return;
+            }
+
+            if (!CallbackInvokeAsyncCache.TryGetValue(propertyTypeFullName, out var invokeAsyncMethod))
+            {
+                invokeAsyncMethod = eventCallbackType.GetMethod("InvokeAsync", new []{ propertyInfo.PropertyType });
+                CallbackInvokeAsyncCache.Add(propertyTypeFullName, invokeAsyncMethod);
+            }
+
+            var propertyValue = propertyInfo.GetValue(this);
+            if (invokeAsyncMethod != null)
+            {
+                var callbackTask = invokeAsyncMethod.Invoke(propertyChangedEventCallback, new[] {propertyValue}) as Task;
+                callbackTask?.GetAwaiter().GetResult();
+            }
         }
     }
 }
