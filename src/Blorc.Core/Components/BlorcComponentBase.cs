@@ -5,9 +5,10 @@
     using System.ComponentModel;
     using Blorc.Bindings;
     using Blorc.Data;
-    using Blorc.Logging;
     using Blorc.StateConverters;
     using Microsoft.AspNetCore.Components;
+
+    using Serilog;
 
     public abstract partial class BlorcComponentBase : ComponentBase, IDisposable, INotifyPropertyChanged
     {
@@ -73,7 +74,7 @@
                 return;
             }
 
-            Log.Debug($"Forcing update for {GetType().Name}");
+            Log.Debug("Forcing update for {TypeName}", GetType().Name);
 
             StateHasChanged();
         }
@@ -98,7 +99,7 @@
             _stateConverterContainers.Clear();
         }
 
-        private void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!_disposedValue)
             {

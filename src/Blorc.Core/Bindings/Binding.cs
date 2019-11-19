@@ -3,7 +3,8 @@
     using System;
     using System.Globalization;
     using Blorc.Converters;
-    using Blorc.Logging;
+
+    using Serilog;
 
     /// <summary>
     /// Binding class for platforms not supporting bindings.

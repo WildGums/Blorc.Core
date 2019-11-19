@@ -1,7 +1,8 @@
 ﻿namespace Blorc.Bindings
 {
     using System;
-    using Blorc.Logging;
+
+    using Serilog;
 
     /// <summary>
     /// Base class for all bindings.
@@ -56,7 +57,7 @@
             ClearBinding();
         }
 
-        private void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!_disposedValue)
             {

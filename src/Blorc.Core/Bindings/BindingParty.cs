@@ -5,7 +5,8 @@
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Reflection;
-    using Blorc.Logging;
+
+    using Serilog;
 
     /// <summary>
     /// Contains information about a specific binding party (either source or target).
@@ -93,7 +94,7 @@
         public void AddEvent<TEventArgs>(string eventName)
             where TEventArgs : EventArgs
         {
-            Log.Debug($"Adding subscription to event '{eventName}'");
+            Log.Debug("Adding subscription to event '{EventName}'", eventName);
 
             var target = _instance.Target;
             if (target is null)

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using Blorc.Logging;
     using Blorc.MVVM;
 
     /// <summary>
@@ -173,7 +172,7 @@
             Clear();
         }
 
-        private void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!_disposedValue)
             {

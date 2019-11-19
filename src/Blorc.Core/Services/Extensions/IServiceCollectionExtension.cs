@@ -4,9 +4,11 @@
 
     public static class IServiceCollectionExtension
     {
-        public static void AddBlorc(this IServiceCollection service)
+        public static void AddBlorc(this IServiceCollection @this)
         {
-            service.AddSingleton<IDocumentService, DocumentService>();
+            @this.AddSingleton<IDocumentService, DocumentService>();
+            @this.AddSingleton<IConfigurationService, ConfigurationService>();
+            @this.AddSingleton<IFileService, FileService>();
         }
     }
 }
