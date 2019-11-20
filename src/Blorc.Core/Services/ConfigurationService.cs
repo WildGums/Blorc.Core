@@ -12,9 +12,9 @@
 
     public class ConfigurationService : IConfigurationService
     {
-        private readonly Dictionary<string, string> _parameters;
-
         private readonly NavigationManager _navigationManager;
+
+        private readonly Dictionary<string, string> _parameters;
 
         public ConfigurationService(NavigationManager navigationManager)
         {
@@ -44,7 +44,6 @@
                 }
             }
         }
-
 
         private void Initialize()
         {

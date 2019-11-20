@@ -1,4 +1,13 @@
-﻿namespace Blorc.Services
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FileService.cs" company="WildGums">
+//   Copyright (c) 2008 - 2019 WildGums. All rights reserved.
+// </copyright>
+// <summary>
+//   Defines the FileService type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Blorc.Services
 {
     using System;
     using System.Threading.Tasks;

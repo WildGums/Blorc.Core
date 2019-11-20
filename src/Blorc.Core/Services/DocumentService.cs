@@ -1,8 +1,10 @@
 ﻿namespace Blorc.Services
 {
     using System.Threading.Tasks;
+
     using Blorc.Dom.Injectors;
-    using Interop;
+    using Blorc.Services.Interop;
+
     using Microsoft.JSInterop;
 
     public class DocumentService : IDocumentService
@@ -14,6 +16,11 @@
             _jsRuntime = jsRuntime;
         }
 
+        public Task<Rect> GetBoundingClientRect(double x, double y)
+        {
+            return DocumentFunctionsInterop.GetBoundingClientRect(_jsRuntime, x, y);
+        }
+
         public Task<Rect> GetBoundingClientRectById(string id)
         {
             return DocumentFunctionsInterop.GetBoundingClientRectById(_jsRuntime, id);
@@ -22,11 +29,6 @@
         public Task<Rect> GetOffsetBoundingClientRect(double x, double y)
         {
             return DocumentFunctionsInterop.GetOffsetBoundingClientRect(_jsRuntime, x, y);
-        }
-
-        public Task<Rect> GetBoundingClientRect(double x, double y)
-        {
-            return DocumentFunctionsInterop.GetBoundingClientRect(_jsRuntime, x, y);
         }
 
         public void InjectHead(IInjectorValueProvider injectorValueProvider)
