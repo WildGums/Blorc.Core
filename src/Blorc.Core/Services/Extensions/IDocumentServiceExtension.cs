@@ -1,8 +1,6 @@
 ﻿namespace Blorc.Services
 {
-    using System;
     using System.Reflection;
-    using Serilog;
 
     public static class IDocumentServiceExtension
     {
