@@ -4,7 +4,7 @@
 
     public static class IServiceCollectionExtension
     {
-        public static void AddBlorc(this IServiceCollection @this)
+        public static void AddBlorcCore(this IServiceCollection @this)
         {
             @this.AddSingleton<IDocumentService, DocumentService>();
             @this.AddSingleton<IConfigurationService, ConfigurationService>();

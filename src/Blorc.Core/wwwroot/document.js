@@ -1,5 +1,4 @@
-// TODO: Move to another place and fix the name.
-window.DocumentFunctions = {
+window.BlorcDocument = {
     getBoundingClientRect: function(x, y) {
         var elementFromPoint = document.elementFromPoint(x, y);
         if (elementFromPoint === undefined || elementFromPoint == null) {

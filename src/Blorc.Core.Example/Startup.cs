@@ -1,5 +1,6 @@
 ﻿namespace Blorc.Example
 {
+    using Blorc.Dom.Injectors;
     using Blorc.Example;
     using Microsoft.AspNetCore.Components.Builder;
     using Microsoft.Extensions.DependencyInjection;
@@ -9,11 +10,14 @@
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddBlorc();
+            services.AddBlorcCore();
         }
 
-        public void Configure(IComponentsApplicationBuilder app)
+        public void Configure(IComponentsApplicationBuilder app, IDocumentService documentService)
         {
+            documentService.InjectBlorcCoreJS();
+            documentService.InjectHead(new Css("/patternfly/patternfly.css"));
+
             app.AddComponent<App>("app");
         }
     }

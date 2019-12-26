@@ -1,4 +1,4 @@
-﻿window.FileService = {
+﻿window.BlorcFile = {
     SaveAs: function (fileName, bytesBase64) {
         var link = document.createElement('a');
         link.download = fileName;

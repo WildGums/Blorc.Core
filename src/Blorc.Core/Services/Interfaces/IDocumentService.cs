@@ -20,5 +20,7 @@ namespace Blorc.Services
         Task<Rect> GetOffsetBoundingClientRect(double x, double y);
 
         void InjectHead(IInjectorValueProvider injectorValueProvider);
+
+        void InjectScript(string source, string type = "text/javascript");
     }
 }

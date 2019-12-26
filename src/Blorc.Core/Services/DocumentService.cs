@@ -18,23 +18,28 @@
 
         public Task<Rect> GetBoundingClientRect(double x, double y)
         {
-            return DocumentFunctionsInterop.GetBoundingClientRect(_jsRuntime, x, y);
+            return DocumentInterop.GetBoundingClientRect(_jsRuntime, x, y);
         }
 
         public Task<Rect> GetBoundingClientRectById(string id)
         {
-            return DocumentFunctionsInterop.GetBoundingClientRectById(_jsRuntime, id);
+            return DocumentInterop.GetBoundingClientRectById(_jsRuntime, id);
         }
 
         public Task<Rect> GetOffsetBoundingClientRect(double x, double y)
         {
-            return DocumentFunctionsInterop.GetOffsetBoundingClientRect(_jsRuntime, x, y);
+            return DocumentInterop.GetOffsetBoundingClientRect(_jsRuntime, x, y);
+        }
+
+        public void InjectScript(string source, string type = "text/javascript")
+        {
+            InjectorInterop.InjectScript(_jsRuntime, source, type);
         }
 
         public void InjectHead(IInjectorValueProvider injectorValueProvider)
         {
             var value = injectorValueProvider.GetValue();
-            StyleInjectorFunctionsInterop.InjectHead(_jsRuntime, value);
+            InjectorInterop.InjectHead(_jsRuntime, value);
         }
     }
 }

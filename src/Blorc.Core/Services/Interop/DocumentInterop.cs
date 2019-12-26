@@ -13,12 +13,12 @@ namespace Blorc.Services.Interop
 
     using Microsoft.JSInterop;
 
-    internal static class DocumentFunctionsInterop
+    internal static class DocumentInterop
     {
         public static Task<Rect> GetBoundingClientRect(IJSRuntime jsRuntime, double x, double y)
         {
             return jsRuntime.InvokeAsync<Rect>(
-                "DocumentFunctions.getBoundingClientRect",
+                "BlorcDocument.getBoundingClientRect",
                 x,
                 y).AsTask();
         }
@@ -26,14 +26,14 @@ namespace Blorc.Services.Interop
         public static Task<Rect> GetBoundingClientRectById(IJSRuntime jsRuntime, string id)
         {
             return jsRuntime.InvokeAsync<Rect>(
-                "DocumentFunctions.getBoundingClientRectById",
+                "BlorcDocument.getBoundingClientRectById",
                 id).AsTask();
         }
 
         public static Task<Rect> GetOffsetBoundingClientRect(IJSRuntime jsRuntime, double x, double y)
         {
             return jsRuntime.InvokeAsync<Rect>(
-                "DocumentFunctions.getOffsetBoundingClientRect",
+                "BlorcDocument.getOffsetBoundingClientRect",
                 x,
                 y).AsTask();
         }

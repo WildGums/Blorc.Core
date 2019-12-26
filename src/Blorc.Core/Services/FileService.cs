@@ -25,7 +25,7 @@ namespace Blorc.Services
 
         public async Task SaveAsync(string filename, byte[] data)
         {
-            await _jsRuntime.InvokeAsync<object>("FileService.SaveAs", filename, Convert.ToBase64String(data));
+            await _jsRuntime.InvokeAsync<object>("BlorcFile.SaveAs", filename, Convert.ToBase64String(data));
         }
     }
 }
