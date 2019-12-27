@@ -1,19 +1,20 @@
 ﻿namespace Blorc.Services
 {
     using System.Reflection;
+    using System.Threading.Tasks;
 
     public static class IDocumentServiceExtension
     {
-        public static void InjectAssemblyScriptFile(this IDocumentService @this, Assembly assembly, string path)
+        public static async Task InjectAssemblyScriptFile(this IDocumentService @this, Assembly assembly, string path)
         {
             var source = $"_content/{assembly.GetName().Name}/{path}";
-            @this.InjectScript(source);
+            await @this.InjectScript(source);
         }
 
-        public static void InjectBlorcCoreJS(this IDocumentService @this)
+        public static async Task InjectBlorcCoreJS(this IDocumentService @this)
         {
-            @this.InjectAssemblyScriptFile(typeof(IDocumentServiceExtension).Assembly, "document.js");
-            @this.InjectAssemblyScriptFile(typeof(IDocumentServiceExtension).Assembly, "file.js");
+            await @this.InjectAssemblyScriptFile(typeof(IDocumentServiceExtension).Assembly, "document.js");
+            await @this.InjectAssemblyScriptFile(typeof(IDocumentServiceExtension).Assembly, "file.js");
         }
     }
 }

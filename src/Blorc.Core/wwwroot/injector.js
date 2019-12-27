@@ -12,10 +12,11 @@ window.BlorcInjector = {
 
     injectScript: function (source, type) {
         return new Promise((resolve, reject) => {
+
             var head = document.getElementsByTagName('head')[0];
             var script = document.createElement('script');
             script.onload = function () {
-                resolve(true);
+                resolve();
             };
 
             script.src = source;

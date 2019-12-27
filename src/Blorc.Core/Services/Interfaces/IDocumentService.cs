@@ -21,6 +21,6 @@ namespace Blorc.Services
 
         void InjectHead(IInjectorValueProvider injectorValueProvider);
 
-        void InjectScript(string source, string type = "text/javascript");
+        Task InjectScript(string source, string type = "text/javascript");
     }
 }

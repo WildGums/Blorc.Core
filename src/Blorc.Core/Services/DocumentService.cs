@@ -31,9 +31,9 @@
             return DocumentInterop.GetOffsetBoundingClientRect(_jsRuntime, x, y);
         }
 
-        public void InjectScript(string source, string type = "text/javascript")
+        public async Task InjectScript(string source, string type = "text/javascript")
         {
-            InjectorInterop.InjectScript(_jsRuntime, source, type);
+            await InjectorInterop.InjectScript(_jsRuntime, source, type);
         }
 
         public void InjectHead(IInjectorValueProvider injectorValueProvider)
