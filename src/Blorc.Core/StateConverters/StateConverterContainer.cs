@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using Blorc.Components;
 
     public class StateConverterContainer : IStateConverterContainer
@@ -12,12 +11,12 @@
         private readonly List<IStateWatcher> _watchers = new List<IStateWatcher>();
         private readonly List<IStateUpdater> _updaters = new List<IStateUpdater>();
 
-        private readonly BlorcComponentBase _component;
+        private readonly IBlorcComponent _component;
         private bool _disposedValue;
         private bool _isUpdating;
         private bool _forceComponentUpdate;
 
-        internal StateConverterContainer(BlorcComponentBase component)
+        internal StateConverterContainer(IBlorcComponent component)
         {
             _component = component;
             _forceComponentUpdate = true;

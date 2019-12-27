@@ -1,15 +1,20 @@
 ﻿namespace Blorc.Components
 {
-    using System.Collections.Generic;
-
     using Blorc.Bindings;
     using Blorc.Data;
+    using Blorc.Services;
     using Blorc.StateConverters;
+
     using Microsoft.AspNetCore.Components;
 
     using Serilog;
 
-    public abstract partial class BlorcComponentBase : ComponentBase, IBlorcComponent
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Threading.Tasks;
+
+    public abstract partial class BlorcLayoutComponentBase : LayoutComponentBase, IBlorcComponent, IDisposable, INotifyPropertyChanged
     {
         private static readonly Dictionary<string, int> InstanceCounters = new Dictionary<string, int>();
 
@@ -18,10 +23,13 @@
         private readonly PropertyBag _propertyBag = new PropertyBag();
 
         private bool _suspendUpdates;
-
+        
         private bool _disposedValue;
 
-        public BlorcComponentBase()
+        [Inject]
+        public IDocumentService DocumentService { get; set; } 
+
+        public BlorcLayoutComponentBase()
         {
             BindingContext = new BindingContext();
 
@@ -44,16 +52,18 @@
             base.OnInitialized();
         }
 
+        protected override async Task OnInitializedAsync()
+        {
+            await DocumentService.InjectBlorcCoreJS();
+        }
 
         protected virtual void CreateBindings()
         {
-
         }
 
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
-
             if (_stateConverterContainers.Count > 0)
             {
                 _suspendUpdates = true;
