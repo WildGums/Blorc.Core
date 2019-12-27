@@ -4,7 +4,7 @@
     <AssemblyName>Blorc.Core</AssemblyName>
     <RootNamespace>Blorc</RootNamespace>
     <PackageId>Blorc.Core</PackageId>
-    <PackageVersion>1.0.0-alpha0143</PackageVersion>
+    <PackageVersion>1.0.0-alpha0175</PackageVersion>
     <Description>Core library for Blazor libraries and apps.</Description>
     <PackageTags>blazor;core</PackageTags>
     <IsPackable>true</IsPackable>

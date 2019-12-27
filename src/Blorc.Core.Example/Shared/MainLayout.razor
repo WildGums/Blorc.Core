@@ -1,7 +1,4 @@
-@inherits LayoutComponentBase
-
-@using Blorc.Dom.Injectors
-@using Blorc.Services
+@inherits Blorc.Components.BlorcLayoutComponentBase
 
 <div class="sidebar">
     <NavMenu />
@@ -16,16 +13,3 @@
         @Body
     </div>
 </div>
-
-@code
-{
-    [Inject]
-    public IDocumentService DocumentService { get; set; }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-
-      
-    }
-}
