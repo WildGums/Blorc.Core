@@ -24,6 +24,82 @@
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Data\BoxingCache.boxedvalues.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BoxingCache.boxedvalues.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Reflection\FastMemberInvoker\FastMemberInvoker.caches.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FastMemberInvoker.caches.g.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Reflection\FastMemberInvoker\FastMemberInvoker.getfieldmethods.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FastMemberInvoker.getfieldmethods.g.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Reflection\FastMemberInvoker\FastMemberInvoker.getpropertymethods.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FastMemberInvoker.getpropertymethods.g.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Reflection\FastMemberInvoker\FastMemberInvoker.interfaceimplementation.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FastMemberInvoker.interfaceimplementation.g.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Reflection\FastMemberInvoker\FastMemberInvoker.setfieldmethods.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FastMemberInvoker.setfieldmethods.g.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Reflection\FastMemberInvoker\FastMemberInvoker.setpropertymethods.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FastMemberInvoker.setpropertymethods.g.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Reflection\FastMemberInvoker\Interfaces\IFastMemberInvoker.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IFastMemberInvoker.g.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Data\BoxingCache.boxedvalues.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BoxingCache.boxedvalues.cs</LastGenOutput>
+    </None>
+    <None Update="Reflection\FastMemberInvoker\FastMemberInvoker.caches.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FastMemberInvoker.caches.g.cs</LastGenOutput>
+    </None>
+    <None Update="Reflection\FastMemberInvoker\FastMemberInvoker.getfieldmethods.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FastMemberInvoker.getfieldmethods.g.cs</LastGenOutput>
+    </None>
+    <None Update="Reflection\FastMemberInvoker\FastMemberInvoker.getpropertymethods.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FastMemberInvoker.getpropertymethods.g.cs</LastGenOutput>
+    </None>
+    <None Update="Reflection\FastMemberInvoker\FastMemberInvoker.interfaceimplementation.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FastMemberInvoker.interfaceimplementation.g.cs</LastGenOutput>
+    </None>
+    <None Update="Reflection\FastMemberInvoker\FastMemberInvoker.setfieldmethods.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FastMemberInvoker.setfieldmethods.g.cs</LastGenOutput>
+    </None>
+    <None Update="Reflection\FastMemberInvoker\FastMemberInvoker.setpropertymethods.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FastMemberInvoker.setpropertymethods.g.cs</LastGenOutput>
+    </None>
+    <None Update="Reflection\FastMemberInvoker\Interfaces\IFastMemberInvoker.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IFastMemberInvoker.g.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildProjectDirectory)\..\Directory.build.shared.explicit.props" Condition="Exists('$(MSBuildProjectDirectory)\..\Directory.build.shared.explicit.props')" />
   <Import Project="$(MSBuildProjectDirectory)\..\Directory.build.shared.mat.props" Condition="Exists('$(MSBuildProjectDirectory)\..\Directory.build.shared.mat.props')" />
 </Project>

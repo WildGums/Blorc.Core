@@ -1,7 +1,6 @@
 ﻿namespace Blorc.Components
 {
     using Blorc.Bindings;
-    using Blorc.Data;
     using Blorc.Services;
     using Blorc.StateConverters;
 
@@ -13,6 +12,7 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Threading.Tasks;
+    using Catel.Data;
 
     public abstract partial class BlorcLayoutComponentBase : LayoutComponentBase, IBlorcComponent, IDisposable, INotifyPropertyChanged
     {

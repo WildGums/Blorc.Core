@@ -3,8 +3,8 @@
     using System.Collections.Generic;
 
     using Blorc.Bindings;
-    using Blorc.Data;
     using Blorc.StateConverters;
+    using Catel.Data;
     using Microsoft.AspNetCore.Components;
 
     using Serilog;

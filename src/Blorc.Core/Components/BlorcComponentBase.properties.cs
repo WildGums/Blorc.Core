@@ -24,12 +24,12 @@
 
         public TValue GetPropertyValue<TValue>(string propertyName)
         {
-            return _propertyBag.GetPropertyValue(propertyName, default(TValue));
+            return _propertyBag.GetValue(propertyName, default(TValue));
         }
 
         public void SetPropertyValue(string propertyName, object value)
         {
-            _propertyBag.SetPropertyValue(propertyName, value);
+            _propertyBag.SetValue(propertyName, value);
         }
 
         private void OnPropertyBagPropertyChanged(object sender, PropertyChangedEventArgs e)
