@@ -36,6 +36,11 @@
             await InjectorInterop.InjectScript(_jsRuntime, source, type);
         }
 
+        public async Task InjectLink(string href, string rel= "stylesheet", string type = "text/css")
+        {
+            await InjectorInterop.InjectLink(_jsRuntime, href, rel, type);
+        }
+
         public void InjectHead(IInjectorValueProvider injectorValueProvider)
         {
             var value = injectorValueProvider.GetValue();

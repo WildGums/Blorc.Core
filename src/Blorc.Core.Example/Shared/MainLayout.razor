@@ -1,4 +1,7 @@
+﻿@using Blorc.Services
+
 @inherits Blorc.Components.BlorcLayoutComponentBase
+
 
 <div class="sidebar">
     <NavMenu />
@@ -6,10 +9,20 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <a href="https://github.com/wildgums/Blorc.Core" target="_blank" class="ml-md-auto">About</a>
+        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
     </div>
 
     <div class="content px-4">
         @Body
     </div>
 </div>
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await DocumentService.InjectLink("css/bootstrap/bootstrap.min.css");
+        await DocumentService.InjectLink("css/site.css");
+    }
+}

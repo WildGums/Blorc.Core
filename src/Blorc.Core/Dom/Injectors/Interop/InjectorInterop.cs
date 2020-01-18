@@ -1,7 +1,8 @@
 ﻿namespace Blorc.Dom.Injectors
 {
-    using Microsoft.JSInterop;
     using System.Threading.Tasks;
+
+    using Microsoft.JSInterop;
 
     internal static class InjectorInterop
     {
@@ -12,11 +13,21 @@
                 value).AsTask();
         }
 
+        public static Task<string> InjectLink(IJSRuntime jsRuntime, string href, string rel, string type)
+        {
+            return jsRuntime.InvokeAsync<string>(
+                "BlorcInjector.injectLink",
+                href, 
+                rel, 
+                type).AsTask();
+        }
+
         public static Task<string> InjectScript(IJSRuntime jsRuntime, string source, string type)
         {
             return jsRuntime.InvokeAsync<string>(
                 "BlorcInjector.injectScript",
-                source, type).AsTask();
+                source,
+                type).AsTask();
         }
     }
 }

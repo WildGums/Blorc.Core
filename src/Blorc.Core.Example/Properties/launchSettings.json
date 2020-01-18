@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:19331/",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:4937/",
+      "sslPort": 44327
     }
   },
   "profiles": {
@@ -15,13 +15,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Blorc.Example": {
+    "Blorc.Core.Example2": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:19332/"
+      "applicationUrl": "http://localhost:5000"
     }
   }
 }
