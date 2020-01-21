@@ -5,22 +5,28 @@
     using System.ComponentModel;
     using System.Reflection;
     using System.Threading.Tasks;
+
+    using Blorc.Attributes;
+    using Blorc.Reflection;
+
     using Microsoft.AspNetCore.Components;
-    using Reflection;
 
     public abstract partial class BlorcLayoutComponentBase
     {
+        private static readonly Dictionary<string, MethodInfo> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo>();
+
         private static readonly Dictionary<string, Type> EventCallbackTypeCache = new Dictionary<string, Type>();
 
-        private static readonly Dictionary<string, MethodInfo> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo>();
+        public event PropertyChangedEventHandler PropertyChanged;
 
         [Parameter(CaptureUnmatchedValues = true)]
         public IDictionary<string, object> AdditionalAttributes { get; set; }
-        
+
+        [Parameter]
+        public bool InjectComponentReferenceAsService { get; set; }
+
         [Parameter]
         public bool DisableAutomaticRaiseEventCallback { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public TValue GetPropertyValue<TValue>(string propertyName)
         {
@@ -32,9 +38,40 @@
             _propertyBag.SetValue(propertyName, value);
         }
 
-        private void OnPropertyBagPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            RaisePropertyChanged(e);
+            await base.OnAfterRenderAsync(firstRender);
+            if (firstRender && InjectComponentReferenceAsService)
+            {
+                var type = GetType();
+                var fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                foreach (var fieldInfo in fieldInfos)
+                {
+                    var wrapAttribute = fieldInfo.GetCustomAttribute<InjectAsServiceAttribute>();
+                    if (wrapAttribute != null)
+                    {
+                        var targetProperty = type.GetProperty(wrapAttribute.PropertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                        if (targetProperty != null)
+                        {
+                            targetProperty.SetValue(this, Activator.CreateInstance(wrapAttribute.ServiceType, fieldInfo.GetValue(this)));
+                        }
+                    }
+                }
+
+                var propertyInfos = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                foreach (var propertyInfo in propertyInfos)
+                {
+                    var wrapAttribute = propertyInfo.GetCustomAttribute<InjectAsServiceAttribute>();
+                    if (wrapAttribute != null)
+                    {
+                        var targetProperty = type.GetProperty(wrapAttribute.PropertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                        if (targetProperty != null)
+                        {
+                            targetProperty.SetValue(this, Activator.CreateInstance(wrapAttribute.ServiceType, propertyInfo.GetValue(this)));
+                        }
+                    }
+                }
+            }
         }
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -53,6 +90,11 @@
             PropertyChanged?.Invoke(this, eventArgs);
 
             RaiseEventCallback(eventArgs);
+        }
+
+        private void OnPropertyBagPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            RaisePropertyChanged(e);
         }
 
         private void RaiseEventCallback(PropertyChangedEventArgs eventArgs)
@@ -84,14 +126,14 @@
 
             if (!CallbackInvokeAsyncCache.TryGetValue(propertyTypeFullName, out var invokeAsyncMethod))
             {
-                invokeAsyncMethod = eventCallbackType.GetMethod("InvokeAsync", new []{ propertyInfo.PropertyType });
+                invokeAsyncMethod = eventCallbackType.GetMethod("InvokeAsync", new[] { propertyInfo.PropertyType });
                 CallbackInvokeAsyncCache.Add(propertyTypeFullName, invokeAsyncMethod);
             }
 
             var propertyValue = propertyInfo.GetValue(this);
             if (invokeAsyncMethod != null)
             {
-                var callbackTask = invokeAsyncMethod.Invoke(propertyChangedEventCallback, new[] {propertyValue}) as Task;
+                var callbackTask = invokeAsyncMethod.Invoke(propertyChangedEventCallback, new[] { propertyValue }) as Task;
                 callbackTask?.GetAwaiter().GetResult();
             }
         }

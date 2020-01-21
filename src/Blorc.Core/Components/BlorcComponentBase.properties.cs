@@ -20,6 +20,9 @@
         [Parameter]
         public bool DisableAutomaticRaiseEventCallback { get; set; }
 
+        [Parameter]
+        public bool InjectComponentReferenceAsService { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public TValue GetPropertyValue<TValue>(string propertyName)
