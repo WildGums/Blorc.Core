@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Blorc.Services.Interfaces
+namespace Blorc.Services
 {
     using System.Threading.Tasks;
 
