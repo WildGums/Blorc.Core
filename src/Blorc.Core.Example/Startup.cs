@@ -1,24 +1,34 @@
 ﻿namespace Blorc.Example
 {
-    using Blorc.Dom.Injectors;
-    using Blorc.Example;
+    using Blorc.Example.Shared;
+    using Blorc.Services;
+
     using Microsoft.AspNetCore.Components.Builder;
     using Microsoft.Extensions.DependencyInjection;
-    using Services;
 
     public class Startup
     {
+        public void Configure(
+            IComponentsApplicationBuilder app)
+        {
+            // Map the component service with components.
+            app.UseComponentServices(
+                options =>
+                {
+                    options.Map<SurveyPrompt, SurveyExecutionService>();
+                    options.Map<SurveyPrompt, SurveyVisualizationService>();
+                });
+
+            app.AddComponent<App>("app");
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddBlorcCore();
-        }
 
-        public void Configure(IComponentsApplicationBuilder app, IDocumentService documentService)
-        {
-            // documentService.InjectBlorcCoreJS();
-            documentService.InjectHead(new Css("/patternfly/patternfly.css"));
-
-            app.AddComponent<App>("app");
+            // TODO: Register component services...
+            services.AddTransient<SurveyExecutionService>();
+            services.AddTransient<SurveyVisualizationService>();
         }
     }
 }

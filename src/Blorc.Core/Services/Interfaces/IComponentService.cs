@@ -1,15 +1,15 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IExecutionService.cs" company="WildGums">
+// <copyright file="IComponentServiceBase.cs" company="WildGums">
 //   Copyright (c) 2008 - 2020 WildGums. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Blorc.Services
 {
-    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Components;
 
-    public interface IExecutionService : IComponentService
+    public interface IComponentService
     {
-        Task ExecuteAsync(object state = null);
+        ComponentBase Component { get; set; }
     }
 }

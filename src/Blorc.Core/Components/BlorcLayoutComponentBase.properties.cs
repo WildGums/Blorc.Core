@@ -22,8 +22,6 @@
         [Parameter(CaptureUnmatchedValues = true)]
         public IDictionary<string, object> AdditionalAttributes { get; set; }
 
-        [Parameter]
-        public bool InjectComponentReferenceAsService { get; set; }
 
         [Parameter]
         public bool DisableAutomaticRaiseEventCallback { get; set; }
@@ -38,41 +36,6 @@
             _propertyBag.SetValue(propertyName, value);
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-            if (firstRender && InjectComponentReferenceAsService)
-            {
-                var type = GetType();
-                var fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                foreach (var fieldInfo in fieldInfos)
-                {
-                    var wrapAttribute = fieldInfo.GetCustomAttribute<InjectAsServiceAttribute>();
-                    if (wrapAttribute != null)
-                    {
-                        var targetProperty = type.GetProperty(wrapAttribute.PropertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                        if (targetProperty != null)
-                        {
-                            targetProperty.SetValue(this, Activator.CreateInstance(wrapAttribute.ServiceType, fieldInfo.GetValue(this)));
-                        }
-                    }
-                }
-
-                var propertyInfos = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                foreach (var propertyInfo in propertyInfos)
-                {
-                    var wrapAttribute = propertyInfo.GetCustomAttribute<InjectAsServiceAttribute>();
-                    if (wrapAttribute != null)
-                    {
-                        var targetProperty = type.GetProperty(wrapAttribute.PropertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                        if (targetProperty != null)
-                        {
-                            targetProperty.SetValue(this, Activator.CreateInstance(wrapAttribute.ServiceType, propertyInfo.GetValue(this)));
-                        }
-                    }
-                }
-            }
-        }
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {

@@ -9,6 +9,7 @@
             @this.AddSingleton<IDocumentService, DocumentService>();
             @this.AddSingleton<IConfigurationService, ConfigurationService>();
             @this.AddSingleton<IFileService, FileService>();
+            @this.AddSingleton<IComponentServiceFactory, ComponentServiceFactory>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Xml
 @using Blorc.Attributes
 @using Blorc.Services
 
@@ -12,6 +13,7 @@ Welcome to your new app.
 
 @code
 {
-    [InjectAsService(typeof(SurveyVisualizationService), nameof(SurveyVisualizationService))]
+    [InjectComponentService(nameof(SurveyVisualizationService))]
+    [InjectComponentService(nameof(SurveyExcutionService))]
     private SurveyPrompt _surveyPrompt;
 }

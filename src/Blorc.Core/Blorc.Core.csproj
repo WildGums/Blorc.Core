@@ -17,6 +17,7 @@
     <ProjectGuid>ED13422D-5A52-425F-B973-958D22B04AA6</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.1.0-preview4.19579.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.1" />
     <PackageReference Include="Serilog" Version="2.9.0" />

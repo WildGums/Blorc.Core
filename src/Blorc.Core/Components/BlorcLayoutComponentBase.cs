@@ -1,33 +1,33 @@
 ﻿namespace Blorc.Components
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Reflection;
+    using System.Threading.Tasks;
+
+    using Blorc.Attributes;
     using Blorc.Bindings;
     using Blorc.Services;
     using Blorc.StateConverters;
+
+    using Catel.Data;
 
     using Microsoft.AspNetCore.Components;
 
     using Serilog;
 
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Threading.Tasks;
-    using Catel.Data;
-
     public abstract partial class BlorcLayoutComponentBase : LayoutComponentBase, IBlorcComponent, IDisposable, INotifyPropertyChanged
     {
         private static readonly Dictionary<string, int> InstanceCounters = new Dictionary<string, int>();
 
-        private readonly List<IStateConverterContainer> _stateConverterContainers = new List<IStateConverterContainer>();
-
         private readonly PropertyBag _propertyBag = new PropertyBag();
 
-        private bool _suspendUpdates;
-        
+        private readonly List<IStateConverterContainer> _stateConverterContainers = new List<IStateConverterContainer>();
+
         private bool _disposedValue;
 
-        [Inject]
-        public IDocumentService DocumentService { get; set; } 
+        private bool _suspendUpdates;
 
         public BlorcLayoutComponentBase()
         {
@@ -36,7 +36,37 @@
             _propertyBag.PropertyChanged += OnPropertyBagPropertyChanged;
         }
 
+        [Parameter]
+        public bool InjectComponentServices { get; set; }
+
         protected BindingContext BindingContext { get; private set; }
+
+        [Inject]
+        protected IDocumentService DocumentService { get; set; }
+
+        [Inject]
+        protected IComponentServiceFactory ComponentServiceFactory { get; set; }
+        
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        public void ForceUpdate()
+        {
+            if (_suspendUpdates)
+            {
+                return;
+            }
+
+            Log.Debug("Forcing update for {TypeName}", GetType().Name);
+
+            StateHasChanged();
+        }
+
+        protected virtual void CreateBindings()
+        {
+        }
 
         protected StateConverterContainer CreateConverter()
         {
@@ -47,18 +77,73 @@
             return container;
         }
 
-        protected override void OnInitialized()
+        protected virtual void Dispose(bool disposing)
         {
-            base.OnInitialized();
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    DisposeManaged();
+                }
+
+                _disposedValue = true;
+            }
         }
+
+        protected virtual void DisposeManaged()
+        {
+            BindingContext.Dispose();
+            BindingContext = null;
+
+            _stateConverterContainers.ForEach(x => x.Dispose());
+            _stateConverterContainers.Clear();
+        }
+
+        protected string GenerateUniqueId(string prefix)
+        {
+            if (InstanceCounters.TryGetValue(prefix, out var index))
+            {
+            }
+
+            InstanceCounters[prefix] = ++index;
+
+            return $"{prefix}-{index}";
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+            if (InjectComponentServices)
+            {
+                var type = GetType();
+                var fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                foreach (var fieldInfo in fieldInfos)
+                {
+                    var value = fieldInfo.GetValue(this);
+                    if (value != null)
+                    {
+                        var attributes = fieldInfo.GetCustomAttributes<InjectComponentServiceAttribute>();
+                        Inject(attributes, type, value);
+                    }
+                }
+
+                var propertyInfos = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                foreach (var propertyInfo in propertyInfos)
+                {
+                    var value = propertyInfo.GetValue(this);
+                    if (value != null)
+                    {
+                        var attributes = propertyInfo.GetCustomAttributes<InjectComponentServiceAttribute>();
+                        Inject(attributes, type, value);
+                    }
+                }
+            }
+        }
+
 
         protected override async Task OnInitializedAsync()
         {
             await DocumentService.InjectBlorcCoreJS();
-        }
-
-        protected virtual void CreateBindings()
-        {
         }
 
         protected override void OnParametersSet()
@@ -78,54 +163,22 @@
             }
         }
 
-        public void ForceUpdate()
+        private void Inject(IEnumerable<InjectComponentServiceAttribute> attributes, Type type, object value)
         {
-            if (_suspendUpdates)
+            foreach (var attribute in attributes)
             {
-                return;
-            }
-
-            Log.Debug("Forcing update for {TypeName}", GetType().Name);
-
-            StateHasChanged();
-        }
-
-        protected string GenerateUniqueId(string prefix)
-        {
-            if (InstanceCounters.TryGetValue(prefix, out var index))
-            {
-            }
-
-            InstanceCounters[prefix] = ++index;
-
-            return $"{prefix}-{index}";
-        }
-
-        protected virtual void DisposeManaged()
-        {
-            BindingContext.Dispose();
-            BindingContext = null;
-
-            _stateConverterContainers.ForEach(x => x.Dispose());
-            _stateConverterContainers.Clear();
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposedValue)
-            {
-                if (disposing)
+                if (attribute != null)
                 {
-                    DisposeManaged();
+                    var targetProperty = type.GetProperty(
+                        attribute.PropertyName,
+                        BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                    if (targetProperty != null)
+                    {
+                        var componentService = ComponentServiceFactory.Get(value, targetProperty.PropertyType);
+                        targetProperty.SetValue(this, componentService);
+                    }
                 }
-
-                _disposedValue = true;
             }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
         }
     }
 }

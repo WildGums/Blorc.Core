@@ -1,15 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IExecutionService.cs" company="WildGums">
+// <copyright file="IFactory.cs" company="WildGums">
 //   Copyright (c) 2008 - 2020 WildGums. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Blorc.Services
 {
-    using System.Threading.Tasks;
+    using System;
+    using System.Collections;
 
-    public interface IExecutionService : IComponentService
+    public interface IFactory
     {
-        Task ExecuteAsync(object state = null);
+        IEnumerable Get(object source);
+
+        object Get(object source, Type targetType);
     }
 }

@@ -7,16 +7,23 @@
 
     public class IndexComponent : BlorcComponentBase
     {
+        protected IExecutionService SurveyExcutionService { get; set; }
+
         protected IUIVisualizationService SurveyVisualizationService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            InjectComponentReferenceAsService = true;
+            InjectComponentServices = true;
         }
 
         protected async Task OnButtonClick()
         {
+            if (SurveyExcutionService != null)
+            {
+                await SurveyExcutionService.ExecuteAsync();
+            }
+
             if (SurveyVisualizationService != null)
             {
                 await SurveyVisualizationService.ShowAsync();

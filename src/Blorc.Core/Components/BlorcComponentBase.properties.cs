@@ -21,7 +21,7 @@
         public bool DisableAutomaticRaiseEventCallback { get; set; }
 
         [Parameter]
-        public bool InjectComponentReferenceAsService { get; set; }
+        public bool InjectComponentServices { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

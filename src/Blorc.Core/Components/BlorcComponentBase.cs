@@ -8,6 +8,7 @@
 
     using Blorc.Attributes;
     using Blorc.Bindings;
+    using Blorc.Services;
     using Blorc.StateConverters;
 
     using Catel.Data;
@@ -27,6 +28,9 @@
         private bool _disposedValue;
 
         private bool _suspendUpdates;
+
+        [Inject]
+        protected IComponentServiceFactory ComponentServiceFactory { get; set; }
 
         public BlorcComponentBase()
         {
@@ -103,39 +107,50 @@
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
-            if (firstRender && InjectComponentReferenceAsService)
+            if (InjectComponentServices)
             {
                 var type = GetType();
                 var fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                 foreach (var fieldInfo in fieldInfos)
                 {
-                    var wrapAttribute = fieldInfo.GetCustomAttribute<InjectAsServiceAttribute>();
-                    if (wrapAttribute != null)
+                    var value = fieldInfo.GetValue(this);
+                    if (value != null)
                     {
-                        var targetProperty = type.GetProperty(wrapAttribute.PropertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                        if (targetProperty != null)
-                        {
-                            targetProperty.SetValue(this, Activator.CreateInstance(wrapAttribute.ServiceType, fieldInfo.GetValue(this)));
-                        }
+                        var attributes = fieldInfo.GetCustomAttributes<InjectComponentServiceAttribute>();
+                        Inject(attributes, type, value);
                     }
                 }
 
                 var propertyInfos = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                 foreach (var propertyInfo in propertyInfos)
                 {
-                    var wrapAttribute = propertyInfo.GetCustomAttribute<InjectAsServiceAttribute>();
-                    if (wrapAttribute != null)
+                    var value = propertyInfo.GetValue(this);
+                    if (value != null)
                     {
-                        var targetProperty = type.GetProperty(wrapAttribute.PropertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                        if (targetProperty != null)
-                        {
-                            targetProperty.SetValue(this, Activator.CreateInstance(wrapAttribute.ServiceType, propertyInfo.GetValue(this)));
-                        }
+                        var attributes = propertyInfo.GetCustomAttributes<InjectComponentServiceAttribute>();
+                        Inject(attributes, type, value);
                     }
                 }
             }
         }
 
+        private void Inject(IEnumerable<InjectComponentServiceAttribute> attributes, Type type, object value)
+        {
+            foreach (var attribute in attributes)
+            {
+                if (attribute != null)
+                {
+                    var targetProperty = type.GetProperty(
+                        attribute.PropertyName,
+                        BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                    if (targetProperty != null)
+                    {
+                        var componentService = ComponentServiceFactory.Get(value, targetProperty.PropertyType);
+                        targetProperty.SetValue(this, componentService);
+                    }
+                }
+            }
+        }
 
         protected override void OnParametersSet()
         {

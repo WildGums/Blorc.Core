@@ -9,17 +9,13 @@ namespace Blorc.Example
     using System;
     using System.Threading.Tasks;
 
-    using Blorc.Example.Shared;
     using Blorc.Services;
+
+    using Microsoft.AspNetCore.Components;
 
     public class SurveyVisualizationService : IUIVisualizationService
     {
-        private readonly SurveyPrompt _survey;
-
-        public SurveyVisualizationService(SurveyPrompt survey)
-        {
-            _survey = survey;
-        }
+        public ComponentBase Component { get; set; }
 
         public Task CloseAsync()
         {
@@ -28,9 +24,7 @@ namespace Blorc.Example
 
         public async Task ShowAsync()
         {
-            Console.WriteLine("Calling [ShowAsync] at [SurveyVisualizationService]");
-            Console.WriteLine("===================================================");
-            Console.WriteLine("'_survey' field is null => " + (_survey is null));
+            Console.WriteLine("Hello from Visualization!!!");
         }
 
         public Task UpdateAsync()
