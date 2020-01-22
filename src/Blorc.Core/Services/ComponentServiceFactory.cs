@@ -46,6 +46,11 @@ namespace Blorc.Services
             return componentService;
         }
 
+        public override object Get(object source, Type targetType)
+        {
+            return Get<IComponentService>((ComponentBase)source, targetType);
+        }
+
         public void Map<TComponent, TComponentService>()
             where TComponent : ComponentBase where TComponentService : IComponentService
         {

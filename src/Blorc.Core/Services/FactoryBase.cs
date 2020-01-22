@@ -34,7 +34,7 @@ namespace Blorc.Services
             }
         }
 
-        public object Get(object source, Type targetType)
+        public virtual object Get(object source, Type targetType)
         {
             var componentType = source.GetType();
             if (_typeMappings.TryGetValue(componentType, out var serviceTypes))
