@@ -1,0 +1,1065 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Blorc.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Blorc.Bindings.Binding">
+            <summary>
+            Binding class for platforms not supporting bindings.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.Binding.#ctor(System.Object,System.String,System.Object,System.String,Blorc.Bindings.BindingMode,Blorc.Converters.IValueConverter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Blorc.Bindings.Binding"/> class.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="sourcePropertyName">Name of the source property.</param>
+            <param name="target">The target.</param>
+            <param name="targetPropertyName">Name of the target property.</param>
+            <param name="mode">The mode.</param>
+            <param name="converter">The converter.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="source"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="target"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.Binding.#ctor(Blorc.Bindings.BindingParty,Blorc.Bindings.BindingParty,Blorc.Bindings.BindingMode,Blorc.Converters.IValueConverter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Blorc.Bindings.Binding"/> class.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="target">The target.</param>
+            <param name="mode">The mode.</param>
+            <param name="converter">The converter.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="source"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="target"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:Blorc.Bindings.Binding.Converter">
+            <summary>
+            Gets or sets the converter.
+            </summary>
+            <value>The converter.</value>
+        </member>
+        <member name="P:Blorc.Bindings.Binding.ConverterParameter">
+            <summary>
+            Gets or sets the converter parameter.
+            </summary>
+            <value>The converter parameter.</value>
+        </member>
+        <member name="P:Blorc.Bindings.Binding.Mode">
+            <summary>
+            Gets the binding mode.
+            </summary>
+            <value>The mode.</value>
+        </member>
+        <member name="P:Blorc.Bindings.Binding.Source">
+            <summary>
+            Gets the binding source.
+            </summary>
+            <value>The source.</value>
+        </member>
+        <member name="P:Blorc.Bindings.Binding.Target">
+            <summary>
+            Gets the binding target.
+            </summary>
+            <value>The target.</value>
+        </member>
+        <member name="P:Blorc.Bindings.Binding.Value">
+            <summary>
+            Gets the value of the binding source.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="E:Blorc.Bindings.Binding.ValueChanged">
+            <summary>
+            Occurs when the value of the binding has changed.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.Binding.DetermineToString">
+            <summary>
+            Determines the value to use in the <see cref="M:Blorc.Bindings.BindingBase.ToString"/> method.
+            </summary>
+            <returns>The string to use.</returns>
+        </member>
+        <member name="M:Blorc.Bindings.Binding.Uninitialize">
+            <summary>
+            Uninitializes this binding.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.Binding.EnsureBindingLifetime">
+            <summary>
+            Ensures the binding lifetime by checking if both the source and target are still alive.
+            </summary>
+            <returns><c>true</c> if the binding is still valid; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Blorc.Bindings.Binding.TransferValueFromSourceToTarget">
+            <summary>
+            Transfers the value from the source to target.
+            <para />
+            Note that this method will check the <see cref="T:Blorc.Bindings.BindingMode"/> to see if the transfer is possible.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.Binding.TransferValueFromTargetToSource">
+            <summary>
+            Transfers the value from the target to source.
+            <para />
+            Note that this method will check the <see cref="T:Blorc.Bindings.BindingMode"/> to see if the transfer is possible.
+            </summary>
+        </member>
+        <member name="T:Blorc.Bindings.BindingBase">
+            <summary>
+            Base class for all bindings.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.BindingBase.DetermineToString">
+            <summary>
+            Determines the value to use in the <see cref="M:Blorc.Bindings.BindingBase.ToString"/> method.
+            </summary>
+            <returns>The string to use.</returns>
+        </member>
+        <member name="M:Blorc.Bindings.BindingBase.Uninitialize">
+            <summary>
+            Uninitializes this binding.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.BindingBase.ToString">
+            <summary>
+            Converts the current instance to a string.
+            </summary>
+            <returns>The string representation of this object.</returns>
+        </member>
+        <member name="M:Blorc.Bindings.BindingBase.ClearBinding">
+            <summary>
+            Clears the binding and stops listening to both the source and target instances.
+            </summary>
+        </member>
+        <member name="T:Blorc.Bindings.BindingContext">
+            <summary>
+            Binding context that takes care of binding updates.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Blorc.Bindings.BindingContext"/> class.
+            </summary>
+        </member>
+        <member name="P:Blorc.Bindings.BindingContext.UniqueIdentifier">
+            <summary>
+            Gets the unique identifier.
+            </summary>
+            <value>The unique identifier.</value>
+        </member>
+        <member name="P:Blorc.Bindings.BindingContext.GetBindings">
+            <summary>
+            Gets the get bindings.
+            </summary>
+            <value>The get bindings.</value>
+        </member>
+        <member name="P:Blorc.Bindings.BindingContext.GetCommandBindings">
+            <summary>
+            Gets the get command bindings.
+            </summary>
+            <value>The get command bindings.</value>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContext.Clear">
+            <summary>
+            Clears this binding context and all bindings.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContext.AddBinding(Blorc.Bindings.Binding)">
+            <summary>
+            Adds a new binding.
+            </summary>
+            <param name="binding">The binding.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="binding"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContext.RemoveBinding(Blorc.Bindings.Binding)">
+            <summary>
+            Removes the binding.
+            </summary>
+            <param name="binding">The binding.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="binding"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContext.AddCommandBinding(Blorc.Bindings.CommandBinding)">
+            <summary>
+            Adds a new command binding.
+            </summary>
+            <param name="commandBinding">The command binding.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="commandBinding"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContext.RemoveCommandBinding(Blorc.Bindings.CommandBinding)">
+            <summary>
+            Removes the command binding.
+            </summary>
+            <param name="commandBinding">The command binding.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="commandBinding"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:Blorc.Bindings.BindingMode">
+            <summary>
+            Describes the direction of the data flow in a binding.
+            </summary>
+        </member>
+        <member name="F:Blorc.Bindings.BindingMode.OneTime">
+            <summary>
+            Updates the binding target when the application starts or when the data context changes. This type of binding is 
+            appropriate if you are using data where either a snapshot of the current state is appropriate to use or the data 
+            is truly static. This type of binding is also useful if you want to initialize your target property with some 
+            value from a source property and the data context is not known in advance. This is essentially a simpler form of 
+            OneWay binding that provides better performance in cases where the source value does not change.
+            </summary>
+        </member>
+        <member name="F:Blorc.Bindings.BindingMode.OneWay">
+            <summary>
+            Updates the binding target (target) property when the binding source (source) changes. This type of binding is 
+            appropriate if the control being bound is implicitly read-only. For instance, you may bind to a source such as 
+            a stock ticker. Or perhaps your target property has no control interface provided for making changes, such as a 
+            data-bound background color of a table. If there is no need to monitor the changes of the target property, using 
+            the OneWay binding mode avoids the overhead of the TwoWay binding mode.
+            </summary>
+        </member>
+        <member name="F:Blorc.Bindings.BindingMode.OneWayToSource">
+            <summary>
+            Updates the source property when the target property changes.
+            </summary>
+        </member>
+        <member name="F:Blorc.Bindings.BindingMode.TwoWay">
+            <summary>
+            Causes changes to either the source property or the target property to automatically update the other. This type 
+            of binding is appropriate for editable forms or other fully-interactive UI scenarios.
+            </summary>
+        </member>
+        <member name="T:Blorc.Bindings.BindingParty">
+            <summary>
+            Contains information about a specific binding party (either source or target).
+            </summary>
+        </member>
+        <member name="E:Blorc.Bindings.BindingParty.ValueChanged">
+            <summary>
+            Occurs when the value has changed.
+            </summary>
+        </member>
+        <member name="P:Blorc.Bindings.BindingParty.Instance">
+            <summary>
+            Gets the instance of the binding party.
+            <para />
+            Note that this value is stored in a weak reference and can be <c>null</c> if garbage collected.
+            </summary>
+            <value>The instance.</value>
+        </member>
+        <member name="P:Blorc.Bindings.BindingParty.PropertyName">
+            <summary>
+            Gets the name of the property.
+            </summary>
+            <value>The name of the property.</value>
+        </member>
+        <member name="M:Blorc.Bindings.BindingParty.ToString">
+            <summary>
+            Converts the current instance to a string.
+            </summary>
+            <returns>The string representation of this object.</returns>
+        </member>
+        <member name="M:Blorc.Bindings.BindingParty.AddEvent``1(System.String)">
+            <summary>
+            Adds the event so it will be used as source to raise the <see cref="E:Blorc.Bindings.BindingParty.ValueChanged"/> event.
+            </summary>
+            <param name="eventName">Name of the event.</param>
+        </member>
+        <member name="M:Blorc.Bindings.BindingParty.GetPropertyValue">
+            <summary>
+            Gets the property value.
+            <para />
+            Note that the property value will be <c>null</c> if the <see cref="P:Blorc.Bindings.BindingParty.Instance"/> is garbage collected.
+            </summary>
+            <returns>The property value.</returns>
+        </member>
+        <member name="M:Blorc.Bindings.BindingParty.SetPropertyValue(System.Object)">
+            <summary>
+            Sets the property value.
+            <para />
+            Note that the property value will not be set if the <see cref="P:Blorc.Bindings.BindingParty.Instance"/> is garbage collected.
+            </summary>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Blorc.Bindings.BindingParty.RaiseValueChanged">
+            <summary>
+            Raises the <see cref="E:Blorc.Bindings.BindingParty.ValueChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.BindingParty.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.BindingParty.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Blorc.Bindings.CommandBinding">
+            <summary>
+            Binding to bind events to commands.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.CommandBinding.#ctor(System.Object,System.String,Blorc.Bindings.ICommand,Blorc.Bindings.Binding)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Blorc.Bindings.CommandBinding"/> class.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="eventName">Name of the event.</param>
+            <param name="command">The command.</param>
+            <param name="commandParameterBinding">The command parameter binding.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="element"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="eventName"/> is <c>null</c> or whitespace.</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="command"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.CommandBinding.DetermineToString">
+            <summary>
+            Determines the value to use in the <see cref="M:Blorc.Bindings.BindingBase.ToString"/> method.
+            </summary>
+            <returns>The string to use.</returns>
+        </member>
+        <member name="M:Blorc.Bindings.CommandBinding.Uninitialize">
+            <summary>
+            Uninitializes this binding.
+            </summary>
+        </member>
+        <member name="T:Blorc.Bindings.BindingContextExtensions">
+            <summary>
+            Extension methods for the binding context.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContextExtensions.AddBinding(Blorc.Bindings.BindingContext,System.Object,System.String,System.Object,System.String,Blorc.Bindings.BindingMode,Blorc.Converters.IValueConverter)">
+            <summary>
+            Adds a new binding to the binding context.
+            </summary>
+            <param name="bindingContext">The binding context.</param>
+            <param name="source">The source.</param>
+            <param name="sourcePropertyName">Name of the source property.</param>
+            <param name="target">The target.</param>
+            <param name="targetPropertyName">Name of the target property.</param>
+            <param name="mode">The binding mode.</param>
+            <param name="converter">The converter, can be set afterwards as well.</param>
+            <returns>The <see cref="T:Blorc.Bindings.Binding"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="source"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="target"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContextExtensions.AddBinding(Blorc.Bindings.BindingContext,System.Linq.Expressions.Expression{System.Func{System.Object}},System.Linq.Expressions.Expression{System.Func{System.Object}},Blorc.Bindings.BindingMode,Blorc.Converters.IValueConverter)">
+            <summary>
+            Adds a new binding to the source object.
+            </summary>
+            <param name="bindingContext">The binding context.</param>
+            <param name="sourcePropertyExpression">The source property expression.</param>
+            <param name="targetPropertyExpression">The target property expression.</param>
+            <param name="mode">The mode.</param>
+            <param name="converter">The converter, can be set afterwards as well.</param>
+            <returns>The <see cref="T:Blorc.Bindings.Binding"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="sourcePropertyExpression"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="targetPropertyExpression"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContextExtensions.AddBindingWithConverter``1(Blorc.Bindings.BindingContext,System.Object,System.String,System.Object,System.String,Blorc.Bindings.BindingMode)">
+            <summary>
+            Adds a new binding to the source object and automatically instantiates the converter.
+            </summary>
+            <typeparam name="TConverter">The type of the t converter.</typeparam>
+            <param name="bindingContext">The binding context.</param>
+            <param name="source">The source.</param>
+            <param name="sourcePropertyName">Name of the source property.</param>
+            <param name="target">The target.</param>
+            <param name="targetPropertyName">Name of the target property.</param>
+            <param name="mode">The mode.</param>
+            <returns>The <see cref="T:Blorc.Bindings.Binding"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="source"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="target"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContextExtensions.AddBindingWithConverter``1(Blorc.Bindings.BindingContext,System.Linq.Expressions.Expression{System.Func{System.Object}},System.Linq.Expressions.Expression{System.Func{System.Object}},Blorc.Bindings.BindingMode)">
+            <summary>
+            Adds a new binding to the source object and automatically instantiates the converter.
+            </summary>
+            <typeparam name="TConverter">The type of the converter.</typeparam>
+            <param name="bindingContext">The binding context.</param>
+            <param name="sourcePropertyExpression">The source property expression.</param>
+            <param name="targetPropertyExpression">The target property expression.</param>
+            <param name="mode">The mode.</param>
+            <returns>The <see cref="T:Blorc.Bindings.Binding"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="sourcePropertyExpression"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="targetPropertyExpression"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingContextExtensions.AddCommandBinding(Blorc.Bindings.BindingContext,System.Object,System.String,Blorc.Bindings.ICommand,Blorc.Bindings.Binding)">
+            <summary>
+            Adds a new command binding to the element.
+            </summary>
+            <param name="bindingContext">The binding context.</param>
+            <param name="element">The element.</param>
+            <param name="eventName">Name of the event.</param>
+            <param name="command">The command.</param>
+            <param name="commandParameterBinding">The command parameter binding.</param>
+            <returns>Catel.MVVM.CommandBinding.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="element"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="eventName"/> is <c>null</c> or whitespace.</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="command"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:Blorc.Bindings.BindingExtensions">
+            <summary>
+            Extension methods to create bindings on platforms that initially don't support bindings.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.BindingExtensions.AddTargetEvent(Blorc.Bindings.Binding,System.String)">
+            <summary>
+            Adds an additional event subscription to support change notification.
+            <para />
+            This extension method will use the <see cref="P:Blorc.Bindings.Binding.Target" /> to add an event.
+            </summary>
+            <param name="binding">The binding.</param>
+            <param name="eventName">Name of the event.</param>
+            <returns>Catel.MVVM.Binding.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="binding" /> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="eventName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingExtensions.AddTargetEvent``1(Blorc.Bindings.Binding,System.String)">
+            <summary>
+            Adds an additional event subscription to support change notification.
+            <para />
+            This extension method will use the <see cref="P:Blorc.Bindings.Binding.Target" /> to add an event.
+            </summary>
+            <param name="binding">The binding.</param>
+            <param name="eventName">Name of the event.</param>
+            <returns>Catel.MVVM.Binding.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="binding"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="eventName"/> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingExtensions.AddSourceEvent(Blorc.Bindings.Binding,System.String)">
+            <summary>
+            Adds an additional event subscription to support change notification.
+            <para />
+            This extension method will use the <see cref="P:Blorc.Bindings.Binding.Source" /> to add an event.
+            </summary>
+            <param name="binding">The binding.</param>
+            <param name="eventName">Name of the event.</param>
+            <returns>Catel.MVVM.Binding.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="binding"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="eventName"/> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingExtensions.AddSourceEvent``1(Blorc.Bindings.Binding,System.String)">
+            <summary>
+            Adds an additional event subscription to support change notification.
+            <para />
+            This extension method will use the <see cref="P:Blorc.Bindings.Binding.Source" /> to add an event.
+            </summary>
+            <param name="binding">The binding.</param>
+            <param name="eventName">Name of the event.</param>
+            <returns>Catel.MVVM.Binding.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="binding"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="eventName"/> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Blorc.Bindings.BindingExtensions.GetBindingValue(Blorc.Bindings.Binding)">
+            <summary>
+            Gets the binding value. 
+            <para />
+            If the <paramref name="binding"/> is <c>null</c>, this method will return <c>null</c>.
+            </summary>
+            <param name="binding">The binding.</param>
+            <returns>The binding value.</returns>
+        </member>
+        <member name="T:Blorc.Bindings.BindingPartyExtensions">
+            <summary>
+            Extension methods for binding parties.
+            </summary>
+        </member>
+        <member name="M:Blorc.Bindings.BindingPartyExtensions.AddEvent(Blorc.Bindings.BindingParty,System.String)">
+            <summary>
+            Adds the event by automatically retrieving the event args type.
+            </summary>
+            <param name="bindingParty">The binding party.</param>
+            <param name="eventName">Name of the event.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="bindingParty"/> is <c>null</c>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="bindingParty"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Blorc.Converters.IValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the source data before passing it to the target for display in the UI.
+            </summary>
+            <param name="value">The source data being passed to the target.</param>
+            <param name="targetType">The <see cref="T:System.Type" /> of data expected by the target dependency property.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+            <returns>The value to be passed to the target dependency property.</returns>
+        </member>
+        <member name="M:Blorc.Converters.IValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the target data before passing it to the source object.
+            </summary>
+            <param name="value">The target data being passed to the source.</param>
+            <param name="targetType">The <see cref="T:System.Type" /> of data expected by the source object.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+            <returns>The value to be passed to the source object.</returns>
+        </member>
+        <member name="T:Blorc.Services.IDocumentService">
+            <summary>
+            The DocumentService interface.
+            </summary>
+        </member>
+        <member name="M:Blorc.Services.IDocumentService.GetBoundingClientRect(System.Double,System.Double)">
+            <summary>
+            The get bounding client rect.
+            </summary>
+            <param name="x">
+            The x.
+            </param>
+            <param name="y">
+            The y.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
+        </member>
+        <member name="M:Blorc.Services.IDocumentService.GetBoundingClientRectById(System.String)">
+            <summary>
+            The get bounding client rect by id.
+            </summary>
+            <param name="id">
+            The id.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
+        </member>
+        <member name="M:Blorc.Services.IDocumentService.GetOffsetBoundingClientRect(System.Double,System.Double)">
+            <summary>
+            The get offset bounding client rect.
+            </summary>
+            <param name="x">
+            The x.
+            </param>
+            <param name="y">
+            The y.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
+        </member>
+        <member name="M:Blorc.Services.IDocumentService.InjectHead(Blorc.Dom.Injectors.IInjectorValueProvider)">
+            <summary>
+            The inject head.
+            </summary>
+            <param name="injectorValueProvider">
+            The injector value provider.
+            </param>
+        </member>
+        <member name="M:Blorc.Services.IDocumentService.InjectLink(System.String,System.String,System.String)">
+            <summary>
+            The inject link.
+            </summary>
+            <param name="href">
+            The href.
+            </param>
+            <param name="rel">
+            The rel.
+            </param>
+            <param name="type">
+            The type.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
+        </member>
+        <member name="M:Blorc.Services.IDocumentService.InjectScript(System.String,System.String)">
+            <summary>
+            The inject script.
+            </summary>
+            <param name="source">
+            The source.
+            </param>
+            <param name="type">
+            The type.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
+        </member>
+        <member name="T:Catel.Data.BoxingCache">
+            <summary>
+            Boxing cache helper.
+            </summary>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Boolean)">
+            <summary>
+            Converts the specified Boolean value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Char)">
+            <summary>
+            Converts the specified Char value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.SByte)">
+            <summary>
+            Converts the specified SByte value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Byte)">
+            <summary>
+            Converts the specified Byte value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Int16)">
+            <summary>
+            Converts the specified Int16 value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.UInt16)">
+            <summary>
+            Converts the specified UInt16 value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Int32)">
+            <summary>
+            Converts the specified Int32 value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.UInt32)">
+            <summary>
+            Converts the specified UInt32 value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Int64)">
+            <summary>
+            Converts the specified Int64 value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.UInt64)">
+            <summary>
+            Converts the specified UInt64 value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Single)">
+            <summary>
+            Converts the specified Single value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Double)">
+            <summary>
+            Converts the specified Double value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Decimal)">
+            <summary>
+            Converts the specified Decimal value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.DateTime)">
+            <summary>
+            Converts the specified DateTime value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.String)">
+            <summary>
+            Converts the specified String value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache.GetBoxedValue(System.Object)">
+            <summary>
+            Converts the specified value into a cached boxed value in case of value type to decrease memory pressure after serialization.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>An object representing the value.</returns>
+        </member>
+        <member name="T:Catel.Data.BoxingCache`1">
+            <summary>
+            Caches boxed objects to minimize the memory footprint for boxed value types.
+            </summary>
+        </member>
+        <member name="P:Catel.Data.BoxingCache`1.Default">
+            <summary>
+            Gets the default instance of the boxing cache.
+            </summary>
+        </member>
+        <member name="M:Catel.Data.BoxingCache`1.AddUnboxedValue(`0)">
+            <summary>
+            Adds the value to the cache.
+            </summary>
+            <param name="value">The value to add to the cache.</param>
+        </member>
+        <member name="M:Catel.Data.BoxingCache`1.AddBoxedValue(System.Object)">
+            <summary>
+            Adds the value to the cache.
+            </summary>
+            <param name="boxedValue">The value to add to the cache.</param>
+        </member>
+        <member name="M:Catel.Data.BoxingCache`1.GetBoxedValue(`0)">
+            <summary>
+            Gets the boxed value representing the specified value.
+            </summary>
+            <param name="value">The value to box.</param>
+            <returns>The boxed value.</returns>
+        </member>
+        <member name="M:Catel.Data.BoxingCache`1.GetUnboxedValue(System.Object)">
+            <summary>
+            Gets the unboxed value representing the specified value.
+            </summary>
+            <param name="boxedValue">The value to unbox.</param>
+            <returns>The unboxed value.</returns>
+        </member>
+        <member name="T:Catel.Data.IPropertyBag">
+            <summary>
+            Defines a property bag allowing to store values inside.
+            </summary>
+        </member>
+        <member name="M:Catel.Data.IPropertyBag.SetValue``1(System.String,``0)">
+            <summary>
+            Sets a value inside the property bag.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="name">The name of the value.</param>
+            <param name="value">The actual value.</param>
+        </member>
+        <member name="M:Catel.Data.IPropertyBag.GetValue``1(System.String,``0)">
+            <summary>
+            Gets a value inside the property bag.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="name">The name of the value.</param>
+            <param name="defaultValue">The default value of the property.</param>
+            <returns>The value or the specified default value in case the property is not set yet.</returns>
+        </member>
+        <member name="M:Catel.Data.IPropertyBag.IsAvailable(System.String)">
+            <summary>
+            Determines whether the specified property is available on the property bag, which means it has a value.
+            </summary>
+            <param name="name">Name of the property.</param>
+            <returns><c>true</c> if the property is available; otherwise, <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentException">The <paramref name="name" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.IPropertyBag.GetAllNames">
+            <summary>
+            Gets all the available property names in the property bag.
+            </summary>
+            <returns>An array of property names.</returns>
+        </member>
+        <member name="M:Catel.Data.IPropertyBag.GetAllProperties">
+            <summary>
+            Gets all the properties and their values that are registered in this property bag.
+            </summary>
+            <returns>A dictionary containing all the properties and their values.</returns>
+        </member>
+        <member name="T:Catel.Data.PropertyBag">
+            <summary>
+            Class that is able to manage all properties of a specific object in a thread-safe manner.
+            </summary>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.Boolean)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.Char)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.SByte)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.Byte)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.Int16)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.UInt16)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.Int32)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.UInt32)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.Int64)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.UInt64)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.Single)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.Double)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.Decimal)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.DateTime)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.SetValue(System.String,System.String)">
+            <summary>
+            Sets the property value.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="propertyName" /> is <c>null</c> or whitespace.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Catel.Data.PropertyBag"/> class.
+            </summary>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Catel.Data.PropertyBag"/> class.
+            </summary>
+            <param name="propertyDictionary">The property dictionary.</param>
+        </member>
+        <member name="P:Catel.Data.PropertyBag.Item(System.String)">
+            <summary>
+            Gets or sets the property using the indexer.
+            </summary>
+            <param name="name">The name.</param>
+            <returns>The value of the property.</returns>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.Import(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Imports the properties in the existing dictionary.
+            <para />
+            This method will overwrite all existing property values in the property bag.
+            </summary>
+            <param name="propertiesToImport">The properties to import.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="propertiesToImport"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.GetAllProperties">
+            <summary>
+            Gets all the currently available properties in the property bag.
+            </summary>
+            <returns>A list of all property names and values.</returns>
+        </member>
+        <member name="M:Catel.Data.PropertyBag.UpdatePropertyValue``1(System.String,System.Func{``0,``0})">
+            <summary>
+            Updates the property value by retrieving it from the property bag. After invoking the update action,
+            the value will be written back to the property bag.
+            </summary>
+            <typeparam name="TValue">The type of the t value.</typeparam>
+            <param name="propertyName">Name of the property.</param>
+            <param name="update">The update.</param>
+        </member>
+        <member name="T:Catel.Data.PropertyBagBase">
+            <summary>
+            Base class for property bags that take care of common logic such as change notifications.
+            </summary>
+        </member>
+        <member name="E:Catel.Data.PropertyBagBase.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:Catel.Data.PropertyBagBase.RaisePropertyChanged(System.String)">
+            <summary>
+            Raises the property changed notification event for the specified property.
+            </summary>
+            <param name="propertyName"></param>
+        </member>
+        <member name="T:Catel.Data.TypedPropertyBag">
+            <summary>
+            Memory efficient typed property bag that takes care of boxing.
+            </summary>
+        </member>
+        <member name="T:Catel.ObjectHelper">
+            <summary>
+            Object helper class.
+            </summary>
+        </member>
+        <member name="M:Catel.ObjectHelper.AreEqual(System.Object,System.Object)">
+            <summary>
+              Checks whether the 2 specified objects are equal. This method is better, simple because it also checks boxing so
+              2 integers with the same values that are boxed are equal.
+            </summary>
+            <param name = "object1">The first object.</param>
+            <param name = "object2">The second object.</param>
+            <returns><c>true</c> if the objects are equal; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Catel.ObjectHelper.AreEqualReferences(System.Object,System.Object)">
+            <summary>
+              Checks whether the 2 specified objects are equal references. This method is better, simple because it also checks boxing so
+              2 integers with the same values that are boxed are equal.
+            <para />
+              Two objects are considered equal if one of the following expressions returns true:
+            <list type="bullet">
+              <item><description>Both values are <c>null</c>.</description></item>
+              <item><description>Both values have the same reference, checked by <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)"/>.</description></item>
+              <item><description>Both values are value types and have the same value.</description></item>
+              <item><description>Both values are string type and have the same value.</description></item>
+            </list>
+            </summary>
+            <param name = "object1">The first object.</param>
+            <param name = "object2">The second object.</param>
+            <returns><c>true</c> if the objects are equal references; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Catel.ObjectHelper.IsNull(System.Object)">
+            <summary>
+            Determines whether the specified object is <c>null</c> or <c>DBNull.Value</c>.
+            </summary>
+            <param name="obj">The object to chec..</param>
+            <returns>
+              <c>true</c> if the specified object is <c>null</c> or <c>DBNull.Value</c>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Catel.Reflection.TypeExtensions">
+            <summary>
+            Extensions for the type class.
+            </summary>
+        </member>
+        <member name="M:Catel.Reflection.TypeExtensions.IsClassType(System.Type)">
+            <summary>
+            Determines whether the specified type is a class type, meaning it is not a value type but also not a string
+            or any of the primitive types in .NET.
+            </summary>
+            <param name="type">The type.</param>
+            <returns><c>true</c> if this type is a class type; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Catel.Reflection.TypeExtensions.IsCollection(System.Type)">
+            <summary>
+            Determines whether the specified type is a collection.
+            </summary>
+            <param name="type">The type.</param>
+            <returns><c>true</c> if the specified type is a collection; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Catel.Reflection.TypeExtensions.IsDictionary(System.Type)">
+            <summary>
+            Determines whether the specified type is a dictionary.
+            </summary>
+            <param name="type">The type.</param>
+            <returns><c>true</c> if the specified type is a dictionary; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Catel.Reflection.TypeExtensions.IsNullableType(System.Type)">
+            <summary>
+            Returns whether a type is nullable or not.
+            </summary>
+            <param name="type">Type to check.</param>
+            <returns>True if the type is nullable, otherwise false.</returns>
+        </member>
+        <member name="M:Catel.Reflection.TypeExtensions.IsBasicType(System.Type)">
+            <summary>
+            Determines whether the specified type is a basic type. A basic type is one that can be wholly expressed
+            as an XML attribute. All primitive data types and <see cref="T:System.String"/> and <see cref="T:System.DateTime"/> are basic types.
+            </summary>
+            <param name="type">The type to check.</param>
+            <returns><c>true</c> if the specified type is a basic type; otherwise, <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="type"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Catel.Reflection.TypeExtensions.GetCollectionElementType(System.Type)">
+            <summary>
+            Gets the element type of the collection.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Type.</returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="type"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:Catel.Reflection.FastMemberInvoker`1">
+            <summary>
+            Wrapper class allowing fast member access as an alternative to reflection.
+            </summary>
+        </member>
+        <member name="T:Catel.Reflection.IFastMemberInvoker">
+            <summary>
+            Wrapper allowing fast member access as an alternative to reflection.
+            </summary>
+        </member>
+    </members>
+</doc>
