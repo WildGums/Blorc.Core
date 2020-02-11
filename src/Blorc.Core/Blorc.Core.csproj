@@ -10,7 +10,7 @@
     <IsPackable>true</IsPackable>
     <LangVersion>7.3</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup>
     <!-- SonarQube requires a project guid -->
@@ -30,6 +30,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>BoxingCache.boxedvalues.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Data\PropertyBags\PropertyBag.boxing.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PropertyBag.boxing.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Data\PropertyBags\TypedPropertyBag.storage.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TypedPropertyBag.storage.tt</DependentUpon>
     </Compile>
     <Compile Update="Reflection\FastMemberInvoker\FastMemberInvoker.caches.g.cs">
       <DesignTime>True</DesignTime>
@@ -71,6 +81,14 @@
     <None Update="Data\BoxingCache.boxedvalues.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BoxingCache.boxedvalues.cs</LastGenOutput>
+    </None>
+    <None Update="Data\PropertyBags\PropertyBag.boxing.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyBag.boxing.cs</LastGenOutput>
+    </None>
+    <None Update="Data\PropertyBags\TypedPropertyBag.storage.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TypedPropertyBag.storage.cs</LastGenOutput>
     </None>
     <None Update="Reflection\FastMemberInvoker\FastMemberInvoker.caches.g.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -3,28 +3,15 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>Blorc.Core.Example</AssemblyName>
     <RootNamespace>Blorc.Example</RootNamespace>
-    <!--
-    <RestoreAdditionalProjectSources>
-      https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
-      https://dotnet.myget.org/F/blazor-dev/api/v3/index.json;
-    </RestoreAdditionalProjectSources>
-    -->
     <LangVersion>7.3</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <PackageVersion>1.0.0-alpha0117</PackageVersion>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup>
     <!-- SonarQube requires a project guid -->
     <ProjectGuid>3D467864-4A28-485A-ADB2-80875974A273</ProjectGuid>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Catel.Fody" Version="4.3.0" PrivateAssets="all" />
-    <PackageReference Include="Fody" Version="6.1.0" PrivateAssets="all">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.2.0-preview1.20073.1" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.2.0-preview1.20073.1" PrivateAssets="all" />
