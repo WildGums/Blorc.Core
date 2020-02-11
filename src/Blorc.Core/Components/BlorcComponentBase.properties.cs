@@ -14,6 +14,11 @@
 
         private static readonly Dictionary<string, MethodInfo> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo>();
 
+        protected BlorcComponentBase(bool injectComponentServices) :this()
+        {
+            InjectComponentServices = injectComponentServices;
+        }
+
         [Parameter(CaptureUnmatchedValues = true)]
         public IDictionary<string, object> AdditionalAttributes { get; set; }
         

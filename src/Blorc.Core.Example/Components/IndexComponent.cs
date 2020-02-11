@@ -11,10 +11,9 @@
 
         protected IUIVisualizationService SurveyVisualizationService { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        public IndexComponent()
+            :base(true)
         {
-            await base.OnInitializedAsync();
-            InjectComponentServices = true;
         }
 
         protected async Task OnButtonClick()

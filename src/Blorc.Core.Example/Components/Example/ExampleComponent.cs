@@ -1,9 +1,9 @@
 ﻿namespace Blorc.Example.Components.Example
 {
     using Microsoft.AspNetCore.Components;
-    using Blorc.Components;
+    // using Blorc.Components;
 
-    public class ExampleComponent : BlorcComponentBase
+    public class ExampleComponent : ComponentBase
     {
         [Parameter]
         public string Title { get; set; }

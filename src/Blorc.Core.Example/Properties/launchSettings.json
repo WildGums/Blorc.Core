@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Blorc.Core.Example2": {
+    "Blorc.Core.Example": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
