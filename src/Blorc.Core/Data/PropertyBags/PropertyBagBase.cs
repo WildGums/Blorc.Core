@@ -1,4 +1,4 @@
-﻿namespace Catel.Data
+﻿namespace Blorc.Data
 {
     using System.Collections.Generic;
     using System.ComponentModel;

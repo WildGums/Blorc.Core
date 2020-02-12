@@ -1,4 +1,4 @@
-﻿namespace Catel.Reflection
+﻿namespace Blorc.Reflection
 {
     /// <summary>
     /// Wrapper allowing fast member access as an alternative to reflection.

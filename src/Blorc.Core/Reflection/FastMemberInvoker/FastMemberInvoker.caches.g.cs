@@ -14,13 +14,13 @@
 // </auto-generated> 
 //------------------------------------------------------------------------------
 
-namespace Catel.Reflection
+namespace Blorc.Reflection
 {
 	using System;
     using System.Collections.Concurrent;
 	using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Catel.Linq.Expressions;
+    using Blorc.Linq.Expressions;
 
 	public partial class FastMemberInvoker<TEntity>
 	{

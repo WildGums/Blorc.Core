@@ -8,10 +8,10 @@
 
     using Blorc.Attributes;
     using Blorc.Bindings;
+    using Blorc.Data;
     using Blorc.Services;
     using Blorc.StateConverters;
 
-    using Catel.Data;
 
     using Microsoft.AspNetCore.Components;
 

@@ -14,10 +14,9 @@
 // </auto-generated> 
 //------------------------------------------------------------------------------
 
-namespace Catel.Reflection
+namespace Blorc.Reflection
 {
 	using System;
-    using Catel.Data;
 
 	public partial class FastMemberInvoker<TEntity>
 	{

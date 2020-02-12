@@ -1,4 +1,4 @@
-﻿namespace Catel.Linq.Expressions
+﻿namespace Blorc.Linq.Expressions
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
-    using Catel.Reflection;
+    using Blorc.Reflection;
 
     public static partial class ExpressionBuilder
     {

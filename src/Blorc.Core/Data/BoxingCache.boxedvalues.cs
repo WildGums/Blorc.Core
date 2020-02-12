@@ -15,7 +15,7 @@
 // </auto-generated> 
 //------------------------------------------------------------------------------
 
-namespace Catel.Data
+namespace Blorc.Data
 {
 	using System;
 

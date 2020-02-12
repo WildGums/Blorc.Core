@@ -9,12 +9,10 @@
 //------------------------------------------------------------------------------
 
 
-namespace Catel.Data
+namespace Blorc.Data
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using Catel.Reflection;
 
     public partial class TypedPropertyBag
     {
