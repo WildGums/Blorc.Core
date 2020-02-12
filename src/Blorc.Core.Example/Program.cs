@@ -4,7 +4,7 @@
 
     using Blorc.Example.Shared;
     using Blorc.Services;
-   
+
     using Microsoft.AspNetCore.Blazor.Hosting;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -14,22 +14,20 @@
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-            // TODO: Register component services...
+            builder.RootComponents.Add<App>("app");
+
             builder.Services.AddBlorcCore();
             builder.Services.AddTransient<SurveyExecutionService>();
             builder.Services.AddTransient<SurveyVisualizationService>();
 
-            builder.RootComponents.Add<App>("app");
-
-
-            var host = builder.Build();
-
-            var componentServiceFactory = host.Services.GetService<IComponentServiceFactory>();
-            componentServiceFactory.Map<SurveyPrompt, SurveyExecutionService>();
-            componentServiceFactory.Map<SurveyPrompt, SurveyVisualizationService>();
-
-            await host.RunAsync();
+            await builder
+                .Build()
+                .MapComponentServices(options =>
+                    {
+                        options.Map<SurveyPrompt, SurveyExecutionService>();
+                        options.Map<SurveyPrompt, SurveyVisualizationService>();
+                    })
+               .RunAsync();
         }
-
     }
 }
