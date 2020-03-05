@@ -474,6 +474,27 @@
             <exception cref="T:System.ArgumentNullException">The <paramref name="bindingParty"/> is <c>null</c>.</exception>
             <exception cref="T:System.ArgumentException">The <paramref name="bindingParty"/> is <c>null</c>.</exception>
         </member>
+        <member name="T:Blorc.Components.BlorcApplicationBase">
+            <summary>
+                The blorc application.
+            </summary>
+        </member>
+        <member name="P:Blorc.Components.BlorcApplicationBase.DocumentService">
+            <summary>
+                Gets or sets the document service.
+            </summary>
+        </member>
+        <member name="M:Blorc.Components.BlorcApplicationBase.OnConfiguringDocument(Blorc.Services.IDocumentService)">
+            <summary>
+                The on configure document.
+            </summary>
+            <param name="documentService">
+                The document service.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task" />.
+            </returns>
+        </member>
         <member name="M:Blorc.Converters.IValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
             <summary>
             Modifies the source data before passing it to the target for display in the UI.
