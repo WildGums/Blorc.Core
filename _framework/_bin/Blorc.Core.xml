@@ -479,12 +479,17 @@
                 The blorc application.
             </summary>
         </member>
+        <member name="P:Blorc.Components.BlorcApplicationBase.Initialized">
+            <summary>
+            Gets a value indicating whether initialized.
+            </summary>
+        </member>
         <member name="P:Blorc.Components.BlorcApplicationBase.DocumentService">
             <summary>
                 Gets or sets the document service.
             </summary>
         </member>
-        <member name="M:Blorc.Components.BlorcApplicationBase.OnConfiguringDocument(Blorc.Services.IDocumentService)">
+        <member name="M:Blorc.Components.BlorcApplicationBase.OnConfiguringDocumentAsync(Blorc.Services.IDocumentService)">
             <summary>
                 The on configure document.
             </summary>
@@ -998,6 +1003,56 @@
             <summary>
             Wrapper allowing fast member access as an alternative to reflection.
             </summary>
+        </member>
+        <member name="T:Blorc.Services.IDocumentServiceExtension">
+            <summary>
+            The document service extension.
+            </summary>
+        </member>
+        <member name="M:Blorc.Services.IDocumentServiceExtension.InjectAssemblyCSSFile(Blorc.Services.IDocumentService,System.Reflection.Assembly,System.String)">
+            <summary>
+            The inject assembly css file.
+            </summary>
+            <param name="this">
+            The this.
+            </param>
+            <param name="assembly">
+            The assembly.
+            </param>
+            <param name="path">
+            The path.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
+        </member>
+        <member name="M:Blorc.Services.IDocumentServiceExtension.InjectAssemblyScriptFile(Blorc.Services.IDocumentService,System.Reflection.Assembly,System.String)">
+            <summary>
+            The inject assembly script file.
+            </summary>
+            <param name="this">
+            The this.
+            </param>
+            <param name="assembly">
+            The assembly.
+            </param>
+            <param name="path">
+            The path.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
+        </member>
+        <member name="M:Blorc.Services.IDocumentServiceExtension.InjectBlorcCoreJS(Blorc.Services.IDocumentService)">
+            <summary>
+            The inject blorc core js.
+            </summary>
+            <param name="this">
+            The this.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
         </member>
         <member name="T:Blorc.Services.IDocumentService">
             <summary>
