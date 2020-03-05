@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Components;
 
     /// <summary>
-    /// The blorc application.
+    ///     The blorc application.
     /// </summary>
     public class BlorcApplicationBase : BlorcComponentBase
     {
@@ -20,13 +20,13 @@
         private IDocumentService DocumentService { get; set; }
 
         /// <summary>
-        /// The on configure document.
+        ///     The on configure document.
         /// </summary>
         /// <param name="documentService">
-        /// The document service.
+        ///     The document service.
         /// </param>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         protected virtual Task OnConfiguringDocument(IDocumentService documentService)
         {
