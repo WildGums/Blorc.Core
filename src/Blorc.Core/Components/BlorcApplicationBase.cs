@@ -11,6 +11,9 @@
     /// </summary>
     public class BlorcApplicationBase : BlorcComponentBase
     {
+        /// <summary>
+        /// Gets a value indicating whether initialized.
+        /// </summary>
         protected bool Initialized { get; private set; }
 
         /// <summary>
@@ -28,14 +31,15 @@
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        protected virtual Task OnConfiguringDocument(IDocumentService documentService)
+        protected virtual Task OnConfiguringDocumentAsync(IDocumentService documentService)
         {
             return Task.CompletedTask;
         }
 
         protected override async Task OnInitializedAsync()
         {
-            await OnConfiguringDocument(DocumentService);
+            await DocumentService.InjectBlorcCoreJS();
+            await OnConfiguringDocumentAsync(DocumentService);
             await base.OnInitializedAsync();
             Initialized = true;
             StateHasChanged();
