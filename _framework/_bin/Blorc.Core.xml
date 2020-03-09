@@ -1137,5 +1137,24 @@
             The <see cref="T:System.Threading.Tasks.Task"/>.
             </returns>
         </member>
+        <member name="T:Blorc.Services.Interfaces.IServiceDiscovery">
+            <summary>
+            The ServiceDiscovery interface.
+            </summary>
+        </member>
+        <member name="M:Blorc.Services.Interfaces.IServiceDiscovery.GetServiceEndPoint(System.String,System.Int32)">
+            <summary>
+            Gets service end point.
+            </summary>
+            <param name="serviceName">
+            The service name.
+            </param>
+            <param name="idx">
+            The idx.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
+        </member>
     </members>
 </doc>
