@@ -9,22 +9,36 @@ namespace Blorc.Services.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The ServiceDiscovery interface.
+    ///     The ServiceDiscovery interface.
     /// </summary>
     public interface IServiceDiscovery
     {
         /// <summary>
-        /// Gets service end point.
+        ///     Gets service end point.
         /// </summary>
         /// <param name="serviceName">
-        /// The service name.
+        ///     The service name.
         /// </param>
-        /// <param name="idx">
-        /// The idx.
+        /// <param name="bindingIndex">
+        ///     The idx.
         /// </param>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
-        Task<string> GetServiceEndPoint(string serviceName, int idx = 0);
+        Task<string> GetServiceEndPoint(string serviceName, int bindingIndex = 0);
+
+        /// <summary>
+        ///     Gets service end point.
+        /// </summary>
+        /// <param name="serviceName">
+        ///     The service name.
+        /// </param>
+        /// <param name="bindingName">
+        ///     The binding name.
+        /// </param>
+        /// <returns>
+        ///     The <see cref="Task" />.
+        /// </returns>
+        Task<string> GetServiceEndPoint(string serviceName, string bindingName);
     }
 }
