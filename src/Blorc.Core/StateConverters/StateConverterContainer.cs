@@ -5,6 +5,8 @@
     using System.Linq;
     using Blorc.Components;
 
+    using Serilog;
+
     public class StateConverterContainer : IStateConverterContainer
     {
         private readonly List<IStateConverter> _converters = new List<IStateConverter>();
@@ -80,7 +82,14 @@
 
             if (_forceComponentUpdate)
             {
-                _component.ForceUpdate();
+                try
+                {
+                    _component.ForceUpdate();
+                }
+                catch (Exception e)
+                {
+                    Log.Debug(e, "Error on component force update");
+                }
             }
 
             _isUpdating = false;
