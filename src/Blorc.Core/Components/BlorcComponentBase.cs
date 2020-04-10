@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
     using System.Xml;
@@ -110,7 +111,7 @@
             if (InjectComponentServices)
             {
                 var type = GetType();
-                var fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                var fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).Where(info => typeof(ComponentBase).IsAssignableFrom(info.FieldType));
                 foreach (var fieldInfo in fieldInfos)
                 {
                     var value = fieldInfo.GetValue(this);
@@ -121,7 +122,7 @@
                     }
                 }
 
-                var propertyInfos = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                var propertyInfos = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).Where(info => typeof(ComponentBase).IsAssignableFrom(info.PropertyType));
                 foreach (var propertyInfo in propertyInfos)
                 {
                     var value = propertyInfo.GetValue(this);
