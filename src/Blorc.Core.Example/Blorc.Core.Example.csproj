@@ -8,17 +8,20 @@
     <PackageVersion>1.0.0-alpha0117</PackageVersion>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
+  
   <PropertyGroup>
     <!-- SonarQube requires a project guid -->
     <ProjectGuid>3D467864-4A28-485A-ADB2-80875974A273</ProjectGuid>
   </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.2.0-preview1.20073.1" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.2.0-preview1.20073.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="3.2.0-preview1.20073.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview1.20073.1" />
   </ItemGroup>
-  <ItemGroup>
+  
+    <ItemGroup>
     <ProjectReference Include="..\Blorc.Core\Blorc.Core.csproj" />
   </ItemGroup>
 </Project>
