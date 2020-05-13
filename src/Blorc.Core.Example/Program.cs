@@ -5,7 +5,8 @@
     using Blorc.Example.Shared;
     using Blorc.Services;
 
-    using Microsoft.AspNetCore.Blazor.Hosting;
+
+    using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
     using Microsoft.Extensions.DependencyInjection;
 
     public class Program

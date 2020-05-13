@@ -1,7 +1,7 @@
 ﻿namespace Blorc.Services
 {
     using System;
-    using Microsoft.AspNetCore.Blazor.Hosting;
+    using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class WebAssemblyHostExtensions
