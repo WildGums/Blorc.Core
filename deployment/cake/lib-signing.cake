@@ -57,11 +57,15 @@ public static void SignFile(BuildContext buildContext, string signToolCommand, s
 
     while (safetyCounter > 0)
     {
+        buildContext.CakeContext.Information($"Ensuring file '{fileName}' is signed...");
+
         // Check
         var checkProcessSettings = new ProcessSettings
         {
             Arguments = $"verify /pa \"{fileName}\"",
-            Silent = true
+            Silent = true,
+            RedirectStandardError = true,
+            RedirectStandardOutput = true
         };
 
         using (var checkProcess = buildContext.CakeContext.StartAndReturnProcess(_signToolFileName, checkProcessSettings))
@@ -75,8 +79,6 @@ public static void SignFile(BuildContext buildContext, string signToolCommand, s
                 buildContext.CakeContext.Information(string.Empty);
                 return;
             }
-
-            buildContext.CakeContext.Information(string.Empty);
         }
 
         // Sign
@@ -87,11 +89,12 @@ public static void SignFile(BuildContext buildContext, string signToolCommand, s
 
         var finalCommand = $"{signToolCommand} \"{fileName}\"";
 
-        buildContext.CakeContext.Information($"Signing '{fileName}' using '{finalCommand}'");
+        buildContext.CakeContext.Information($"File '{fileName}' is not signed, signing using '{finalCommand}'");
 
         var signProcessSettings = new ProcessSettings
         {
-            Arguments = finalCommand
+            Arguments = finalCommand,
+            Silent = true
         };
 
         using (var signProcess = buildContext.CakeContext.StartAndReturnProcess(_signToolFileName, signProcessSettings))
@@ -101,6 +104,7 @@ public static void SignFile(BuildContext buildContext, string signToolCommand, s
             var exitCode = signProcess.GetExitCode();
             if (exitCode == 0)
             {
+                buildContext.CakeContext.Information(string.Empty);
                 return;
             }
 
