@@ -52,6 +52,8 @@ public static void SignFile(BuildContext buildContext, string signToolCommand, s
         _signToolFileName = FindSignToolFileName(buildContext);
     }
 
+    buildContext.CakeContext.Information(string.Empty);
+
     // Retry mechanism, signing with timestamping is not as reliable as we thought
     var safetyCounter = 3;
 
@@ -104,7 +106,6 @@ public static void SignFile(BuildContext buildContext, string signToolCommand, s
             var exitCode = signProcess.GetExitCode();
             if (exitCode == 0)
             {
-                buildContext.CakeContext.Information(string.Empty);
                 return;
             }
 
