@@ -1,13 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+    <UseBlazorWebAssembly>true</UseBlazorWebAssembly>
     <AssemblyName>Blorc.Core.Example</AssemblyName>
     <RootNamespace>Blorc.Example</RootNamespace>
-    <LangVersion>7.3</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
     <PackageVersion>1.0.0-alpha0117</PackageVersion>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <BlazorWebAssemblyEnableLinking>true</BlazorWebAssemblyEnableLinking>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -17,7 +19,6 @@
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.1" PrivateAssets="all" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />  
   </ItemGroup>
