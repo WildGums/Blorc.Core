@@ -26,7 +26,7 @@
         public static async Task InjectAssemblyCSSFile(this IDocumentService @this, Assembly assembly, string path)
         {
             var source = $"_content/{assembly.GetName().Name}/{path}";
-            await @this.InjectLink(source);
+            await @this.InjectLinkAsync(source);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@
         public static async Task InjectAssemblyScriptFile(this IDocumentService @this, Assembly assembly, string path)
         {
             var source = $"_content/{assembly.GetName().Name}/{path}";
-            await @this.InjectScript(source);
+            await @this.InjectScriptAsync(source);
         }
 
         /// <summary>

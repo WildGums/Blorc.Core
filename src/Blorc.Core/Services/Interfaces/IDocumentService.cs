@@ -28,7 +28,7 @@ namespace Blorc.Services
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<Rect> GetBoundingClientRect(double x, double y);
+        Task<Rect> GetBoundingClientRectAsync(double x, double y);
 
         /// <summary>
         /// The get bounding client rect by id.
@@ -39,7 +39,7 @@ namespace Blorc.Services
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<Rect> GetBoundingClientRectById(string id);
+        Task<Rect> GetBoundingClientRectByIdAsync(string id);
 
         /// <summary>
         /// The get offset bounding client rect.
@@ -53,7 +53,7 @@ namespace Blorc.Services
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<Rect> GetOffsetBoundingClientRect(double x, double y);
+        Task<Rect> GetOffsetBoundingClientRectAsync(double x, double y);
 
         /// <summary>
         /// The inject head.
@@ -61,7 +61,7 @@ namespace Blorc.Services
         /// <param name="injectorValueProvider">
         /// The injector value provider.
         /// </param>
-        void InjectHead(IInjectorValueProvider injectorValueProvider);
+        Task InjectHeadAsync(IInjectorValueProvider injectorValueProvider);
 
         /// <summary>
         /// The inject link.
@@ -78,7 +78,7 @@ namespace Blorc.Services
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task InjectLink(string href, string rel = "stylesheet", string type = "text/css");
+        Task InjectLinkAsync(string href, string rel = "stylesheet", string type = "text/css");
 
         /// <summary>
         /// The inject script.
@@ -92,6 +92,6 @@ namespace Blorc.Services
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task InjectScript(string source, string type = "text/javascript");
+        Task InjectScriptAsync(string source, string type = "text/javascript");
     }
 }

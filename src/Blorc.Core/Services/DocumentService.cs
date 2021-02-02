@@ -16,35 +16,35 @@
             _jsRuntime = jsRuntime;
         }
 
-        public Task<Rect> GetBoundingClientRect(double x, double y)
+        public Task<Rect> GetBoundingClientRectAsync(double x, double y)
         {
             return DocumentInterop.GetBoundingClientRect(_jsRuntime, x, y);
         }
 
-        public Task<Rect> GetBoundingClientRectById(string id)
+        public Task<Rect> GetBoundingClientRectByIdAsync(string id)
         {
             return DocumentInterop.GetBoundingClientRectById(_jsRuntime, id);
         }
 
-        public Task<Rect> GetOffsetBoundingClientRect(double x, double y)
+        public Task<Rect> GetOffsetBoundingClientRectAsync(double x, double y)
         {
             return DocumentInterop.GetOffsetBoundingClientRect(_jsRuntime, x, y);
         }
 
-        public async Task InjectScript(string source, string type = "text/javascript")
+        public async Task InjectScriptAsync(string source, string type = "text/javascript")
         {
             await InjectorInterop.InjectScript(_jsRuntime, source, type);
         }
 
-        public async Task InjectLink(string href, string rel= "stylesheet", string type = "text/css")
+        public async Task InjectLinkAsync(string href, string rel= "stylesheet", string type = "text/css")
         {
             await InjectorInterop.InjectLink(_jsRuntime, href, rel, type);
         }
 
-        public void InjectHead(IInjectorValueProvider injectorValueProvider)
+        public async Task InjectHeadAsync(IInjectorValueProvider injectorValueProvider)
         {
             var value = injectorValueProvider.GetValue();
-            InjectorInterop.InjectHead(_jsRuntime, value);
+            await InjectorInterop.InjectHead(_jsRuntime, value);
         }
     }
 }

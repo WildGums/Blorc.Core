@@ -22,7 +22,8 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        await DocumentService.InjectLink("css/bootstrap/bootstrap.min.css");
-        await DocumentService.InjectLink("css/site.css");
+
+        await DocumentService.InjectLinkAsync("css/bootstrap/bootstrap.min.css");
+        await DocumentService.InjectLinkAsync("css/site.css");
     }
 }
