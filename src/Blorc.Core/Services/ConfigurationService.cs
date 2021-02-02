@@ -24,7 +24,7 @@
             Initialize();
         }
 
-        public async Task<T> GetSection<T>(string sectionName)
+        public async Task<T> GetSectionAsync<T>(string sectionName)
         {
             _parameters.TryGetValue("env", out var environment);
 

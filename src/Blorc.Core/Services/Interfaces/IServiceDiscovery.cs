@@ -25,7 +25,7 @@ namespace Blorc.Services
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        Task<string> GetServiceEndPoint(string serviceName, int bindingIndex = 0);
+        Task<string> GetServiceEndPointAsync(string serviceName, int bindingIndex = 0);
 
         /// <summary>
         ///     Gets service end point.
@@ -39,6 +39,6 @@ namespace Blorc.Services
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        Task<string> GetServiceEndPoint(string serviceName, string bindingName);
+        Task<string> GetServiceEndPointAsync(string serviceName, string bindingName);
     }
 }

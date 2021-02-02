@@ -10,6 +10,6 @@ namespace Blorc.Services
 
     public interface IConfigurationService
     {
-        Task<T> GetSection<T>(string sectionName);
+        Task<T> GetSectionAsync<T>(string sectionName);
     }
 }

@@ -23,7 +23,7 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public static async Task InjectAssemblyCSSFileAsync(this IDocumentService @this, Assembly assembly, string path)
+        public static async Task InjectAssemblyCssFileAsync(this IDocumentService @this, Assembly assembly, string path)
         {
             var source = $"_content/{assembly.GetName().Name}/{path}";
             await @this.InjectLinkAsync(source);
