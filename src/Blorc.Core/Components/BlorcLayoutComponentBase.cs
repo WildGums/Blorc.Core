@@ -143,7 +143,7 @@
 
         protected override async Task OnInitializedAsync()
         {
-            await DocumentService.InjectBlorcCoreJS();
+            await DocumentService.InjectBlorcCoreJsAsync();
         }
 
         protected override void OnParametersSet()

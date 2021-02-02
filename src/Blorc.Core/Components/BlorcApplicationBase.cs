@@ -38,10 +38,13 @@
 
         protected override async Task OnInitializedAsync()
         {
-            await DocumentService.InjectBlorcCoreJS();
+            await DocumentService.InjectBlorcCoreJsAsync();
             await OnConfiguringDocumentAsync(DocumentService);
+
             await base.OnInitializedAsync();
+            
             Initialized = true;
+            
             StateHasChanged();
         }
     }

@@ -23,7 +23,7 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public static async Task InjectAssemblyCSSFile(this IDocumentService @this, Assembly assembly, string path)
+        public static async Task InjectAssemblyCSSFileAsync(this IDocumentService @this, Assembly assembly, string path)
         {
             var source = $"_content/{assembly.GetName().Name}/{path}";
             await @this.InjectLinkAsync(source);
@@ -44,7 +44,7 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public static async Task InjectAssemblyScriptFile(this IDocumentService @this, Assembly assembly, string path)
+        public static async Task InjectAssemblyScriptFileAsync(this IDocumentService @this, Assembly assembly, string path)
         {
             var source = $"_content/{assembly.GetName().Name}/{path}";
             await @this.InjectScriptAsync(source);
@@ -59,10 +59,10 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public static async Task InjectBlorcCoreJS(this IDocumentService @this)
+        public static async Task InjectBlorcCoreJsAsync(this IDocumentService @this)
         {
-            await @this.InjectAssemblyScriptFile(typeof(IDocumentServiceExtension).Assembly, "document.js");
-            await @this.InjectAssemblyScriptFile(typeof(IDocumentServiceExtension).Assembly, "file.js");
+            await @this.InjectAssemblyScriptFileAsync(typeof(IDocumentServiceExtension).Assembly, "document.js");
+            await @this.InjectAssemblyScriptFileAsync(typeof(IDocumentServiceExtension).Assembly, "file.js");
         }
     }
 }
