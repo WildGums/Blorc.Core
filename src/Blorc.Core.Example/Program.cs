@@ -5,7 +5,6 @@
     using Blorc.Example.Shared;
     using Blorc.Services;
 
-
     using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -21,14 +20,22 @@
             builder.Services.AddTransient<SurveyExecutionService>();
             builder.Services.AddTransient<SurveyVisualizationService>();
 
-            await builder
-                .Build()
-                .MapComponentServices(options =>
+            var webAssemblyHost = builder.Build();
+
+            await webAssemblyHost
+                .MapComponentServices(
+                    options =>
                     {
                         options.Map<SurveyPrompt, SurveyExecutionService>();
                         options.Map<SurveyPrompt, SurveyVisualizationService>();
                     })
-               .RunAsync();
+                .ConfigureDocumentAsync(
+                    async documentService =>
+                    {
+                        await documentService.InjectBlorcCoreJsAsync();
+                    });
+
+            await webAssemblyHost.RunAsync();
         }
     }
 }
