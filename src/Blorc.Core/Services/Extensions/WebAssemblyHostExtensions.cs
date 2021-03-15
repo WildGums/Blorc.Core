@@ -12,14 +12,16 @@
         {
             var requiredService = @this.Services.GetRequiredService<IServiceProvider>();
             await options(requiredService);
-            await @this.RunAsync();
         }
 
         public static async Task ConfigureDocumentAsync(this WebAssemblyHost @this, Func<IDocumentService, Task> options)
         {
-            var requiredService = @this.Services.GetRequiredService<IDocumentService>();
-            await options(requiredService);
-            await @this.RunAsync();
+            await @this.ConfigureAsync(
+                async provider =>
+                {
+                    var requiredService = @this.Services.GetRequiredService<IDocumentService>();
+                    await options(requiredService);
+                });
         }
 
         public static WebAssemblyHost MapComponentServices(this WebAssemblyHost @this, Action<IComponentServiceFactory> options)
