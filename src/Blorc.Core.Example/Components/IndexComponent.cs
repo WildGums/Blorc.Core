@@ -7,9 +7,9 @@
 
     public class IndexComponent : BlorcComponentBase
     {
-        protected IExecutionService SurveyExcutionService { get; set; }
+        public IExecutionService SurveyExecutionService { get; set; }
 
-        protected IUIVisualizationService SurveyVisualizationService { get; set; }
+        public IUIVisualizationService SurveyVisualizationService { get; set; }
 
         public IndexComponent()
             :base(true)
@@ -18,9 +18,9 @@
 
         protected async Task OnButtonClick()
         {
-            if (SurveyExcutionService != null)
+            if (SurveyExecutionService != null)
             {
-                await SurveyExcutionService.ExecuteAsync();
+                await SurveyExecutionService.ExecuteAsync();
             }
 
             if (SurveyVisualizationService != null)

@@ -1,5 +1,6 @@
 ﻿namespace Blorc.Components
 {
+    using System;
     using System.Threading.Tasks;
 
     using Blorc.Services;
@@ -9,6 +10,7 @@
     /// <summary>
     ///     The blorc application.
     /// </summary>
+    [Obsolete("This class will be removed")]
     public class BlorcApplicationBase : BlorcComponentBase
     {
         /// <summary>

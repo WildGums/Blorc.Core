@@ -23,6 +23,11 @@
 
             await builder
                 .Build()
+                .ConfigureDocument(
+                    async documentService =>
+                    {
+                        await documentService.InjectBlorcCoreJsAsync();
+                    })
                 .MapComponentServices(options =>
                     {
                         options.Map<SurveyPrompt, SurveyExecutionService>();
