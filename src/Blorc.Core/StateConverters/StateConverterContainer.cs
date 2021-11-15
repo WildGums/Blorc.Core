@@ -27,7 +27,7 @@
         public string GetValue()
         {
             var items = _converters.Select(x => x.GetValue());
-            return string.Join(" ", items.Where(x => x != null));
+            return string.Join(" ", items.Where(x => x is not null));
         }
 
         public StateConverterContainer Add(IStateConverter converter)

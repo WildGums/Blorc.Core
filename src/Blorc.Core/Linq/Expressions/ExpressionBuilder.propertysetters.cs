@@ -43,7 +43,7 @@
         public static IReadOnlyDictionary<string, Expression<Action<T, object>>> CreatePropertySetters<T>()
         {
             var propertySetters = new Dictionary<string, Expression<Action<T, object>>>(StringComparer.OrdinalIgnoreCase);
-            var properties = typeof(T).GetProperties().Where(w => w.SetMethod != null);
+            var properties = typeof(T).GetProperties().Where(w => w.SetMethod is not null);
 
             foreach (var property in properties)
             {
@@ -62,7 +62,7 @@
         public static IReadOnlyDictionary<string, Expression<Action<T, TProperty>>> CreatePropertySetters<T, TProperty>()
         {
             var propertySetters = new Dictionary<string, Expression<Action<T, TProperty>>>(StringComparer.OrdinalIgnoreCase);
-            var properties = typeof(T).GetProperties().Where(w => w.SetMethod != null && w.PropertyType == typeof(TProperty));
+            var properties = typeof(T).GetProperties().Where(w => w.SetMethod is not null && w.PropertyType == typeof(TProperty));
 
             foreach (var property in properties)
             {

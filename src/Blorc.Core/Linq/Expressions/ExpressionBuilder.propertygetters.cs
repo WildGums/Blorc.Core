@@ -43,7 +43,7 @@
         public static IReadOnlyDictionary<string, Expression<Func<T, TProperty>>> CreatePropertyGetters<T, TProperty>()
         {
             var propertyGetters = new Dictionary<string, Expression<Func<T, TProperty>>>(StringComparer.OrdinalIgnoreCase);
-            var properties = typeof(T).GetProperties().Where(w => w.GetMethod != null && w.PropertyType == typeof(TProperty));
+            var properties = typeof(T).GetProperties().Where(w => w.GetMethod is not null && w.PropertyType == typeof(TProperty));
 
             foreach (var property in properties)
             {
@@ -62,7 +62,7 @@
         public static IReadOnlyDictionary<string, Expression<Func<T, object>>> CreatePropertyGetters<T>()
         {
             var propertyGetters = new Dictionary<string, Expression<Func<T, object>>>(StringComparer.OrdinalIgnoreCase);
-            var properties = typeof(T).GetProperties().Where(w => w.GetMethod != null);
+            var properties = typeof(T).GetProperties().Where(w => w.GetMethod is not null);
 
             foreach (var property in properties)
             {

@@ -115,7 +115,7 @@
                 foreach (var fieldInfo in fieldInfos)
                 {
                     var value = fieldInfo.GetValue(this);
-                    if (value != null)
+                    if (value is not null)
                     {
                         var attributes = fieldInfo.GetCustomAttributes<InjectComponentServiceAttribute>();
                         Inject(attributes, type, value);
@@ -126,7 +126,7 @@
                 foreach (var propertyInfo in propertyInfos)
                 {
                     var value = propertyInfo.GetValue(this);
-                    if (value != null)
+                    if (value is not null)
                     {
                         var attributes = propertyInfo.GetCustomAttributes<InjectComponentServiceAttribute>();
                         Inject(attributes, type, value);
@@ -139,12 +139,12 @@
         {
             foreach (var attribute in attributes)
             {
-                if (attribute != null)
+                if (attribute is not null)
                 {
                     var targetProperty = type.GetProperty(
                         attribute.PropertyName,
                         BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                    if (targetProperty != null)
+                    if (targetProperty is not null)
                     {
                         var componentService = ComponentServiceFactory.Get(value, targetProperty.PropertyType);
                         targetProperty.SetValue(this, componentService);

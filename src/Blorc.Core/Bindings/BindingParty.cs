@@ -33,7 +33,7 @@
             }
 
             var notifyPropertyChanged = instance as INotifyPropertyChanged;
-            if (notifyPropertyChanged != null)
+            if (notifyPropertyChanged is not null)
             {
                 _notifyPropertyChanged = notifyPropertyChanged;
                 notifyPropertyChanged.PropertyChanged += OnInstancePropertyChanged;
@@ -56,7 +56,7 @@
         /// <value>The instance.</value>
         public object Instance
         {
-            get { return (_instance != null && _instance.IsAlive) ? _instance.Target : null; }
+            get { return (_instance is not null && _instance.IsAlive) ? _instance.Target : null; }
         }
 
         /// <summary>
@@ -168,7 +168,7 @@
         {
             if (disposing)
             {
-                if (_notifyPropertyChanged != null)
+                if (_notifyPropertyChanged is not null)
                 {
                     _notifyPropertyChanged.PropertyChanged -= OnInstancePropertyChanged;
                     _notifyPropertyChanged = null;

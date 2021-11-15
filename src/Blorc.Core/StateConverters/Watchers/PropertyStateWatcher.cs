@@ -16,7 +16,7 @@
             _propertyName = propertyName;
 
             _notifyPropertyChangedSource = source as INotifyPropertyChanged;
-            if (_notifyPropertyChangedSource != null)
+            if (_notifyPropertyChangedSource is not null)
             {
                 _notifyPropertyChangedSource.PropertyChanged += OnPropertyChanged;
             }
@@ -33,7 +33,7 @@
 
         protected override void DisposeManaged()
         {
-            if (_notifyPropertyChangedSource != null)
+            if (_notifyPropertyChangedSource is not null)
             {
                 _notifyPropertyChangedSource.PropertyChanged -= OnPropertyChanged;
             }

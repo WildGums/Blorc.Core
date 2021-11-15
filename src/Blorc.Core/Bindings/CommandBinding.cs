@@ -57,7 +57,7 @@
             _canExecuteChangedHandler = async (sender, e) => await UpdateEnabledStateAsync();
             command.CanExecuteChanged += _canExecuteChangedHandler;
 
-            if (commandParameterBinding != null)
+            if (commandParameterBinding is not null)
             {
                 _commandBindingParameterValueChangedHandler = async (sender, e) => await UpdateEnabledStateAsync();
                 commandParameterBinding.ValueChanged += _commandBindingParameterValueChangedHandler;
@@ -85,19 +85,19 @@
         /// </summary>
         protected override void Uninitialize()
         {
-            if (_eventHandler != null)
+            if (_eventHandler is not null)
             {
                 _eventInfo.RemoveEventHandler(_element, _eventHandler);
                 _eventHandler = null;
             }
 
-            if (_canExecuteChangedHandler != null)
+            if (_canExecuteChangedHandler is not null)
             {
                 _command.CanExecuteChanged -= _canExecuteChangedHandler;
                 _canExecuteChangedHandler = null;
             }
 
-            if (_commandBindingParameterValueChangedHandler != null)
+            if (_commandBindingParameterValueChangedHandler is not null)
             {
                 _commandParameterBinding.ValueChanged -= _commandBindingParameterValueChangedHandler;
                 _commandBindingParameterValueChangedHandler = null;

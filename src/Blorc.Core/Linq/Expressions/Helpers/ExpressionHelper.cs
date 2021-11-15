@@ -31,13 +31,13 @@
             }
 
             var constantExpression = body.Expression as ConstantExpression;
-            if (constantExpression != null)
+            if (constantExpression is not null)
             {
                 return constantExpression.Value;
             }
 
             var memberExpression = body.Expression as MemberExpression;
-            if (memberExpression != null)
+            if (memberExpression is not null)
             {
                 var resolvedMemberExpression = ResolveMemberExpression(memberExpression);
                 return resolvedMemberExpression;
@@ -49,27 +49,27 @@
         private static object ResolveMemberExpression(MemberExpression memberExpression)
         {
             var fieldInfo = memberExpression.Member as FieldInfo;
-            if (fieldInfo != null)
+            if (fieldInfo is not null)
             {
                 var ownerConstantExpression = memberExpression.Expression as ConstantExpression;
-                if (ownerConstantExpression != null)
+                if (ownerConstantExpression is not null)
                 {
                     return fieldInfo.GetValue(ownerConstantExpression.Value);
                 }
             }
 
             var propertyInfo = memberExpression.Member as PropertyInfo;
-            if (propertyInfo != null)
+            if (propertyInfo is not null)
             {
                 var ownerConstantExpression = memberExpression.Expression as ConstantExpression;
-                if (ownerConstantExpression != null)
+                if (ownerConstantExpression is not null)
                 {
                     return propertyInfo.GetValue(ownerConstantExpression.Value, null);
                 }
 
                 // Note: this is support for .NET native
                 var subMemberExpression = memberExpression.Expression as MemberExpression;
-                if (subMemberExpression != null)
+                if (subMemberExpression is not null)
                 {
                     var resolvedMemberExpression = ResolveMemberExpression(subMemberExpression);
                     return propertyInfo.GetValue(resolvedMemberExpression, null);
@@ -87,7 +87,7 @@
 
             // Might occur in Android, maybe on other platforms as well
             var unaryExpression = expressionToHandle as UnaryExpression;
-            if (unaryExpression != null)
+            if (unaryExpression is not null)
             {
                 expressionToHandle = unaryExpression.Operand;
             }

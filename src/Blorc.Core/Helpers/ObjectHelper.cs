@@ -43,7 +43,7 @@ namespace Blorc
             var firstTagAsString = object1 as string;
             var secondTagAsString = object2 as string;
 
-            if ((firstTagAsString != null) && (secondTagAsString != null))
+            if ((firstTagAsString is not null) && (secondTagAsString is not null))
             {
                 return string.Compare(firstTagAsString, secondTagAsString, StringComparison.Ordinal) == 0;
             }
@@ -107,7 +107,7 @@ namespace Blorc
             var firstTagAsString = object1 as string;
             var secondTagAsString = object2 as string;
 
-            if ((firstTagAsString != null) && (secondTagAsString != null))
+            if ((firstTagAsString is not null) && (secondTagAsString is not null))
             {
                 return string.Compare(firstTagAsString, secondTagAsString, StringComparison.Ordinal) == 0;
             }

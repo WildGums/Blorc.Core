@@ -20,7 +20,7 @@
         public virtual string GetValue()
         {
             var predicate = Predicate;
-            if (predicate != null)
+            if (predicate is not null)
             {
                 if (!predicate())
                 {

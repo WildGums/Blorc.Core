@@ -72,7 +72,7 @@
 
             var propertyName = eventArgs.PropertyName;
             var propertyInfo = PropertyHelper.GetPropertyInfo(this, propertyName);
-            if (propertyInfo == null)
+            if (propertyInfo is null)
             {
                 return;
             }
@@ -85,7 +85,7 @@
             }
 
             var propertyChangedEventCallback = PropertyHelper.GetPropertyValue(this, $"{propertyName}Changed");
-            if (propertyChangedEventCallback == null || !eventCallbackType.IsInstanceOfType(propertyChangedEventCallback))
+            if (propertyChangedEventCallback is null || !eventCallbackType.IsInstanceOfType(propertyChangedEventCallback))
             {
                 return;
             }
@@ -97,7 +97,7 @@
             }
 
             var propertyValue = propertyInfo.GetValue(this);
-            if (invokeAsyncMethod != null)
+            if (invokeAsyncMethod is not null)
             {
                 var callbackTask = invokeAsyncMethod.Invoke(propertyChangedEventCallback, new[] {propertyValue}) as Task;
                 callbackTask?.GetAwaiter().GetResult();

@@ -1,4 +1,6 @@
-﻿namespace Blorc.Dom.Injectors
+﻿#pragma warning disable CL0002 // Use "Async" suffix for async methods
+
+namespace Blorc.Dom.Injectors
 {
     using System.Threading.Tasks;
 

@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+#pragma warning disable CL0002 // Use "Async" suffix for async methods
+
 namespace Blorc.Services.Interop
 {
     using System.Threading.Tasks;
@@ -15,6 +17,7 @@ namespace Blorc.Services.Interop
 
     internal static class DocumentInterop
     {
+
         public static Task<Rect> GetBoundingClientRect(IJSRuntime jsRuntime, double x, double y)
         {
             return jsRuntime.InvokeAsync<Rect>(

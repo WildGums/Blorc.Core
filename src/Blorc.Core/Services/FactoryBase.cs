@@ -40,7 +40,7 @@ namespace Blorc.Services
             if (_typeMappings.TryGetValue(componentType, out var serviceTypes))
             {
                 var serviceType = serviceTypes.FirstOrDefault(targetType.IsAssignableFrom);
-                if (serviceType != null)
+                if (serviceType is not null)
                 {
                     return _provider.GetService(serviceType);
                 }

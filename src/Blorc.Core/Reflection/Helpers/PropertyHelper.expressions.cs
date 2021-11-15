@@ -31,7 +31,7 @@
             MemberExpression memberExpression;
 
             var unaryExpression = propertyExpression as UnaryExpression;
-            if (unaryExpression != null)
+            if (unaryExpression is not null)
             {
                 memberExpression = unaryExpression.Operand as MemberExpression;
             }
@@ -61,7 +61,7 @@
                 throw new NotSupportedException("No member expression");
             }
 
-            if (allowNested && (memberExpression.Expression != null) && (memberExpression.Expression.NodeType == ExpressionType.MemberAccess))
+            if (allowNested && (memberExpression.Expression is not null) && (memberExpression.Expression.NodeType == ExpressionType.MemberAccess))
             {
                 var propertyName = GetPropertyName(memberExpression.Expression, true, true);
 

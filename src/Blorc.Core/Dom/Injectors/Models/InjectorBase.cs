@@ -17,7 +17,7 @@
 
             foreach (var attribute in attributes)
             {
-                if (attribute.Value != null)
+                if (attribute.Value is not null)
                 {
                     stringBuilder.Append($" {attribute.Key}=\"{attribute.Value}\"");
                 }

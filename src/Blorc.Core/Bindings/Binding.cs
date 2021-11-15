@@ -98,7 +98,7 @@
         /// <value>The value.</value>
         public object Value
         {
-            get { return (_source != null) ? _source.GetPropertyValue() : null; }
+            get { return (_source is not null) ? _source.GetPropertyValue() : null; }
         }
         #endregion
 
@@ -179,7 +179,7 @@
                 var newValue = source.GetPropertyValue();
 
                 var converter = Converter;
-                if (converter != null)
+                if (converter is not null)
                 {
                     if (useConvertBack)
                     {

@@ -12,18 +12,18 @@
         public IUIVisualizationService SurveyVisualizationService { get; set; }
 
         public IndexComponent()
-            :base(true)
+            : base(true)
         {
         }
 
-        protected async Task OnButtonClick()
+        protected async Task OnButtonClickAsync()
         {
-            if (SurveyExecutionService != null)
+            if (SurveyExecutionService is not null)
             {
                 await SurveyExecutionService.ExecuteAsync();
             }
 
-            if (SurveyVisualizationService != null)
+            if (SurveyVisualizationService is not null)
             {
                 await SurveyVisualizationService.ShowAsync();
             }
