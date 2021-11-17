@@ -8,7 +8,7 @@ Parameters["SolutionName"] = "Blorc.Core";
 Parameters["Company"] = "WildGums";
 Parameters["RepositoryUrl"] = string.Format("https://github.com/{0}/{1}", GetBuildServerVariable("Company"), GetBuildServerVariable("SolutionName"));
 Parameters["StartYear"] = "2019";
-Parameters["UseVisualStudioPrerelease"] = "false";
+Parameters["UseVisualStudioPrerelease"] = "true";
 Parameters["SourceLinkDisabled"] = "true";
 
 // Note: the rest of the variables should be coming from the build server,
@@ -27,7 +27,7 @@ Parameters["SourceLinkDisabled"] = "true";
 
 Components.Add(string.Format("{0}", GetBuildServerVariable("SolutionName")));
 
-// GitHubPages.Add(string.Format("{0}.Example", GetBuildServerVariable("SolutionName")));
+GitHubPages.Add(string.Format("{0}.Example", GetBuildServerVariable("SolutionName")));
 
 TestProjects.Add(string.Format("{0}.Tests", GetBuildServerVariable("SolutionName")));
 
