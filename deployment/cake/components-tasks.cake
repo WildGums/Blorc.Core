@@ -179,6 +179,10 @@ public class ComponentsProcessor : ProcessorBase
                 continue;
             }
 
+
+            // Special exception for Blazor projects
+            var isBlazorProject = IsBlazorProject(BuildContext, component);
+
             BuildContext.CakeContext.LogSeparator("Packaging component '{0}'", component);
 
             var projectDirectory = GetProjectDirectory(component);
@@ -199,12 +203,15 @@ public class ComponentsProcessor : ProcessorBase
             var binFiles = CakeContext.GetFiles(binFolderPattern);
             CakeContext.DeleteFiles(binFiles);
 
-            var objFolderPattern = string.Format("{0}/obj/{1}/**.dll", projectDirectory, configurationName);
+            if (!isBlazorProject)
+            {
+                var objFolderPattern = string.Format("{0}/obj/{1}/**.dll", projectDirectory, configurationName);
 
-            CakeContext.Information("Deleting 'bin' directory contents using '{0}'", objFolderPattern);
+                CakeContext.Information("Deleting 'bin' directory contents using '{0}'", objFolderPattern);
 
-            var objFiles = CakeContext.GetFiles(objFolderPattern);
-            CakeContext.DeleteFiles(objFiles);
+                var objFiles = CakeContext.GetFiles(objFolderPattern);
+                CakeContext.DeleteFiles(objFiles);
+            }
 
             CakeContext.Information(string.Empty);
 
@@ -258,8 +265,7 @@ public class ComponentsProcessor : ProcessorBase
 
             var noBuild = true;
 
-            // Special exception for Blazor projects
-            if (IsBlazorProject(BuildContext, projectFileName))
+            if (isBlazorProject)
             {
                 CakeContext.Information("Allowing build during package phase since this is a Blazor project which requires the 'obj' directory");
 
