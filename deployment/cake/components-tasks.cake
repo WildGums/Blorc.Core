@@ -267,8 +267,10 @@ public class ComponentsProcessor : ProcessorBase
 
             if (isBlazorProject)
             {
-                CakeContext.Information("Allowing build during package phase since this is a Blazor project which requires the 'obj' directory");
+                CakeContext.Information("Allowing build and package restore during package phase since this is a Blazor project which requires the 'obj' directory");
 
+                msBuildSettings.WithProperty("ResolveNuGetPackages", "true");
+                msBuildSettings.Restore = true;
                 noBuild = false;
             }
 
