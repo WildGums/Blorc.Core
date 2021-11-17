@@ -211,7 +211,8 @@ public class ComponentsProcessor : ProcessorBase
             // Step 2: Go packaging!
             CakeContext.Information("Using 'msbuild' to package '{0}'", component);
 
-            var msBuildSettings = new MSBuildSettings {
+            var msBuildSettings = new MSBuildSettings 
+            {
                 Verbosity = Verbosity.Quiet,
                 //Verbosity = Verbosity.Diagnostic,
                 ToolVersion = MSBuildToolVersion.Default,
@@ -254,8 +255,18 @@ public class ComponentsProcessor : ProcessorBase
             // Fix for .NET Core 3.0, see https://github.com/dotnet/core-sdk/issues/192, it
             // uses obj/release instead of [outputdirectory]
             msBuildSettings.WithProperty("DotNetPackIntermediateOutputPath", outputDirectory);
-            
-            msBuildSettings.WithProperty("NoBuild", "true");
+
+            var noBuild = true;
+
+            // Special exception for Blazor projects
+            if (IsBlazorProject(BuildContext, projectFileName))
+            {
+                CakeContext.Information("Allowing build during package phase since this is a Blazor project which requires the 'obj' directory");
+
+                noBuild = false;
+            }
+
+            msBuildSettings.WithProperty("NoBuild", noBuild.ToString());
             msBuildSettings.Targets.Add("Pack");
 
             RunMsBuild(BuildContext, component, projectFileName, msBuildSettings, "pack");
