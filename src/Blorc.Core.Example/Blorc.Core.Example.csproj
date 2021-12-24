@@ -5,7 +5,6 @@
     <UseBlazorWebAssembly>true</UseBlazorWebAssembly>
     <AssemblyName>Blorc.Core.Example</AssemblyName>
     <RootNamespace>Blorc.Example</RootNamespace>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RazorLangVersion>3.0</RazorLangVersion>
     <PackageVersion>1.0.0-alpha0117</PackageVersion>
