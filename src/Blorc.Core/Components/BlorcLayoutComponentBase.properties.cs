@@ -5,8 +5,6 @@
     using System.ComponentModel;
     using System.Reflection;
     using System.Threading.Tasks;
-
-    using Blorc.Attributes;
     using Blorc.Reflection;
 
     using Microsoft.AspNetCore.Components;
@@ -16,6 +14,8 @@
         private static readonly Dictionary<string, MethodInfo> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo>();
 
         private static readonly Dictionary<string, Type> EventCallbackTypeCache = new Dictionary<string, Type>();
+
+        private readonly Queue<Action> _propertyChangedActionQueue = new Queue<Action>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -57,7 +57,14 @@
 
         private void OnPropertyBagPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            RaisePropertyChanged(e);
+            if (_hasRenderHandler)
+            {
+                RaisePropertyChanged(e);
+            }
+            else
+            {
+                _propertyChangedActionQueue.Enqueue(() => RaisePropertyChanged(e));
+            }
         }
 
         private void RaiseEventCallback(PropertyChangedEventArgs eventArgs)

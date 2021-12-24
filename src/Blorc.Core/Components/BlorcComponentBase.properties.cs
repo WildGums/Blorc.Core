@@ -14,6 +14,8 @@
 
         private static readonly Dictionary<string, MethodInfo> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo>();
 
+        private readonly Queue<Action> _propertyChangedActionQueue = new Queue<Action>();
+
         protected BlorcComponentBase(bool injectComponentServices) :this()
         {
             InjectComponentServices = injectComponentServices;
@@ -42,7 +44,14 @@
 
         private void OnPropertyBagPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            RaisePropertyChanged(e);
+            if (_hasRenderHandler)
+            {
+                RaisePropertyChanged(e);
+            }
+            else
+            {
+                _propertyChangedActionQueue.Enqueue(() => RaisePropertyChanged(e));
+            }
         }
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
