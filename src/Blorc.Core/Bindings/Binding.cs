@@ -12,8 +12,10 @@
     public class Binding : BindingBase
     {
         #region Fields
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
         private BindingParty _source;
         private BindingParty _target;
+#pragma warning restore IDISP008 // Don't assign member with injected and created disposables
 
         private bool _isUpdatingBinding;
         #endregion
@@ -139,11 +141,11 @@
         protected override void Uninitialize()
         {
             _source.ValueChanged -= OnSourceValueChanged;
-            _source.Dispose();
+            _source?.Dispose();
             _source = null;
 
             _target.ValueChanged -= OnTargetValueChanged;
-            _target.Dispose();
+            _target?.Dispose();
             _target = null;
 
             Log.Debug($"Uninitialized binding '{this}'");
@@ -255,6 +257,16 @@
             if (Mode == BindingMode.OneWayToSource || Mode == BindingMode.TwoWay)
             {
                 UpdateBinding(_target, _source, true);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                _source?.Dispose();
+                _target?.Dispose();
             }
         }
         #endregion
