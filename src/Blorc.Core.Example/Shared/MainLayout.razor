@@ -1,29 +1,17 @@
-﻿@using Blorc.Services
+﻿@inherits Blorc.Components.BlorcLayoutComponentBase
 
-@inherits Blorc.Components.BlorcLayoutComponentBase
-
-
-<div class="sidebar">
-    <NavMenu />
-</div>
-
-<div class="main">
-    <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
     </div>
 
-    <div class="content px-4">
-        @Body
-    </div>
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
 </div>
-
-@code
-{
-    protected override async Task OnInitializedAsync()
-    {
-        await base.OnInitializedAsync();
-
-        await DocumentService.InjectLinkAsync("css/bootstrap/bootstrap.min.css");
-        await DocumentService.InjectLinkAsync("css/site.css");
-    }
-}

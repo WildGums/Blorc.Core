@@ -7,9 +7,9 @@
 
     public class IndexComponent : BlorcComponentBase
     {
-        public IExecutionService SurveyExecutionService { get; set; }
+        public IExecutionService? SurveyExecutionService { get; set; }
 
-        public IUIVisualizationService SurveyVisualizationService { get; set; }
+        public IUIVisualizationService? SurveyVisualizationService { get; set; }
 
         public IndexComponent()
             : base(true)

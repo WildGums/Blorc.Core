@@ -15,7 +15,7 @@ namespace Blorc.Example
 
     public class SurveyVisualizationService : IUIVisualizationService
     {
-        public ComponentBase Component { get; set; }
+        public ComponentBase? Component { get; set; }
 
         public Task CloseAsync()
         {
