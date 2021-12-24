@@ -32,4 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Blorc.Core\Blorc.Core.csproj" />
   </ItemGroup>
+
+  <Import Project="$(MSBuildProjectDirectory)\..\Directory.Build.nullable.props" Condition="Exists('$(MSBuildProjectDirectory)\..\Directory.Build.nullable.props')" />
+
 </Project>

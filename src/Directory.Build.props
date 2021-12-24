@@ -10,8 +10,6 @@
           Condition="$(RepositoryTemplateIgnoreBuildProjectProps) != 'true' And Exists('$(MSBuildProjectDirectory)\..\Directory.Build.project.props')" />
   <Import Project="$(MSBuildProjectDirectory)\..\Directory.Build.analyzers.props"
           Condition="$(RepositoryTemplateIgnoreBuildAnalyzersProps) != 'true' And Exists('$(MSBuildProjectDirectory)\..\Directory.Build.analyzers.props')" />
-  <Import Project="$(MSBuildProjectDirectory)\..\Directory.Build.nullable.props"
-          Condition="Exists('$(MSBuildProjectDirectory)\..\Directory.Build.nullable.props')" />
  
   <!-- ..\..\ -->
   <Import Project="$(MSBuildProjectDirectory)\..\..\Directory.Build.shared.implicit.props" 
@@ -20,7 +18,5 @@
           Condition="$(RepositoryTemplateIgnoreBuildProjectProps) != 'true' And Exists('$(MSBuildProjectDirectory)\..\..\Directory.Build.project.props')" />
   <Import Project="$(MSBuildProjectDirectory)\..\..\Directory.Build.analyzers.props"
           Condition="$(RepositoryTemplateIgnoreBuildAnalyzersProps) != 'true' And Exists('$(MSBuildProjectDirectory)\..\..\Directory.Build.analyzers.props')" />
-  <Import Project="$(MSBuildProjectDirectory)\..\..\Directory.Build.nullable.props"
-          Condition="Exists('$(MSBuildProjectDirectory)\..\..\Directory.Build.nullable.props')" />
 
 </Project>
