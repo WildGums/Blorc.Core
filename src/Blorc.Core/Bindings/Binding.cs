@@ -136,17 +136,23 @@
         }
 
         /// <summary>
-        /// Uninitializes this binding.
+        /// Uninitialize this binding.
         /// </summary>
         protected override void Uninitialize()
         {
-            _source.ValueChanged -= OnSourceValueChanged;
-            _source?.Dispose();
-            _source = null;
+            if (_source is not null)
+            {
+                _source.ValueChanged -= OnSourceValueChanged;
+                _source.Dispose();
+                _source = null;
+            }
 
-            _target.ValueChanged -= OnTargetValueChanged;
-            _target?.Dispose();
-            _target = null;
+            if (_target is not null)
+            {
+                _target.ValueChanged -= OnTargetValueChanged;
+                _target.Dispose();
+                _target = null;
+            }
 
             Log.Debug($"Uninitialized binding '{this}'");
         }
