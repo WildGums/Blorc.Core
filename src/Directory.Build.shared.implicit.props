@@ -47,6 +47,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   
+  <!-- Browser-wasm requires portable debug type -->
   <PropertyGroup Condition="'$(Configuration)' == 'Debug' And '$(RuntimeIdentifier)' == 'browser-wasm'">
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
