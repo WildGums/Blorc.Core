@@ -1,9 +1,7 @@
 ﻿namespace Blorc.Bindings
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq.Expressions;
     using System.Reflection;
 
     using Serilog;
@@ -32,8 +30,7 @@
                 throw new InvalidOperationException($"Property '{_toStringValue}' not found, cannot create binding");
             }
 
-            var notifyPropertyChanged = instance as INotifyPropertyChanged;
-            if (notifyPropertyChanged is not null)
+            if (instance is INotifyPropertyChanged notifyPropertyChanged)
             {
                 _notifyPropertyChanged = notifyPropertyChanged;
                 notifyPropertyChanged.PropertyChanged += OnInstancePropertyChanged;

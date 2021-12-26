@@ -29,6 +29,8 @@
 
         private bool _suspendUpdates;
 
+        private bool _hasRenderHandler;
+
         public BlorcLayoutComponentBase()
         {
             BindingContext = new BindingContext();
@@ -42,14 +44,12 @@
         protected BindingContext BindingContext { get; private set; }
 
         [Inject]
-        protected IDocumentService DocumentService { get; set; }
-
-        [Inject]
         protected IComponentServiceFactory ComponentServiceFactory { get; set; }
-        
+
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public void ForceUpdate()
@@ -113,6 +113,7 @@
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
+
             if (InjectComponentServices)
             {
                 var type = GetType();
@@ -138,12 +139,18 @@
                     }
                 }
             }
+
+            _hasRenderHandler = true;
+            while (_propertyChangedActionQueue.TryDequeue(out var propertyChangedAction))
+            {
+                propertyChangedAction();
+            }
         }
+
 
 
         protected override async Task OnInitializedAsync()
         {
-            await DocumentService.InjectBlorcCoreJsAsync();
         }
 
         protected override void OnParametersSet()

@@ -1,10 +1,6 @@
 ﻿namespace Blorc.StateConverters
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
-    public class FixedValueConverter : IStateConverter
+    public sealed class FixedValueConverter : IStateConverter
     {
         private readonly string _fixedValue;
 

@@ -6,9 +6,9 @@
     public class ExampleComponent : ComponentBase
     {
         [Parameter]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public string Slug
+        public string? Slug
         {
             get
             {
@@ -17,6 +17,6 @@
         }
 
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment? ChildContent { get; set; }
     }
 }

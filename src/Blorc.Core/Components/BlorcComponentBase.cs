@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
-    using System.Xml;
 
     using Blorc.Attributes;
     using Blorc.Bindings;
@@ -30,6 +29,8 @@
 
         private bool _suspendUpdates;
 
+        private bool _hasRenderHandler;
+
         [Inject]
         protected IComponentServiceFactory ComponentServiceFactory { get; set; }
 
@@ -43,8 +44,9 @@
         protected BindingContext BindingContext { get; private set; }
 
         public void Dispose()
-        {
+        {   
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public void ForceUpdate()
@@ -132,6 +134,12 @@
                         Inject(attributes, type, value);
                     }
                 }
+            }
+
+            _hasRenderHandler = true;
+            while (_propertyChangedActionQueue.TryDequeue(out var propertyChangedAction))
+            {
+                propertyChangedAction();
             }
         }
 

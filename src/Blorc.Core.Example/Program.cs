@@ -1,41 +1,38 @@
-﻿namespace Blorc.Example
-{
-    using System.Threading.Tasks;
+﻿using Blorc.Example;
+using Blorc.Example.Shared;
+using Blorc.Services;
 
-    using Blorc.Example.Shared;
-    using Blorc.Services;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-    using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-    using Microsoft.Extensions.DependencyInjection;
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-    public class Program
-    {
-        public static async Task Main(string[] args)
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Services.AddScoped(
+    sp => new HttpClient
+          {
+              BaseAddress = new Uri(builder.HostEnvironment.BaseAddress),
+          });
+
+builder.Services.AddBlorcCore();
+builder.Services.AddTransient<SurveyExecutionService>();
+builder.Services.AddTransient<SurveyVisualizationService>();
+
+var webAssemblyHost = builder.Build();
+
+await webAssemblyHost
+    .MapComponentServices(
+        options =>
         {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            options.Map<SurveyPrompt, SurveyExecutionService>();
+            options.Map<SurveyPrompt, SurveyVisualizationService>();
+        })
+    .ConfigureDocumentAsync(
+        async documentService =>
+        {
+            await documentService.InjectBlorcCoreJsAsync();
+        });
 
-            builder.RootComponents.Add<App>("app");
-
-            builder.Services.AddBlorcCore();
-            builder.Services.AddTransient<SurveyExecutionService>();
-            builder.Services.AddTransient<SurveyVisualizationService>();
-
-            var webAssemblyHost = builder.Build();
-
-            await webAssemblyHost
-                .MapComponentServices(
-                    options =>
-                    {
-                        options.Map<SurveyPrompt, SurveyExecutionService>();
-                        options.Map<SurveyPrompt, SurveyVisualizationService>();
-                    })
-                .ConfigureDocumentAsync(
-                    async documentService =>
-                    {
-                        await documentService.InjectBlorcCoreJsAsync();
-                    });
-
-            await webAssemblyHost.RunAsync();
-        }
-    }
-}
+await webAssemblyHost.RunAsync();

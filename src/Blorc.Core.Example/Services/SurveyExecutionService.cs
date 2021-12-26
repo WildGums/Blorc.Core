@@ -15,9 +15,9 @@ namespace Blorc.Example
 
     public class SurveyExecutionService : IExecutionService
     {
-        public ComponentBase Component { get; set; }
+        public ComponentBase? Component { get; set; }
 
-        public async Task ExecuteAsync(object state = null)
+        public async Task ExecuteAsync(object? state = null)
         {
             Console.WriteLine("Hello from ExecutionService!!!");
         }

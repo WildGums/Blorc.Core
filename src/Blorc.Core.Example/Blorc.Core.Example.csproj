@@ -5,6 +5,7 @@
     <UseBlazorWebAssembly>true</UseBlazorWebAssembly>
     <AssemblyName>Blorc.Core.Example</AssemblyName>
     <RootNamespace>Blorc.Example</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
     <RazorLangVersion>3.0</RazorLangVersion>
     <PackageVersion>1.0.0-alpha0117</PackageVersion>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
@@ -16,14 +17,22 @@
     <!-- SonarQube requires a project guid -->
     <ProjectGuid>3D467864-4A28-485A-ADB2-80875974A273</ProjectGuid>
   </PropertyGroup>
-  
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <!-- Requires for blazor Debug -->
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" PrivateAssets="all" />
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />  
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blorc.Core\Blorc.Core.csproj" />
   </ItemGroup>
+
+  <Import Project="$(MSBuildProjectDirectory)\..\Directory.Build.nullable.props" Condition="Exists('$(MSBuildProjectDirectory)\..\Directory.Build.nullable.props')" />
+
 </Project>
