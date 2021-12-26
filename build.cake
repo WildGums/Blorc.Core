@@ -25,11 +25,11 @@ Parameters["SourceLinkDisabled"] = "true";
 // DEFINE COMPONENTS TO BUILD / PACKAGE
 //=======================================================
 
-Components.Add(string.Format("{0}", GetBuildServerVariable("SolutionName")));
+Components.Add("Blorc.Core");
 
-// GitHubPages.Add(string.Format("{0}.Example", GetBuildServerVariable("SolutionName")));
+// GitHubPages.Add("Blorc.Core.Example");
 
-TestProjects.Add(string.Format("{0}.Tests", GetBuildServerVariable("SolutionName")));
+TestProjects.Add("Blorc.Core.Tests");
 
 //=======================================================
 // REQUIRED INITIALIZATION, DO NOT CHANGE

@@ -41,8 +41,14 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+  <!-- Enforce debug for non-web assembly projects -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' And '$(RuntimeIdentifier)' != 'browser-wasm'">
     <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' And '$(RuntimeIdentifier)' == 'browser-wasm'">
+    <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
