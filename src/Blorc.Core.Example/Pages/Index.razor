@@ -1,0 +1,19 @@
+﻿@page "/"
+
+@using Blorc.Attributes
+@using Blorc.Example.Shared
+
+@inherits Blorc.Example.Components.IndexComponent
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" @ref="_surveyPrompt" />
+<button @onclick="OnButtonClickAsync">Click</button>
+
+@code
+{
+    [InjectComponentService(nameof(SurveyVisualizationService))]
+    [InjectComponentService(nameof(SurveyExecutionService))]
+    private SurveyPrompt? _surveyPrompt;
+}
