@@ -44,7 +44,7 @@
         protected BindingContext BindingContext { get; private set; }
 
         [Inject]
-        protected IComponentServiceFactory ComponentServiceFactory { get; set; }
+        protected IComponentServiceFactory? ComponentServiceFactory { get; set; }
 
         public void Dispose()
         {
@@ -93,7 +93,6 @@
         protected virtual void DisposeManaged()
         {
             BindingContext.Dispose();
-            BindingContext = null;
 
             _stateConverterContainers.ForEach(x => x.Dispose());
             _stateConverterContainers.Clear();
@@ -181,7 +180,7 @@
                         BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                     if (targetProperty is not null)
                     {
-                        var componentService = ComponentServiceFactory.Get(value, targetProperty.PropertyType);
+                        var componentService = ComponentServiceFactory?.Get(value, targetProperty.PropertyType);
                         targetProperty.SetValue(this, componentService);
                     }
                 }

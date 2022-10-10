@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FileService.cs" company="WildGums">
-//   Copyright (c) 2008 - 2019 WildGums. All rights reserved.
-// </copyright>
-// <summary>
-//   Defines the FileService type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Blorc.Services
+﻿namespace Blorc.Services
 {
     using System;
     using System.Threading.Tasks;
@@ -20,12 +11,17 @@ namespace Blorc.Services
 
         public FileService(IJSRuntime jsRuntime)
         {
+            ArgumentNullException.ThrowIfNull(jsRuntime);
+
             _jsRuntime = jsRuntime;
         }
 
-        public async Task SaveAsync(string filename, byte[] data)
+        public async Task SaveAsync(string fileName, byte[] data)
         {
-            await _jsRuntime.InvokeAsync<object>("BlorcFile.SaveAs", filename, Convert.ToBase64String(data));
+            ArgumentNullException.ThrowIfNull(fileName);
+            ArgumentNullException.ThrowIfNull(data);
+
+            await _jsRuntime.InvokeAsync<object>("BlorcFile.SaveAs", fileName, Convert.ToBase64String(data));
         }
     }
 }

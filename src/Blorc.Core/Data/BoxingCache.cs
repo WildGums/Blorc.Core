@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BoxingCache.cs" company="Catel development team">
-//   Copyright (c) 2008 - 2016 Catel development team. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace Blorc.Data
+﻿namespace Blorc.Data
 {
     using System.Collections.Generic;
 
@@ -21,8 +14,9 @@ namespace Blorc.Data
     /// Caches boxed objects to minimize the memory footprint for boxed value types.
     /// </summary>
     public class BoxingCache<T>
+        where T : notnull
     {
-        private readonly Dictionary<T, object> _boxedValues = new Dictionary<T, object>();
+        private readonly Dictionary<T, object?> _boxedValues = new Dictionary<T, object?>();
         //private readonly Dictionary<object, T> _unboxedValues = new Dictionary<object, T>();
 
         /// <summary>
@@ -34,9 +28,9 @@ namespace Blorc.Data
         /// Adds the value to the cache.
         /// </summary>
         /// <param name="value">The value to add to the cache.</param>
-        protected object AddUnboxedValue(T value)
+        protected object? AddUnboxedValue(T value)
         {
-            var boxedValue = (object)value;
+            var boxedValue = (object?)value;
 
             lock (_boxedValues)
             {
@@ -77,9 +71,9 @@ namespace Blorc.Data
         /// </summary>
         /// <param name="value">The value to box.</param>
         /// <returns>The boxed value.</returns>
-        public object GetBoxedValue(T value)
+        public object? GetBoxedValue(T value)
         {
-            if (ReferenceEquals(value, null))
+            if (value is null)
             {
                 return null;
             }

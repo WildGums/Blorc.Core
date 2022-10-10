@@ -12,16 +12,22 @@
     {
         public static string GetPropertyName<TSource, TProperty>(Expression<Func<TSource, TProperty>> propertyExpression)
         {
+            ArgumentNullException.ThrowIfNull(propertyExpression);
+
             return PropertyHelper.GetPropertyName(propertyExpression);
         }
 
         public static string GetPropertyName<TProperty>(Expression<Func<TProperty>> propertyExpression)
         {
+            ArgumentNullException.ThrowIfNull(propertyExpression);
+
             return PropertyHelper.GetPropertyName(propertyExpression);
         }
 
-        public static object GetOwner<TProperty>(Expression<Func<TProperty>> propertyExpression)
+        public static object? GetOwner<TProperty>(Expression<Func<TProperty>> propertyExpression)
         {
+            ArgumentNullException.ThrowIfNull(propertyExpression);
+
             var expressionToHandle = GetExpressionToHandle(propertyExpression);
 
             var body = expressionToHandle as MemberExpression;
@@ -46,8 +52,10 @@
             return null;
         }
 
-        private static object ResolveMemberExpression(MemberExpression memberExpression)
+        private static object? ResolveMemberExpression(MemberExpression memberExpression)
         {
+            ArgumentNullException.ThrowIfNull(memberExpression);
+
             var fieldInfo = memberExpression.Member as FieldInfo;
             if (fieldInfo is not null)
             {
@@ -83,6 +91,8 @@
 
         private static Expression GetExpressionToHandle<TProperty>(Expression<Func<TProperty>> propertyExpression)
         {
+            ArgumentNullException.ThrowIfNull(propertyExpression);
+
             var expressionToHandle = propertyExpression.Body;
 
             // Might occur in Android, maybe on other platforms as well

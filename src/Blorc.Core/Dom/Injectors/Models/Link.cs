@@ -4,6 +4,18 @@
 
     public class Link : InjectorBase
     {
+        public Link()
+        {
+            Charset = string.Empty;
+            CrossOrigin = string.Empty;
+            Href = string.Empty;
+            HrefLang = string.Empty;
+            Media = string.Empty;
+            Rel = string.Empty;
+            Sizes = string.Empty;
+            Type = string.Empty;
+        }
+
         public string Charset { get; set; }
 
         public string CrossOrigin { get; set; }

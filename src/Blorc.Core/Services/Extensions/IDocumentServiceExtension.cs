@@ -1,5 +1,7 @@
 ﻿namespace Blorc.Services
 {
+    using System;
+    using System.IO;
     using System.Reflection;
     using System.Threading.Tasks;
 
@@ -25,6 +27,10 @@
         /// </returns>
         public static async Task InjectAssemblyCssFileAsync(this IDocumentService @this, Assembly assembly, string path)
         {
+            ArgumentNullException.ThrowIfNull(@this);
+            ArgumentNullException.ThrowIfNull(assembly);
+            ArgumentNullException.ThrowIfNull(path);
+
             var source = $"_content/{assembly.GetName().Name}/{path}";
             await @this.InjectLinkAsync(source);
         }
@@ -46,6 +52,10 @@
         /// </returns>
         public static async Task InjectAssemblyScriptFileAsync(this IDocumentService @this, Assembly assembly, string path)
         {
+            ArgumentNullException.ThrowIfNull(@this);
+            ArgumentNullException.ThrowIfNull(assembly);
+            ArgumentNullException.ThrowIfNull(path);
+
             var source = $"_content/{assembly.GetName().Name}/{path}";
             await @this.InjectScriptAsync(source);
         }
@@ -61,6 +71,8 @@
         /// </returns>
         public static async Task InjectBlorcCoreJsAsync(this IDocumentService @this)
         {
+            ArgumentNullException.ThrowIfNull(@this);
+
             await @this.InjectAssemblyScriptFileAsync(typeof(IDocumentServiceExtension).Assembly, "document.js");
             await @this.InjectAssemblyScriptFileAsync(typeof(IDocumentServiceExtension).Assembly, "file.js");
         }

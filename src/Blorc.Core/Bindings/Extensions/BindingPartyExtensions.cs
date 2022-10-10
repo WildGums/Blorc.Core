@@ -12,11 +12,13 @@
 
         static BindingPartyExtensions()
         {
-            AddEventMethodInfo = typeof(BindingParty).GetMethod("AddEvent");
-            if (AddEventMethodInfo is null)
+            var methodInfo = typeof(BindingParty).GetMethod("AddEvent");
+            if (methodInfo is null)
             {
                 throw new NotSupportedException($"Cannot find BindingParty.AddEvent method, BindingPartyExtensions will not be supported");
             }
+
+            AddEventMethodInfo = methodInfo;
         }
 
         /// <summary>
@@ -28,6 +30,9 @@
         /// <exception cref="ArgumentException">The <paramref name="bindingParty"/> is <c>null</c>.</exception>
         public static void AddEvent(this BindingParty bindingParty, string eventName)
         {
+            ArgumentNullException.ThrowIfNull(bindingParty);
+            ArgumentNullException.ThrowIfNull(eventName);
+
             var instance = bindingParty.Instance;
             if (instance is null)
             {
@@ -42,6 +47,11 @@
             }
 
             var eventHandlerType = eventInfo.EventHandlerType;
+            if (eventHandlerType is null)
+            {
+                throw new InvalidOperationException("Event handler type is null");
+            }
+
             var eventArgsType = eventHandlerType.GetGenericArguments()[0];
 
             var genericAddEventMethod = AddEventMethodInfo.MakeGenericMethod(eventArgsType);

@@ -6,7 +6,7 @@
     {
         private bool _disposedValue = false;
 
-        public event EventHandler<EventArgs> StateChanged;
+        public event EventHandler<EventArgs>? StateChanged;
 
         protected virtual void RaiseStateChanged()
         {

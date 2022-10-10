@@ -11,13 +11,13 @@
     {
         private object _element;
         private EventInfo _eventInfo;
-        private PropertyInfo _enabledPropertyInfo;
+        private PropertyInfo? _enabledPropertyInfo;
         private ICommand _command;
-        private Binding _commandParameterBinding;
+        private Binding? _commandParameterBinding;
 
-        private EventHandler<EventArgs> _eventHandler;
-        private EventHandler<EventArgs> _canExecuteChangedHandler;
-        private EventHandler<EventArgs> _commandBindingParameterValueChangedHandler;
+        private EventHandler<EventArgs>? _eventHandler;
+        private EventHandler<EventArgs>? _canExecuteChangedHandler;
+        private EventHandler<EventArgs>? _commandBindingParameterValueChangedHandler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandBinding"/> class.
@@ -29,24 +29,31 @@
         /// <exception cref="ArgumentNullException">The <paramref name="element"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">The <paramref name="eventName"/> is <c>null</c> or whitespace.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="command"/> is <c>null</c>.</exception>
-        public CommandBinding(object element, string eventName, ICommand command, Binding commandParameterBinding = null)
+        public CommandBinding(object element, string eventName, ICommand command, Binding? commandParameterBinding = null)
         {
+            ArgumentNullException.ThrowIfNull(element);
+            ArgumentNullException.ThrowIfNull(eventName);
+            ArgumentNullException.ThrowIfNull(command);
+
             _element = element;
             _command = command;
             _commandParameterBinding = commandParameterBinding;
 
             var elementType = _element.GetType();
-            _eventInfo = elementType.GetEvent(eventName);
-            if (_eventInfo is null)
+            var eventInfo = elementType.GetEvent(eventName);
+            if (eventInfo is null)
             {
                 throw new InvalidOperationException($"Event '{elementType.Name}.{eventName}' not found, cannot create command binding");
             }
+
+            _eventInfo = eventInfo;
 
             _enabledPropertyInfo = elementType.GetProperty("Enabled");
 
             _eventHandler = async delegate
             {
-                var commandParameter = _commandParameterBinding.GetBindingValue();
+                var commandParameter = _commandParameterBinding?.GetBindingValue();
+
                 if (await _command.CanExecuteAsync(commandParameter))
                 {
                     await _command.ExecuteAsync(commandParameter);
@@ -68,7 +75,6 @@
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
-        #region Methods
         /// <summary>
         /// Determines the value to use in the <see cref="BindingBase.ToString"/> method.
         /// </summary>
@@ -97,17 +103,18 @@
                 _canExecuteChangedHandler = null;
             }
 
-            if (_commandBindingParameterValueChangedHandler is not null)
+            if (_commandParameterBinding is not null &&
+                _commandBindingParameterValueChangedHandler is not null)
             {
                 _commandParameterBinding.ValueChanged -= _commandBindingParameterValueChangedHandler;
                 _commandBindingParameterValueChangedHandler = null;
             }
 
-            _element = null;
-            _eventInfo = null;
-            _enabledPropertyInfo = null;
-            _command = null;
-            _commandParameterBinding = null;
+            //_element = null;
+            //_eventInfo = null;
+            //_enabledPropertyInfo = null;
+            //_command = null;
+            //_commandParameterBinding = null;
 
             // TODO: call commandParameterBinding.ClearBinding();?
         }
@@ -119,9 +126,8 @@
                 return;
             }
 
-            var commandParameter = _commandParameterBinding.GetBindingValue();
+            var commandParameter = _commandParameterBinding?.GetBindingValue();
             _enabledPropertyInfo.SetValue(_element, await _command.CanExecuteAsync(commandParameter));
         }
-        #endregion
     }
 }

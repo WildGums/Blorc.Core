@@ -1,5 +1,6 @@
 ﻿namespace Blorc.Services
 {
+    using System;
     using System.Threading.Tasks;
 
     using Blorc.Dom.Injectors;
@@ -13,6 +14,8 @@
 
         public DocumentService(IJSRuntime jsRuntime)
         {
+            ArgumentNullException.ThrowIfNull(jsRuntime);
+
             _jsRuntime = jsRuntime;
         }
 

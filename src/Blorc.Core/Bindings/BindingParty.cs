@@ -15,20 +15,25 @@
         private readonly PropertyInfo _propertyInfo;
         private readonly string _propertyName;
         private readonly WeakReference _instance;
-        private INotifyPropertyChanged _notifyPropertyChanged;
+        private INotifyPropertyChanged? _notifyPropertyChanged;
 
         public BindingParty(object instance, string propertyName)
         {
+            ArgumentNullException.ThrowIfNull(instance);
+            ArgumentNullException.ThrowIfNull(propertyName);
+
             _instance = new WeakReference(instance);
             _propertyName = propertyName;
 
             var instanceType = instance.GetType();
             _toStringValue = string.Format("{0}.{1}", instanceType.Name, _propertyName);
-            _propertyInfo = instanceType.GetProperty(_propertyName);
-            if (_propertyInfo is null)
+            var propertyInfo = instanceType.GetProperty(_propertyName);
+            if (propertyInfo is null)
             {
                 throw new InvalidOperationException($"Property '{_toStringValue}' not found, cannot create binding");
             }
+
+            _propertyInfo = propertyInfo;
 
             if (instance is INotifyPropertyChanged notifyPropertyChanged)
             {
@@ -37,23 +42,23 @@
             }
         }
 
-        #region Events
         /// <summary>
         /// Occurs when the value has changed.
         /// </summary>
-        public event EventHandler<EventArgs> ValueChanged;
-        #endregion
+        public event EventHandler<EventArgs>? ValueChanged;
 
-        #region Properties
         /// <summary>
         /// Gets the instance of the binding party.
         /// <para />
         /// Note that this value is stored in a weak reference and can be <c>null</c> if garbage collected.
         /// </summary>
         /// <value>The instance.</value>
-        public object Instance
+        public object? Instance
         {
-            get { return (_instance is not null && _instance.IsAlive) ? _instance.Target : null; }
+            get 
+            { 
+                return (_instance is not null && _instance.IsAlive) ? _instance.Target : null; 
+            }
         }
 
         /// <summary>
@@ -64,10 +69,8 @@
         {
             get { return _propertyName; }
         }
-        #endregion
 
-        #region Methods
-        private void OnInstancePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnInstancePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(e.PropertyName) || string.Equals(e.PropertyName, _propertyName))
             {
@@ -112,7 +115,7 @@
         /// Note that the property value will be <c>null</c> if the <see cref="Instance"/> is garbage collected.
         /// </summary>
         /// <returns>The property value.</returns>
-        public object GetPropertyValue()
+        public object? GetPropertyValue()
         {
             var instance = Instance;
             if (instance is null)
@@ -129,7 +132,7 @@
         /// Note that the property value will not be set if the <see cref="Instance"/> is garbage collected.
         /// </summary>
         /// <param name="newValue">The new value.</param>
-        public void SetPropertyValue(object newValue)
+        public void SetPropertyValue(object? newValue)
         {
             var instance = Instance;
             if (instance is null)
@@ -172,6 +175,5 @@
                 }
             }
         }
-        #endregion
     }
 }

@@ -18,14 +18,18 @@
 
         public ConfigurationService(NavigationManager navigationManager)
         {
+            ArgumentNullException.ThrowIfNull(navigationManager);
+
             _navigationManager = navigationManager;
             _parameters = new Dictionary<string, string>();
 
             Initialize();
         }
 
-        public async Task<T> GetSectionAsync<T>(string sectionName)
+        public async Task<T?> GetSectionAsync<T>(string sectionName)
         {
+            ArgumentNullException.ThrowIfNull(sectionName);
+
             _parameters.TryGetValue("env", out var environment);
 
             using (var httpClient = new HttpClient())

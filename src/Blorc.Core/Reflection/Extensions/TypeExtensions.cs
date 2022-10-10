@@ -146,14 +146,15 @@ namespace Blorc.Reflection
         /// <param name="type">The type.</param>
         /// <returns>Type.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="type"/> is <c>null</c>.</exception>
-        public static Type GetCollectionElementType(this Type type)
+        public static Type? GetCollectionElementType(this Type type)
         {
             if (type.IsArray)
             {
                 return type.GetElementType();
             }
 
-            Type genericEnumerableInterface;
+            Type? genericEnumerableInterface;
+
             if (typeof(IEnumerable).IsAssignableFrom(type) && type.IsGenericType)
             {
                 genericEnumerableInterface = type;

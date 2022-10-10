@@ -1,18 +1,18 @@
 ﻿namespace Blorc.StateConverters
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     public abstract class StateConverterBase : IStateConverter
     {
         protected readonly Func<string> ValueFunc;
-        protected readonly Func<bool> Predicate;
+        protected readonly Func<bool>? Predicate;
 
         private bool _disposedValue;
 
-        public StateConverterBase(Func<string> valueFunc, Func<bool> predicate)
+        public StateConverterBase(Func<string> valueFunc, Func<bool>? predicate)
         {
+            ArgumentNullException.ThrowIfNull(valueFunc);
+
             ValueFunc = valueFunc;
             Predicate = predicate;
         }
@@ -24,7 +24,7 @@
             {
                 if (!predicate())
                 {
-                    return null;
+                    return string.Empty;
                 }
             }
 

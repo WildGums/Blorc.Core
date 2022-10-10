@@ -7,7 +7,9 @@
     {
         public InjectComponentServiceAttribute(string propertyName)
         {
-            PropertyName = !string.IsNullOrWhiteSpace(propertyName) ? propertyName : throw new ArgumentNullException(nameof(propertyName));
+            ArgumentNullException.ThrowIfNull(propertyName);
+
+            PropertyName = propertyName;
         }
 
         public string PropertyName { get; }

@@ -11,27 +11,27 @@
 
     public abstract partial class BlorcLayoutComponentBase
     {
-        private static readonly Dictionary<string, MethodInfo> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo>();
+        private static readonly Dictionary<string, MethodInfo?> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo?>();
 
-        private static readonly Dictionary<string, Type> EventCallbackTypeCache = new Dictionary<string, Type>();
+        private static readonly Dictionary<string, Type?> EventCallbackTypeCache = new Dictionary<string, Type?>();
 
         private readonly Queue<Action> _propertyChangedActionQueue = new Queue<Action>();
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         [Parameter(CaptureUnmatchedValues = true)]
-        public IDictionary<string, object> AdditionalAttributes { get; set; }
+        public IDictionary<string, object?>? AdditionalAttributes { get; set; }
 
 
         [Parameter]
         public bool DisableAutomaticRaiseEventCallback { get; set; }
 
-        public TValue GetPropertyValue<TValue>(string propertyName)
+        public TValue? GetPropertyValue<TValue>(string propertyName)
         {
             return _propertyBag.GetValue(propertyName, default(TValue));
         }
 
-        public void SetPropertyValue(string propertyName, object value)
+        public void SetPropertyValue(string propertyName, object? value)
         {
             _propertyBag.SetValue(propertyName, value);
         }
@@ -55,7 +55,7 @@
             RaiseEventCallback(eventArgs);
         }
 
-        private void OnPropertyBagPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPropertyBagPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_hasRenderHandler)
             {
@@ -69,6 +69,11 @@
 
         private void RaiseEventCallback(PropertyChangedEventArgs eventArgs)
         {
+            if (string.IsNullOrWhiteSpace(eventArgs.PropertyName))
+            {
+                return;
+            }
+
             if (DisableAutomaticRaiseEventCallback)
             {
                 return;
@@ -86,6 +91,11 @@
             {
                 eventCallbackType = typeof(EventCallback<>).MakeGenericType(propertyInfo.PropertyType);
                 EventCallbackTypeCache.Add(propertyTypeFullName, eventCallbackType);
+            }
+
+            if (eventCallbackType is null)
+            {
+                return;
             }
 
             var propertyChangedEventCallback = PropertyHelper.GetPropertyValue(this, $"{propertyName}Changed");

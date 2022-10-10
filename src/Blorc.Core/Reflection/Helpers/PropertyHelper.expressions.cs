@@ -11,24 +11,32 @@
     {
         public static string GetPropertyName(Expression propertyExpression, bool allowNested = false)
         {
+            ArgumentNullException.ThrowIfNull(propertyExpression);
+
             return GetPropertyName(propertyExpression, allowNested, false);
         }
 
         public static string GetPropertyName<TValue>(Expression<Func<TValue>> propertyExpression, bool allowNested = false)
         {
+            ArgumentNullException.ThrowIfNull(propertyExpression);
+
             var body = propertyExpression.Body;
             return GetPropertyName(body, allowNested);
         }
 
         public static string GetPropertyName<TModel, TValue>(Expression<Func<TModel, TValue>> propertyExpression, bool allowNested = false)
         {
+            ArgumentNullException.ThrowIfNull(propertyExpression);
+
             var body = propertyExpression.Body;
             return GetPropertyName(body, allowNested);
         }
 
         private static string GetPropertyName(Expression propertyExpression, bool allowNested = false, bool nested = false)
         {
-            MemberExpression memberExpression;
+            ArgumentNullException.ThrowIfNull(propertyExpression);
+
+            MemberExpression? memberExpression;
 
             var unaryExpression = propertyExpression as UnaryExpression;
             if (unaryExpression is not null)

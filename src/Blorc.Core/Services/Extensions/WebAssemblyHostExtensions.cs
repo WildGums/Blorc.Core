@@ -10,12 +10,18 @@
     {
         public static async Task ConfigureAsync(this WebAssemblyHost @this, Func<IServiceProvider, Task> options)
         {
+            ArgumentNullException.ThrowIfNull(@this);
+            ArgumentNullException.ThrowIfNull(options);
+
             var requiredService = @this.Services.GetRequiredService<IServiceProvider>();
             await options(requiredService);
         }
 
         public static async Task ConfigureDocumentAsync(this WebAssemblyHost @this, Func<IDocumentService, Task> options)
         {
+            ArgumentNullException.ThrowIfNull(@this);
+            ArgumentNullException.ThrowIfNull(options);
+
             await @this.ConfigureAsync(
                 async provider =>
                 {
@@ -26,7 +32,10 @@
 
         public static WebAssemblyHost MapComponentServices(this WebAssemblyHost @this, Action<IComponentServiceFactory> options)
         {
-            options?.Invoke(@this.Services.GetRequiredService<IComponentServiceFactory>());
+            ArgumentNullException.ThrowIfNull(@this);
+            ArgumentNullException.ThrowIfNull(options);
+
+            options.Invoke(@this.Services.GetRequiredService<IComponentServiceFactory>());
             return @this;
         }
     }

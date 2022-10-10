@@ -4,27 +4,35 @@
     // https://raw.githubusercontent.com/Catel/Catel/58d964c15281728972d9f1326048fdf665045663/src/Catel.Core/Reflection/Helpers/PropertyHelper.cs
 
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
 
     public static partial class PropertyHelper
     {
-        public static object GetPropertyValue(object obj, string property, bool ignoreCase = false)
+        public static object? GetPropertyValue(object obj, string property, bool ignoreCase = false)
         {
-            return GetPropertyValue<object>(obj, property, ignoreCase);
+            ArgumentNullException.ThrowIfNull(obj);
+            ArgumentNullException.ThrowIfNull(property);
+
+            return GetPropertyValue<object?>(obj, property, ignoreCase);
         }
 
-        public static TValue GetPropertyValue<TValue>(object obj, string property, bool ignoreCase = false)
+        public static TValue? GetPropertyValue<TValue>(object obj, string property, bool ignoreCase = false)
         {
-            TValue returnValue;
+            ArgumentNullException.ThrowIfNull(obj);
+            ArgumentNullException.ThrowIfNull(property);
 
-            TryGetPropertyValue<TValue>(obj, property, ignoreCase, out returnValue);
+            TryGetPropertyValue<TValue>(obj, property, ignoreCase, out var returnValue);
 
             return returnValue;
         }
 
-        private static bool TryGetPropertyValue<TValue>(object obj, string property, bool ignoreCase, out TValue value)
+        private static bool TryGetPropertyValue<TValue>(object obj, string property, bool ignoreCase, [NotNullWhen(true)]out TValue? value)
         {
-            value = default(TValue);
+            ArgumentNullException.ThrowIfNull(obj);
+            ArgumentNullException.ThrowIfNull(property);
+
+            value = default;
 
             var propertyInfo = GetPropertyInfo(obj, property, ignoreCase);
             if (propertyInfo is null)
@@ -40,7 +48,7 @@
 
             try
             {
-                value = (TValue)propertyInfo.GetValue(obj, null);
+                value = (TValue)propertyInfo.GetValue(obj, null)!;
                 return true;
             }
             catch (MethodAccessException)
@@ -49,13 +57,19 @@
             }
         }
 
-        public static void SetPropertyValue(object obj, string property, object value, bool ignoreCase = false)
+        public static void SetPropertyValue(object obj, string property, object? value, bool ignoreCase = false)
         {
+            ArgumentNullException.ThrowIfNull(obj);
+            ArgumentNullException.ThrowIfNull(property);
+
             TrySetPropertyValue(obj, property, value, ignoreCase);
         }
 
-        private static bool TrySetPropertyValue(object obj, string property, object value, bool ignoreCase)
+        private static bool TrySetPropertyValue(object obj, string property, object? value, bool ignoreCase)
         {
+            ArgumentNullException.ThrowIfNull(obj);
+            ArgumentNullException.ThrowIfNull(property);
+
             var propertyInfo = GetPropertyInfo(obj, property, ignoreCase);
             if (propertyInfo is null)
             {
@@ -78,8 +92,11 @@
             return true;
         }
 
-        public static PropertyInfo GetPropertyInfo(object obj, string property, bool ignoreCase = false)
+        public static PropertyInfo? GetPropertyInfo(object obj, string property, bool ignoreCase = false)
         {
+            ArgumentNullException.ThrowIfNull(obj);
+            ArgumentNullException.ThrowIfNull(property);
+
             var objectType = obj.GetType();
 
             if (!ignoreCase)

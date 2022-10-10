@@ -1,14 +1,11 @@
 ﻿namespace Blorc.Components
 {
-    using System.Collections.Generic;
-    using Microsoft.AspNetCore.Components;
-
     public abstract class UniqueComponentBase : BlorcComponentBase
     {
 
         public UniqueComponentBase()
         {
-            InstanceId = GenerateUniqueId(ComponentName?.ToLower());
+            InstanceId = GenerateUniqueId(ComponentName?.ToLower() ?? string.Empty);
         }
 
         public string InstanceId { get; private set; }

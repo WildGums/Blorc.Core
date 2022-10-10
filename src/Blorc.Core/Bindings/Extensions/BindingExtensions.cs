@@ -7,7 +7,6 @@
     /// </summary>
     public static class BindingExtensions
     {
-        #region Methods
         /// <summary>
         /// Adds an additional event subscription to support change notification.
         /// <para />
@@ -20,6 +19,9 @@
         /// <exception cref="ArgumentException">The <paramref name="eventName" /> is <c>null</c> or whitespace.</exception>
         public static Binding AddTargetEvent(this Binding binding, string eventName)
         {
+            ArgumentNullException.ThrowIfNull(binding);
+            ArgumentNullException.ThrowIfNull(eventName);
+
             binding.Target.AddEvent(eventName);
 
             return binding;
@@ -38,6 +40,9 @@
         public static Binding AddTargetEvent<TEventArgs>(this Binding binding, string eventName)
             where TEventArgs : EventArgs
         {
+            ArgumentNullException.ThrowIfNull(binding);
+            ArgumentNullException.ThrowIfNull(eventName);
+
             binding.Target.AddEvent<TEventArgs>(eventName);
 
             return binding;
@@ -55,6 +60,9 @@
         /// <exception cref="ArgumentException">The <paramref name="eventName"/> is <c>null</c> or whitespace.</exception>
         public static Binding AddSourceEvent(this Binding binding, string eventName)
         {
+            ArgumentNullException.ThrowIfNull(binding);
+            ArgumentNullException.ThrowIfNull(eventName);
+
             binding.Source.AddEvent(eventName);
 
             return binding;
@@ -73,6 +81,9 @@
         public static Binding AddSourceEvent<TEventArgs>(this Binding binding, string eventName)
             where TEventArgs : EventArgs
         {
+            ArgumentNullException.ThrowIfNull(binding);
+            ArgumentNullException.ThrowIfNull(eventName);
+
             binding.Source.AddEvent<TEventArgs>(eventName);
 
             return binding;
@@ -85,8 +96,10 @@
         /// </summary>
         /// <param name="binding">The binding.</param>
         /// <returns>The binding value.</returns>
-        public static object GetBindingValue(this Binding binding)
+        public static object? GetBindingValue(this Binding binding)
         {
+            ArgumentNullException.ThrowIfNull(binding);
+
             if (binding is null)
             {
                 return null;
@@ -94,6 +107,5 @@
 
             return binding.Value;
         }
-        #endregion
     }
 }

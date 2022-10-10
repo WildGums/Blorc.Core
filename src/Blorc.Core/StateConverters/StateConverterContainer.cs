@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using Blorc.Components;
-
     using Serilog;
 
     public class StateConverterContainer : IStateConverterContainer
@@ -20,6 +20,8 @@
 
         internal StateConverterContainer(IBlorcComponent component)
         {
+            ArgumentNullException.ThrowIfNull(component);
+
             _component = component;
             _forceComponentUpdate = true;
         }
@@ -32,12 +34,16 @@
 
         public StateConverterContainer Add(IStateConverter converter)
         {
+            ArgumentNullException.ThrowIfNull(converter);
+
             _converters.Add(converter);
             return this;
         }
 
         public StateConverterContainer Add(IStateWatcher watcher)
         {
+            ArgumentNullException.ThrowIfNull(watcher);
+
             _watchers.Add(watcher);
 
             watcher.StateChanged += OnWatcherStateChanged;
@@ -47,6 +53,8 @@
 
         public StateConverterContainer Add(IStateUpdater updater)
         {
+            ArgumentNullException.ThrowIfNull(updater);
+
             _updaters.Add(updater);
             return this;
         }
@@ -62,7 +70,7 @@
             UpdateTargets();
         }
 
-        private void OnWatcherStateChanged(object sender, EventArgs e)
+        private void OnWatcherStateChanged(object? sender, EventArgs e)
         {
             UpdateTargets();
         }

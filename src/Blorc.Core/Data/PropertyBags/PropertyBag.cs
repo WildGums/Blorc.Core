@@ -1,32 +1,24 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PropertyBag.cs" company="Catel development team">
-//   Copyright (c) 2008 - 2015 Catel development team. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Blorc.Data
+﻿namespace Blorc.Data
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Blorc;
 
     /// <summary>
     /// Class that is able to manage all properties of a specific object in a thread-safe manner.
     /// </summary>
     public partial class PropertyBag : PropertyBagBase
     {
-        #region Fields
         private readonly object _lockObject = new object();
 
-        private readonly IDictionary<string, object> _properties;
-        #endregion
+        private readonly IDictionary<string, object?> _properties;
 
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyBag"/> class.
         /// </summary>
         public PropertyBag()
-            : this(new Dictionary<string, object>())
+            : this(new Dictionary<string, object?>())
         {
         }
 
@@ -34,13 +26,11 @@ namespace Blorc.Data
         /// Initializes a new instance of the <see cref="PropertyBag"/> class.
         /// </summary>
         /// <param name="propertyDictionary">The property dictionary.</param>
-        public PropertyBag(IDictionary<string, object> propertyDictionary)
+        public PropertyBag(IDictionary<string, object?> propertyDictionary)
         {
             _properties = propertyDictionary;
         }
-        #endregion
 
-        #region Properties
         /// <summary>
         /// Gets or sets the property using the indexer.
         /// </summary>
@@ -51,9 +41,7 @@ namespace Blorc.Data
             get { return GetValue<object>(name); }
             set { SetValue(name, value); }
         }
-        #endregion
 
-        #region Methods
         /// <summary>
         /// Imports the properties in the existing dictionary.
         /// <para />
@@ -61,8 +49,10 @@ namespace Blorc.Data
         /// </summary>
         /// <param name="propertiesToImport">The properties to import.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="propertiesToImport"/> is <c>null</c>.</exception>
-        public void Import(Dictionary<string, object> propertiesToImport)
+        public void Import(Dictionary<string, object?> propertiesToImport)
         {
+            ArgumentNullException.ThrowIfNull(propertiesToImport);
+
             foreach (var property in propertiesToImport)
             {
                 SetValue(property.Key, property.Value);
@@ -71,6 +61,8 @@ namespace Blorc.Data
 
         public override bool IsAvailable(string name)
         {
+            ArgumentNullException.ThrowIfNull(name);
+
             lock (_lockObject)
             {
                 return _properties.ContainsKey(name);
@@ -81,7 +73,7 @@ namespace Blorc.Data
         /// Gets all the currently available properties in the property bag.
         /// </summary>
         /// <returns>A list of all property names and values.</returns>
-        public override Dictionary<string, object> GetAllProperties()
+        public override Dictionary<string, object?> GetAllProperties()
         {
             lock (_lockObject)
             {
@@ -97,13 +89,15 @@ namespace Blorc.Data
             }
         }
 
-        public override TValue GetValue<TValue>(string name, TValue defaultValue = default)
+        public override TValue GetValue<TValue>(string name, TValue defaultValue = default!)
         {
+            ArgumentNullException.ThrowIfNull(name);
+
             lock (_lockObject)
             {
                 if (_properties.TryGetValue(name, out var propertyValue))
                 {
-                    return (TValue)propertyValue;
+                    return (TValue)propertyValue!;
 
                     //// Safe-guard null values for value types
                     //if (!(propertyValue is null) || typeof(TValue).IsNullableType())
@@ -118,11 +112,14 @@ namespace Blorc.Data
 
         public override void SetValue<TValue>(string name, TValue value)
         {
+            ArgumentNullException.ThrowIfNull(name);
+
             var raisePropertyChanged = false;
 
             lock (_lockObject)
             {
-                if (!_properties.TryGetValue(name, out var propertyValue) || !ObjectHelper.AreEqualReferences(propertyValue, value))
+                if (!_properties.TryGetValue(name, out var propertyValue) || 
+                    !ObjectHelper.AreEqual(propertyValue, value))
                 {
                     _properties[name] = value;
                     raisePropertyChanged = true;
@@ -144,6 +141,9 @@ namespace Blorc.Data
         /// <param name="update">The update.</param>
         public void UpdatePropertyValue<TValue>(string propertyName, Func<TValue, TValue> update)
         {
+            ArgumentNullException.ThrowIfNull(propertyName);
+            ArgumentNullException.ThrowIfNull(update);
+
             lock (_lockObject)
             {
                 if (!_properties.TryGetValue(propertyName, out var propertyValue))
@@ -151,12 +151,11 @@ namespace Blorc.Data
                     return;
                 }
 
-                var value = (TValue) propertyValue;
+                var value = (TValue)propertyValue!;
                 var updatedValue = update(value);
 
                 SetValue(propertyName, updatedValue);
             }
         }
-        #endregion
     }
 }

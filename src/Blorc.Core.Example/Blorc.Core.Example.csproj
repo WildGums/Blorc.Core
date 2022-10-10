@@ -11,6 +11,7 @@
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <BlazorWebAssemblyEnableLinking>true</BlazorWebAssemblyEnableLinking>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
   
   <PropertyGroup>

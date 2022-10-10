@@ -11,14 +11,12 @@
     /// </summary>
     public class Binding : BindingBase
     {
-        #region Fields
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables
-        private BindingParty _source;
-        private BindingParty _target;
+        private readonly BindingParty _source;
+        private readonly BindingParty _target;
 #pragma warning restore IDISP008 // Don't assign member with injected and created disposables
 
         private bool _isUpdatingBinding;
-        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Binding"/> class.
@@ -32,7 +30,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <c>null</c>.</exception>
         public Binding(object source, string sourcePropertyName, object target, string targetPropertyName, BindingMode mode = BindingMode.TwoWay,
-            IValueConverter converter = null)
+            IValueConverter? converter = null)
             : this(new BindingParty(source, sourcePropertyName), new BindingParty(target, targetPropertyName), mode, converter)
         {
         }
@@ -46,8 +44,11 @@
         /// <param name="converter">The converter.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <c>null</c>.</exception>
-        public Binding(BindingParty source, BindingParty target, BindingMode mode = BindingMode.TwoWay, IValueConverter converter = null)
+        public Binding(BindingParty source, BindingParty target, BindingMode mode = BindingMode.TwoWay, IValueConverter? converter = null)
         {
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(target);
+
             Mode = mode;
             Converter = converter;
 
@@ -57,18 +58,17 @@
             Initialize();
         }
 
-        #region Properties
         /// <summary>
         /// Gets or sets the converter.
         /// </summary>
         /// <value>The converter.</value>
-        public IValueConverter Converter { get; set; }
+        public IValueConverter? Converter { get; set; }
 
         /// <summary>
         /// Gets or sets the converter parameter.
         /// </summary>
         /// <value>The converter parameter.</value>
-        public object ConverterParameter { get; set; }
+        public object? ConverterParameter { get; set; }
 
         /// <summary>
         /// Gets the binding mode.
@@ -98,20 +98,16 @@
         /// Gets the value of the binding source.
         /// </summary>
         /// <value>The value.</value>
-        public object Value
+        public object? Value
         {
             get { return (_source is not null) ? _source.GetPropertyValue() : null; }
         }
-        #endregion
 
-        #region Events
         /// <summary>
         /// Occurs when the value of the binding has changed.
         /// </summary>
-        public event EventHandler<EventArgs> ValueChanged;
-        #endregion
+        public event EventHandler<EventArgs>? ValueChanged;
 
-        #region Methods
         /// <summary>
         /// Determines the value to use in the <see cref="BindingBase.ToString"/> method.
         /// </summary>
@@ -144,31 +140,32 @@
             {
                 _source.ValueChanged -= OnSourceValueChanged;
                 _source.Dispose();
-                _source = null;
             }
 
             if (_target is not null)
             {
                 _target.ValueChanged -= OnTargetValueChanged;
                 _target.Dispose();
-                _target = null;
             }
 
             Log.Debug($"Uninitialized binding '{this}'");
         }
 
-        private void OnSourceValueChanged(object sender, EventArgs e)
+        private void OnSourceValueChanged(object? sender, EventArgs e)
         {
             TransferValueFromSourceToTarget();
         }
 
-        private void OnTargetValueChanged(object sender, EventArgs e)
+        private void OnTargetValueChanged(object? sender, EventArgs e)
         {
             TransferValueFromTargetToSource();
         }
 
         private void UpdateBinding(BindingParty source, BindingParty target, bool useConvertBack)
         {
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(target);
+
             if (_isUpdatingBinding)
             {
                 return;
@@ -271,10 +268,9 @@
             base.Dispose(disposing);
             if (disposing)
             {
-                _source?.Dispose();
-                _target?.Dispose();
+                _source.Dispose();
+                _target.Dispose();
             }
         }
-        #endregion
     }
 }

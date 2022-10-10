@@ -1,11 +1,17 @@
 ﻿namespace Blorc.Dom.Injectors
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
 
     public class Meta : InjectorBase
     {
+        public Meta()
+        {
+            Charset = string.Empty;
+            Content = string.Empty;
+            HttpEquiv = string.Empty;
+            Name = string.Empty;
+        }
+
         public string Charset { get; set; }
 
         public string Content { get; set; }
