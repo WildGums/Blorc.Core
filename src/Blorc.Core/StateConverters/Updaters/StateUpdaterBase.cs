@@ -10,6 +10,8 @@
 
         public StateUpdaterBase(Action<string> updater)
         {
+            ArgumentNullException.ThrowIfNull(updater);
+
             _updater = updater;
         }
 

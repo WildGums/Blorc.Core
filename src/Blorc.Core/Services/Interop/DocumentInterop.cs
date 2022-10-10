@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DocumentFunctionsInterop.cs" company="WildGums">
-//   Copyright (c) 2008 - 2019 WildGums. All rights reserved.
-// </copyright>
-// <summary>
-//   Defines the DocumentFunctionsInterop type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-#pragma warning disable CL0002 // Use "Async" suffix for async methods
+﻿#pragma warning disable CL0002 // Use "Async" suffix for async methods
 
 namespace Blorc.Services.Interop
 {
@@ -17,7 +8,6 @@ namespace Blorc.Services.Interop
 
     internal static class DocumentInterop
     {
-
         public static Task<Rect> GetBoundingClientRect(IJSRuntime jsRuntime, double x, double y)
         {
             return jsRuntime.InvokeAsync<Rect>(

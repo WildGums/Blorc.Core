@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IFactory.cs" company="WildGums">
-//   Copyright (c) 2008 - 2020 WildGums. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Blorc.Services
+﻿namespace Blorc.Services
 {
     using System;
     using System.Collections;
@@ -13,6 +7,6 @@ namespace Blorc.Services
     {
         IEnumerable Get(object source);
 
-        object Get(object source, Type targetType);
+        object? Get(object source, Type targetType);
     }
 }

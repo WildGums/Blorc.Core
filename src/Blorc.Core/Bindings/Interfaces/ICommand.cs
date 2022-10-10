@@ -5,14 +5,14 @@
 
     public interface ICommand
     {
-        object Tag { get; set; }
+        object? Tag { get; set; }
 
-        event EventHandler<EventArgs> CanExecuteChanged;
+        event EventHandler<EventArgs>? CanExecuteChanged;
 
-        event EventHandler<EventArgs> Executed;
+        event EventHandler<EventArgs>? Executed;
 
-        Task<bool> CanExecuteAsync(object parameter);
+        Task<bool> CanExecuteAsync(object? parameter);
 
-        Task ExecuteAsync(object parameter);
+        Task ExecuteAsync(object? parameter);
     }
 }

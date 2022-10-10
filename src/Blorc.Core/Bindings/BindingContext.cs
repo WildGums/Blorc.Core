@@ -2,35 +2,25 @@
 {
     using System;
     using System.Collections.Generic;
-    using Blorc.MVVM;
 
     /// <summary>
     /// Binding context that takes care of binding updates.
     /// </summary>
     public class BindingContext : IDisposable
     {
-        #region Fields
         private readonly List<Binding> _bindings = new List<Binding>();
         private readonly List<CommandBinding> _commandBindings = new List<CommandBinding>();
 
         //private int? _lastViewModelId;
         private bool _disposedValue;
-        #endregion
-
+ 
         /// <summary>
         /// Initializes a new instance of the <see cref="BindingContext"/> class.
         /// </summary>
         public BindingContext()
         {
-            //UniqueIdentifier = UniqueIdentifierHelper.GetUniqueIdentifier<BindingContext>();
+            
         }
-
-        #region Properties
-        /// <summary>
-        /// Gets the unique identifier.
-        /// </summary>
-        /// <value>The unique identifier.</value>
-        public int UniqueIdentifier { get; private set; }
 
         /// <summary>
         /// Gets the get bindings.
@@ -49,16 +39,12 @@
         {
             get { return _commandBindings.ToArray(); }
         }
-        #endregion
 
-        #region Events
         ///// <summary>
         ///// Occurs when binding updates are required.
         ///// </summary>
-        //public event EventHandler<EventArgs> BindingUpdateRequired;
-        #endregion
+        //public event EventHandler<EventArgs>? BindingUpdateRequired;
 
-        #region Methods
         /// <summary>
         /// Clears this binding context and all bindings.
         /// </summary>
@@ -80,6 +66,8 @@
         /// <exception cref="ArgumentNullException">The <paramref name="binding"/> is <c>null</c>.</exception>
         public void AddBinding(Binding binding)
         {
+            ArgumentNullException.ThrowIfNull(binding);
+
             //Log.Debug($"Adding binding '{binding}'");
 
             _bindings.Add(binding);
@@ -92,6 +80,8 @@
         /// <exception cref="ArgumentNullException">The <paramref name="binding"/> is <c>null</c>.</exception>
         public void RemoveBinding(Binding binding)
         {
+            ArgumentNullException.ThrowIfNull(binding);
+
             //Log.Debug($"Removing binding '{binding}'");
 
             for (var i = 0; i < _bindings.Count; i++)
@@ -111,6 +101,8 @@
         /// <exception cref="ArgumentNullException">The <paramref name="commandBinding"/> is <c>null</c>.</exception>
         public void AddCommandBinding(CommandBinding commandBinding)
         {
+            ArgumentNullException.ThrowIfNull(commandBinding);
+
             //Log.Debug($"Adding command binding '{commandBinding}'");
 
             _commandBindings.Add(commandBinding);
@@ -123,6 +115,8 @@
         /// <exception cref="ArgumentNullException">The <paramref name="commandBinding"/> is <c>null</c>.</exception>
         public void RemoveCommandBinding(CommandBinding commandBinding)
         {
+            ArgumentNullException.ThrowIfNull(commandBinding);
+
             //Log.Debug($"Removing command binding '{commandBinding}'");
 
             for (var i = 0; i < _commandBindings.Count; i++)
@@ -134,38 +128,6 @@
                 }
             }
         }
-
-        ///// <summary>
-        ///// Updates the view model of this binding context.
-        ///// <para />
-        ///// This method can be called as much as required, it will automatically determine if binding
-        ///// updates are required.
-        ///// </summary>
-        ///// <param name="viewModel">The view model.</param>
-        //public void DetermineIfBindingsAreRequired(IViewModel viewModel)
-        //{
-        //    int? currentViewModelId = null;
-        //    if (viewModel != null)
-        //    {
-        //        currentViewModelId = viewModel.UniqueIdentifier;
-        //    }
-
-        //    if (_lastViewModelId != currentViewModelId)
-        //    {
-        //        if (_lastViewModelId.HasValue)
-        //        {
-        //            Clear();
-        //        }
-
-        //        if (viewModel != null)
-        //        {
-        //            BindingUpdateRequired?.Invoke(this, EventArgs.Empty);
-        //        }
-
-        //        _lastViewModelId = currentViewModelId;
-        //    }
-        //}
-        #endregion
 
         protected virtual void DisposeManaged()
         {

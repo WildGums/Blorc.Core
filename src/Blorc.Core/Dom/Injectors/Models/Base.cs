@@ -4,6 +4,12 @@
 
     public class Base : InjectorBase
     {
+        public Base()
+        {
+            Href = string.Empty;
+            Target = string.Empty;
+        }
+
         public string Href { get; set; }
 
         public string Target { get; set; }

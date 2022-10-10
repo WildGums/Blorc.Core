@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ObjectHelper.cs" company="Catel development team">
-//   Copyright (c) 2008 - 2015 Catel development team. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Blorc
+﻿namespace Blorc
 {
     using System;
 
@@ -20,7 +14,7 @@ namespace Blorc
         /// <param name = "object1">The first object.</param>
         /// <param name = "object2">The second object.</param>
         /// <returns><c>true</c> if the objects are equal; otherwise <c>false</c>.</returns>
-        public static bool AreEqual(object object1, object object2)
+        public static bool AreEqual(object? object1, object? object2)
         {
             var isObject1Null = object1 is null;
             var isObject2Null = object2 is null;
@@ -53,7 +47,7 @@ namespace Blorc
                 return true;
             }
 
-            if (object1.Equals(object2))
+            if (object1!.Equals(object2))
             {
                 return true;
             }
@@ -76,7 +70,7 @@ namespace Blorc
         /// <param name = "object1">The first object.</param>
         /// <param name = "object2">The second object.</param>
         /// <returns><c>true</c> if the objects are equal references; otherwise <c>false</c>.</returns>
-        public static bool AreEqualReferences(object object1, object object2)
+        public static bool AreEqualReferences(object? object1, object? object2)
         {
             var isObject1Null = object1 is null;
             var isObject2Null = object2 is null;
@@ -96,8 +90,8 @@ namespace Blorc
                 return true;
             }
 
-            var object1Type = object1.GetType();
-            var object2Type = object2.GetType();
+            var object1Type = object1!.GetType();
+            var object2Type = object2!.GetType();
 
             if (object1Type.IsValueType && object2Type.IsValueType)
             {
@@ -122,19 +116,17 @@ namespace Blorc
         /// <returns>
         ///   <c>true</c> if the specified object is <c>null</c> or <c>DBNull.Value</c>; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNull(object obj)
+        public static bool IsNull(object? obj)
         {
             if (obj is null)
             {
                 return true;
             }
 
-#if NET || NETCORE || NETSTANDARD
             if (obj == DBNull.Value)
             {
                 return true;
             }
-#endif
 
             return false;
         }

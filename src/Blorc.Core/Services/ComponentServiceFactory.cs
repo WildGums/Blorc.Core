@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ComponentServiceBaseFactory.cs" company="WildGums">
-//   Copyright (c) 2008 - 2020 WildGums. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Blorc.Services
+﻿namespace Blorc.Services
 {
     using System;
     using System.Collections;
@@ -31,6 +25,8 @@ namespace Blorc.Services
         public IEnumerable<TComponentService> Get<TComponentService>(ComponentBase componentBase)
             where TComponentService : IComponentService
         {
+            ArgumentNullException.ThrowIfNull(componentBase);
+
             foreach (var componentService in base.Get(componentBase).OfType<TComponentService>())
             {
                 componentService.Component = componentBase;
@@ -41,13 +37,24 @@ namespace Blorc.Services
         public TComponentService Get<TComponentService>(ComponentBase componentBase, Type targetType)
             where TComponentService : IComponentService
         {
-            var componentService = (TComponentService)base.Get(componentBase, targetType);
+            ArgumentNullException.ThrowIfNull(componentBase);
+            ArgumentNullException.ThrowIfNull(targetType);
+
+            var componentService = (TComponentService?)base.Get(componentBase, targetType);
+            if (componentService is null)
+            {
+                throw new InvalidOperationException($"Cannot create component service for target type '{targetType.Name}'");
+            }
+
             componentService.Component = componentBase;
             return componentService;
         }
 
-        public override object Get(object source, Type targetType)
+        public override object? Get(object source, Type targetType)
         {
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(targetType);
+
             return Get<IComponentService>((ComponentBase)source, targetType);
         }
 

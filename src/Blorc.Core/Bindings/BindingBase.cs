@@ -9,7 +9,7 @@
     /// </summary>
     public abstract class BindingBase : IDisposable
     {
-        private string _toStringValue;
+        private string? _toStringValue;
         private bool _disposedValue;
 
         /// <summary>

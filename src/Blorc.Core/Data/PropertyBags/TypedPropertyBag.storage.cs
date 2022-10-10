@@ -12,6 +12,7 @@
 namespace Blorc.Data
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
 
     public partial class TypedPropertyBag
@@ -196,6 +197,8 @@ namespace Blorc.Data
 
         public override TValue GetValue<TValue>(string name, TValue defaultValue = default)
         {
+            ArgumentNullException.ThrowIfNull(name);
+
             // Get from the right dictionary and see if we need to convert to TValue
             var propertyType = GetRegisteredPropertyType(name);
             if (propertyType is null)
@@ -206,7 +209,9 @@ namespace Blorc.Data
 
             var targetType = typeof(TValue);
 
-            if (targetType == typeof(Boolean))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(Boolean))
             {
                 var storage = GetBooleanStorage();
 
@@ -214,9 +219,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -224,7 +237,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(Char))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(Char))
             {
                 var storage = GetCharStorage();
 
@@ -232,9 +247,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -242,7 +265,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(SByte))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(SByte))
             {
                 var storage = GetSByteStorage();
 
@@ -250,9 +275,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -260,7 +293,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(Byte))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(Byte))
             {
                 var storage = GetByteStorage();
 
@@ -268,9 +303,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -278,7 +321,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(Int16))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(Int16))
             {
                 var storage = GetInt16Storage();
 
@@ -286,9 +331,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -296,7 +349,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(UInt16))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(UInt16))
             {
                 var storage = GetUInt16Storage();
 
@@ -304,9 +359,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -314,7 +377,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(Int32))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(Int32))
             {
                 var storage = GetInt32Storage();
 
@@ -322,9 +387,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -332,7 +405,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(UInt32))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(UInt32))
             {
                 var storage = GetUInt32Storage();
 
@@ -340,9 +415,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -350,7 +433,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(Int64))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(Int64))
             {
                 var storage = GetInt64Storage();
 
@@ -358,9 +443,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -368,7 +461,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(UInt64))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(UInt64))
             {
                 var storage = GetUInt64Storage();
 
@@ -376,9 +471,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -386,7 +489,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(Single))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(Single))
             {
                 var storage = GetSingleStorage();
 
@@ -394,9 +499,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -404,7 +517,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(Double))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(Double))
             {
                 var storage = GetDoubleStorage();
 
@@ -412,9 +527,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -422,7 +545,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(Decimal))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(Decimal))
             {
                 var storage = GetDecimalStorage();
 
@@ -430,9 +555,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -440,7 +573,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(DateTime))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(DateTime))
             {
                 var storage = GetDateTimeStorage();
 
@@ -448,9 +583,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -458,7 +601,9 @@ namespace Blorc.Data
                 return default;
             }
 
-            if (targetType == typeof(String))
+            // Important: compare against the *actual* property type so we use the correct property bag
+            // to retrieve the value
+            if (propertyType == typeof(String))
             {
                 var storage = GetStringStorage();
 
@@ -466,9 +611,17 @@ namespace Blorc.Data
                 {
                     if (storage.TryGetValue(name, out var bagValue))
                     {
-                        // Simply cast
+                        // Special case when GetValue<object> is used to retrieve this value type
+                        if (targetType == typeof(object))
+                        {
+                            // Get boxed value (prevent single boxing) and return as object
+                            return (TValue)(object)BoxingCache.GetBoxedValue(bagValue);
+                        }
+
+                        // Simply cast to the requested type
                         var tr = __makeref(bagValue);
                         var value = __refvalue(tr, TValue);
+
                         return value;
                     }
                 }
@@ -498,6 +651,8 @@ namespace Blorc.Data
 
         public override void SetValue<TValue>(string name, TValue value)
         {
+            ArgumentNullException.ThrowIfNull(name);
+
             var stored = false;
             var raisePropertyChanged = false;
 
@@ -506,9 +661,9 @@ namespace Blorc.Data
             {
                 // If users use SetValue<object>(), we might need to convert
                 var propertyType = GetRegisteredPropertyType(name);
-                if (propertyType != null)
+                if (propertyType is null == false)
                 {
-                    if (propertyType.IsValueType && value == null)
+                    if (propertyType.IsValueType && value is null)
                     {
                         throw new InvalidOperationException($"Property '{name}' cannot be updated with a null value since it represents a value of '{propertyType.FullName}'");
                     }
@@ -1002,7 +1157,7 @@ namespace Blorc.Data
 
             // Note: don't use methods, we don't want to lazy-instantiate the storage
             var booleanStorage = _booleanStorage;
-            if (booleanStorage != null)
+            if (booleanStorage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in booleanStorage)
@@ -1012,7 +1167,7 @@ namespace Blorc.Data
             }
 
             var charStorage = _charStorage;
-            if (charStorage != null)
+            if (charStorage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in charStorage)
@@ -1022,7 +1177,7 @@ namespace Blorc.Data
             }
 
             var sbyteStorage = _sbyteStorage;
-            if (sbyteStorage != null)
+            if (sbyteStorage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in sbyteStorage)
@@ -1032,7 +1187,7 @@ namespace Blorc.Data
             }
 
             var byteStorage = _byteStorage;
-            if (byteStorage != null)
+            if (byteStorage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in byteStorage)
@@ -1042,7 +1197,7 @@ namespace Blorc.Data
             }
 
             var int16Storage = _int16Storage;
-            if (int16Storage != null)
+            if (int16Storage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in int16Storage)
@@ -1052,7 +1207,7 @@ namespace Blorc.Data
             }
 
             var uint16Storage = _uint16Storage;
-            if (uint16Storage != null)
+            if (uint16Storage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in uint16Storage)
@@ -1062,7 +1217,7 @@ namespace Blorc.Data
             }
 
             var int32Storage = _int32Storage;
-            if (int32Storage != null)
+            if (int32Storage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in int32Storage)
@@ -1072,7 +1227,7 @@ namespace Blorc.Data
             }
 
             var uint32Storage = _uint32Storage;
-            if (uint32Storage != null)
+            if (uint32Storage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in uint32Storage)
@@ -1082,7 +1237,7 @@ namespace Blorc.Data
             }
 
             var int64Storage = _int64Storage;
-            if (int64Storage != null)
+            if (int64Storage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in int64Storage)
@@ -1092,7 +1247,7 @@ namespace Blorc.Data
             }
 
             var uint64Storage = _uint64Storage;
-            if (uint64Storage != null)
+            if (uint64Storage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in uint64Storage)
@@ -1102,7 +1257,7 @@ namespace Blorc.Data
             }
 
             var singleStorage = _singleStorage;
-            if (singleStorage != null)
+            if (singleStorage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in singleStorage)
@@ -1112,7 +1267,7 @@ namespace Blorc.Data
             }
 
             var doubleStorage = _doubleStorage;
-            if (doubleStorage != null)
+            if (doubleStorage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in doubleStorage)
@@ -1122,7 +1277,7 @@ namespace Blorc.Data
             }
 
             var decimalStorage = _decimalStorage;
-            if (decimalStorage != null)
+            if (decimalStorage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in decimalStorage)
@@ -1132,7 +1287,7 @@ namespace Blorc.Data
             }
 
             var datetimeStorage = _datetimeStorage;
-            if (datetimeStorage != null)
+            if (datetimeStorage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in datetimeStorage)
@@ -1142,7 +1297,7 @@ namespace Blorc.Data
             }
 
             var stringStorage = _stringStorage;
-            if (stringStorage != null)
+            if (stringStorage is null == false)
             {
                  // Unfortunately we have to box to object here...
                  foreach (var propertyPair in stringStorage)
@@ -1153,7 +1308,7 @@ namespace Blorc.Data
 
 
             var objectStorage = _objectStorage;
-            if (objectStorage != null)
+            if (objectStorage is null == false)
             {
                 foreach (var propertyPair in objectStorage)
                 {

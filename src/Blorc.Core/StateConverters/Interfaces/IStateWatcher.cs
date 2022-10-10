@@ -4,6 +4,6 @@
 
     public interface IStateWatcher : IDisposable
     {
-        event EventHandler<EventArgs> StateChanged;
+        event EventHandler<EventArgs>? StateChanged;
     }
 }

@@ -11,17 +11,17 @@
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public abstract string[] GetAllNames();
 
-        public abstract TValue GetValue<TValue>(string name, TValue defaultValue = default);
+        public abstract TValue GetValue<TValue>(string name, TValue defaultValue = default!);
 
         public abstract bool IsAvailable(string name);
 
         public abstract void SetValue<TValue>(string name, TValue value);
 
-        public abstract Dictionary<string, object> GetAllProperties();
+        public abstract Dictionary<string, object?> GetAllProperties();
 
         /// <summary>
         /// Raises the property changed notification event for the specified property.

@@ -27,7 +27,7 @@
             }
         }
 
-        private Type GetRegisteredPropertyType(string name)
+        private Type? GetRegisteredPropertyType(string name)
         {
             lock (_propertyTypes)
             {

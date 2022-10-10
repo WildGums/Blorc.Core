@@ -10,39 +10,39 @@
 
     public abstract partial class BlorcComponentBase
     {
-        private static readonly Dictionary<string, Type> EventCallbackTypeCache = new Dictionary<string, Type>();
+        private static readonly Dictionary<string, Type?> EventCallbackTypeCache = new Dictionary<string, Type?>();
 
-        private static readonly Dictionary<string, MethodInfo> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo>();
+        private static readonly Dictionary<string, MethodInfo?> CallbackInvokeAsyncCache = new Dictionary<string, MethodInfo?>();
 
         private readonly Queue<Action> _propertyChangedActionQueue = new Queue<Action>();
 
-        protected BlorcComponentBase(bool injectComponentServices) :this()
+        protected BlorcComponentBase(bool injectComponentServices) : this()
         {
             InjectComponentServices = injectComponentServices;
         }
 
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> AdditionalAttributes { get; set; }
-        
+        public Dictionary<string, object?>? AdditionalAttributes { get; set; }
+
         [Parameter]
         public bool DisableAutomaticRaiseEventCallback { get; set; }
 
         [Parameter]
         public bool InjectComponentServices { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public TValue GetPropertyValue<TValue>(string propertyName)
+        public TValue? GetPropertyValue<TValue>(string propertyName)
         {
             return _propertyBag.GetValue(propertyName, default(TValue));
         }
 
-        public void SetPropertyValue(string propertyName, object value)
+        public void SetPropertyValue(string propertyName, object? value)
         {
             _propertyBag.SetValue(propertyName, value);
         }
 
-        private void OnPropertyBagPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPropertyBagPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_hasRenderHandler)
             {
@@ -74,6 +74,11 @@
 
         private void RaiseEventCallback(PropertyChangedEventArgs eventArgs)
         {
+            if (string.IsNullOrEmpty(eventArgs.PropertyName))
+            {
+                return;
+            }
+
             if (DisableAutomaticRaiseEventCallback)
             {
                 return;
@@ -93,6 +98,11 @@
                 EventCallbackTypeCache.Add(propertyTypeFullName, eventCallbackType);
             }
 
+            if (eventCallbackType is null)
+            {
+                return;
+            }
+
             var propertyChangedEventCallback = PropertyHelper.GetPropertyValue(this, $"{propertyName}Changed");
             if (propertyChangedEventCallback is null || !eventCallbackType.IsInstanceOfType(propertyChangedEventCallback))
             {
@@ -101,14 +111,14 @@
 
             if (!CallbackInvokeAsyncCache.TryGetValue(propertyTypeFullName, out var invokeAsyncMethod))
             {
-                invokeAsyncMethod = eventCallbackType.GetMethod("InvokeAsync", new []{ propertyInfo.PropertyType });
+                invokeAsyncMethod = eventCallbackType.GetMethod("InvokeAsync", new[] { propertyInfo.PropertyType });
                 CallbackInvokeAsyncCache.Add(propertyTypeFullName, invokeAsyncMethod);
             }
 
             var propertyValue = propertyInfo.GetValue(this);
             if (invokeAsyncMethod is not null)
             {
-                var callbackTask = invokeAsyncMethod.Invoke(propertyChangedEventCallback, new[] {propertyValue}) as Task;
+                var callbackTask = invokeAsyncMethod.Invoke(propertyChangedEventCallback, new[] { propertyValue }) as Task;
                 callbackTask?.GetAwaiter().GetResult();
             }
         }

@@ -13,7 +13,7 @@
         /// <param name="parameter">An optional parameter to be used in the converter logic.</param>
         /// <param name="culture">The culture of the conversion.</param>
         /// <returns>The value to be passed to the target dependency property.</returns>
-        object Convert(object value, Type targetType, object parameter, CultureInfo culture);
+        object? Convert(object? value, Type targetType, object? parameter, CultureInfo? culture);
 
         /// <summary>
         /// Modifies the target data before passing it to the source object.
@@ -23,6 +23,6 @@
         /// <param name="parameter">An optional parameter to be used in the converter logic.</param>
         /// <param name="culture">The culture of the conversion.</param>
         /// <returns>The value to be passed to the source object.</returns>
-        object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
+        object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo? culture);
     }
 }
