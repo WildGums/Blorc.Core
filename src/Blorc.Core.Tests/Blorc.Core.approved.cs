@@ -145,7 +145,7 @@ namespace Blorc.Components
         protected virtual void DisposeManaged() { }
         public void ForceUpdate() { }
         protected string GenerateUniqueId(string prefix) { }
-        public TValue? GetPropertyValue<TValue>(string propertyName) { }
+        public TValue GetPropertyValue<TValue>(string propertyName) { }
         protected override System.Threading.Tasks.Task OnAfterRenderAsync(bool firstRender) { }
         protected override void OnParametersSet() { }
         protected virtual void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e) { }
