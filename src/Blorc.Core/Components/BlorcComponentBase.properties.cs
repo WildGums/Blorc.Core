@@ -32,9 +32,9 @@
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public TValue? GetPropertyValue<TValue>(string propertyName)
+        public TValue GetPropertyValue<TValue>(string propertyName)
         {
-            return _propertyBag.GetValue(propertyName, default(TValue));
+            return _propertyBag.GetValue(propertyName, default(TValue))!;
         }
 
         public void SetPropertyValue(string propertyName, object? value)
