@@ -8,7 +8,6 @@
     <Description>Core library for Blazor libraries and apps.</Description>
     <PackageTags>blazor;core</PackageTags>
     <IsPackable>true</IsPackable>
-    <RazorLangVersion>3.0</RazorLangVersion>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   
