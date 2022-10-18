@@ -266,7 +266,7 @@ public class ComponentsProcessor : ProcessorBase
 
                 // Don't use WithProperty since that will concatenate
                 //msBuildSettings.WithProperty("ResolveNuGetPackages", "true");
-                msbuildSettings.Properties["ResolveNuGetPackages"] = "true";
+                msBuildSettings.Properties["ResolveNuGetPackages"] = "true";
                 
                 msBuildSettings.Restore = true;
                 noBuild = false;
