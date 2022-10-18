@@ -260,21 +260,21 @@ public class ComponentsProcessor : ProcessorBase
 
             var noBuild = true;
 
-            // if (isBlazorProject)
-            // {
-            //     CakeContext.Information("Allowing build and package restore during package phase since this is a Blazor project which requires the 'obj' directory");
+            if (isBlazorProject)
+            {
+                CakeContext.Information("Allowing build and package restore during package phase since this is a Blazor project which requires the 'obj' directory");
 
-            //     // Don't use WithProperty since that will concatenate, and we need to overwrite the
-            //     // value here
-            //     //msBuildSettings.WithProperty("ResolveNuGetPackages", "true");
-            //     msBuildSettings.Properties["ResolveNuGetPackages"] = new List<string>
-            //     { 
-            //         "true"
-            //     };
+                // Don't use WithProperty since that will concatenate, and we need to overwrite the
+                // value here
+                //msBuildSettings.WithProperty("ResolveNuGetPackages", "true");
+                msBuildSettings.Properties["ResolveNuGetPackages"] = new List<string>
+                { 
+                    "true"
+                };
                 
-            //     msBuildSettings.Restore = true;
-            //     noBuild = false;
-            // }
+                msBuildSettings.Restore = true;
+                noBuild = false;
+            }
 
             // As described in the this issue: https://github.com/NuGet/Home/issues/4360
             // we should not use IsTool, but set BuildOutputTargetFolder instead
