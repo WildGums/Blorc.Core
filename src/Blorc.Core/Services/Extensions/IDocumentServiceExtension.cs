@@ -31,7 +31,9 @@
             ArgumentNullException.ThrowIfNull(assembly);
             ArgumentNullException.ThrowIfNull(path);
 
-            var source = $"_content/{assembly.GetName().Name}/{path}";
+            var version = GetAssemblyVersion(assembly);
+
+            var source = $"_content/{assembly.GetName().Name}/{path}?v={version}";
             await @this.InjectLinkAsync(source);
         }
 
@@ -56,7 +58,9 @@
             ArgumentNullException.ThrowIfNull(assembly);
             ArgumentNullException.ThrowIfNull(path);
 
-            var source = $"_content/{assembly.GetName().Name}/{path}";
+            var version = GetAssemblyVersion(assembly);
+
+            var source = $"_content/{assembly.GetName().Name}/{path}?v={version}";
             await @this.InjectScriptAsync(source);
         }
 
@@ -75,6 +79,14 @@
 
             await @this.InjectAssemblyScriptFileAsync(typeof(IDocumentServiceExtension).Assembly, "document.js");
             await @this.InjectAssemblyScriptFileAsync(typeof(IDocumentServiceExtension).Assembly, "file.js");
+        }
+
+        private static string GetAssemblyVersion(Assembly assembly)
+        {
+            var informationalVersion = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+
+            var version = informationalVersion?.InformationalVersion ?? assembly.GetName().Version?.ToString() ?? "unknown";
+            return version;
         }
     }
 }
