@@ -4,6 +4,9 @@ using Blorc.Services;
 
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Serilog.Core;
+using Serilog.Extensions.Logging;
+using Serilog;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -19,6 +22,25 @@ builder.Services.AddScoped(
 builder.Services.AddBlorcCore();
 builder.Services.AddTransient<SurveyExecutionService>();
 builder.Services.AddTransient<SurveyVisualizationService>();
+
+// Logging
+var levelSwitch = new LoggingLevelSwitch
+{
+#if DEBUG
+    MinimumLevel = Serilog.Events.LogEventLevel.Debug
+#else
+    MinimumLevel = Serilog.Events.LogEventLevel.Information
+#endif
+};
+
+var logger = Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.ControlledBy(levelSwitch)
+    .Enrich.WithProperty("InstanceId", Guid.NewGuid().ToString("n"))
+    .WriteTo.BrowserConsole()
+    .CreateLogger();
+
+builder.Services.AddSingleton<ILoggerFactory>(new SerilogLoggerFactory(logger, false));
+builder.Services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 
 var webAssemblyHost = builder.Build();
 
