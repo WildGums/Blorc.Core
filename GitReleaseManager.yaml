@@ -1,12 +1,14 @@
 issue-labels-include:
-- Breaking change
-- Feature
-- Bug
-- Improvement
-- Documentation
+  - Breaking change
+  - Feature
+  - Bug
+  - Improvement
+  - Documentation
 issue-labels-exclude:
-- Build
+  - Build
+  - Wont-fix
+  - Wontfix
 issue-labels-alias:
-    - name:    Documentation
-      header:  Documentation
-      plural:  Documentation
+  - name:    Documentation
+    header:  Documentation
+    plural:  Documentation
