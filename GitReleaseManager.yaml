@@ -7,8 +7,7 @@ issue-labels-include:
   - Dependencies
 issue-labels-exclude:
   - Build
-  - Wont-fix
-  - Wontfix
+  - Won't fix
 issue-labels-alias:
   - name:    Documentation
     header:  Documentation
