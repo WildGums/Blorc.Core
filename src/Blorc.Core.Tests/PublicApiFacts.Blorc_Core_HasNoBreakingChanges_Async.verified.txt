@@ -433,10 +433,10 @@ namespace Blorc
         public static bool AreEqualReferences(object? object1, object? object2) { }
         public static bool IsNull(object? obj) { }
     }
-    public class _Imports : Microsoft.AspNetCore.Components.ComponentBase
+    public class _Imports
     {
         public _Imports() { }
-        protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder @__builder) { }
+        protected void Execute() { }
     }
 }
 namespace Blorc.Reflection
