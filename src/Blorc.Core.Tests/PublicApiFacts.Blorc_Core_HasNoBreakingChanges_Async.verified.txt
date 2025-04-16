@@ -209,35 +209,35 @@ namespace Blorc.Data
 {
     public static class BoxingCache
     {
-        public static object? GetBoxedValue(bool value) { }
-        public static object? GetBoxedValue(byte value) { }
-        public static object? GetBoxedValue(char value) { }
-        public static object? GetBoxedValue(System.Char? value) { }
         public static object? GetBoxedValue(System.DateTime value) { }
         public static object? GetBoxedValue(System.DateTime? value) { }
-        public static object? GetBoxedValue(decimal value) { }
-        public static object? GetBoxedValue(double value) { }
-        public static object? GetBoxedValue(short value) { }
-        public static object? GetBoxedValue(int value) { }
-        public static object? GetBoxedValue(long value) { }
-        public static object? GetBoxedValue(sbyte value) { }
-        public static object? GetBoxedValue(float value) { }
-        public static object? GetBoxedValue(string value) { }
-        public static object? GetBoxedValue(ushort value) { }
-        public static object? GetBoxedValue(uint value) { }
-        public static object? GetBoxedValue(ulong value) { }
+        public static object? GetBoxedValue(bool value) { }
         public static object? GetBoxedValue(bool? value) { }
+        public static object? GetBoxedValue(byte value) { }
         public static object? GetBoxedValue(byte? value) { }
+        public static object? GetBoxedValue(char value) { }
+        public static object? GetBoxedValue(char? value) { }
+        public static object? GetBoxedValue(decimal value) { }
         public static object? GetBoxedValue(decimal? value) { }
+        public static object? GetBoxedValue(double value) { }
         public static object? GetBoxedValue(double? value) { }
+        public static object? GetBoxedValue(float value) { }
         public static object? GetBoxedValue(float? value) { }
+        public static object? GetBoxedValue(int value) { }
         public static object? GetBoxedValue(int? value) { }
+        public static object? GetBoxedValue(long value) { }
         public static object? GetBoxedValue(long? value) { }
         public static object? GetBoxedValue(object? value) { }
+        public static object? GetBoxedValue(sbyte value) { }
         public static object? GetBoxedValue(sbyte? value) { }
+        public static object? GetBoxedValue(short value) { }
         public static object? GetBoxedValue(short? value) { }
+        public static object? GetBoxedValue(string value) { }
+        public static object? GetBoxedValue(uint value) { }
         public static object? GetBoxedValue(uint? value) { }
+        public static object? GetBoxedValue(ulong value) { }
         public static object? GetBoxedValue(ulong? value) { }
+        public static object? GetBoxedValue(ushort value) { }
         public static object? GetBoxedValue(ushort? value) { }
         public static object? GetBoxedValue<TValue>(TValue value)
             where TValue :  notnull { }
@@ -270,21 +270,21 @@ namespace Blorc.Data
         public override TValue GetValue<TValue>(string name, TValue defaultValue = default) { }
         public void Import(System.Collections.Generic.Dictionary<string, object?> propertiesToImport) { }
         public override bool IsAvailable(string name) { }
+        public void SetValue(string propertyName, System.DateTime value) { }
         public void SetValue(string propertyName, bool value) { }
         public void SetValue(string propertyName, byte value) { }
         public void SetValue(string propertyName, char value) { }
-        public void SetValue(string propertyName, System.DateTime value) { }
         public void SetValue(string propertyName, decimal value) { }
         public void SetValue(string propertyName, double value) { }
-        public void SetValue(string propertyName, short value) { }
+        public void SetValue(string propertyName, float value) { }
         public void SetValue(string propertyName, int value) { }
         public void SetValue(string propertyName, long value) { }
         public void SetValue(string propertyName, sbyte value) { }
-        public void SetValue(string propertyName, float value) { }
+        public void SetValue(string propertyName, short value) { }
         public void SetValue(string propertyName, string value) { }
-        public void SetValue(string propertyName, ushort value) { }
         public void SetValue(string propertyName, uint value) { }
         public void SetValue(string propertyName, ulong value) { }
+        public void SetValue(string propertyName, ushort value) { }
         public override void SetValue<TValue>(string name, TValue value) { }
         public void UpdatePropertyValue<TValue>(string propertyName, System.Func<TValue, TValue> update) { }
     }
@@ -447,73 +447,73 @@ namespace Blorc.Reflection
         public FastMemberInvoker() { }
         protected virtual System.Action<TEntity, TMemberType> Compile<TMemberType>(System.Linq.Expressions.Expression<System.Action<TEntity, TMemberType>> expression) { }
         protected virtual System.Func<TEntity, TMemberType> Compile<TMemberType>(System.Linq.Expressions.Expression<System.Func<TEntity, TMemberType>> expression) { }
+        public bool SetFieldValue(TEntity entity, string fieldName, System.DateTime value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, bool value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, byte value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, char value) { }
-        public bool SetFieldValue(TEntity entity, string fieldName, System.DateTime value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, decimal value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, double value) { }
-        public bool SetFieldValue(TEntity entity, string fieldName, short value) { }
+        public bool SetFieldValue(TEntity entity, string fieldName, float value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, int value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, long value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, object value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, sbyte value) { }
-        public bool SetFieldValue(TEntity entity, string fieldName, float value) { }
+        public bool SetFieldValue(TEntity entity, string fieldName, short value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, string value) { }
-        public bool SetFieldValue(TEntity entity, string fieldName, ushort value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, uint value) { }
         public bool SetFieldValue(TEntity entity, string fieldName, ulong value) { }
+        public bool SetFieldValue(TEntity entity, string fieldName, ushort value) { }
         public bool SetFieldValue<TValue>(object entity, string fieldName, TValue value) { }
+        public bool SetPropertyValue(TEntity entity, string propertyName, System.DateTime value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, bool value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, byte value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, char value) { }
-        public bool SetPropertyValue(TEntity entity, string propertyName, System.DateTime value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, decimal value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, double value) { }
-        public bool SetPropertyValue(TEntity entity, string propertyName, short value) { }
+        public bool SetPropertyValue(TEntity entity, string propertyName, float value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, int value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, long value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, object value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, sbyte value) { }
-        public bool SetPropertyValue(TEntity entity, string propertyName, float value) { }
+        public bool SetPropertyValue(TEntity entity, string propertyName, short value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, string value) { }
-        public bool SetPropertyValue(TEntity entity, string propertyName, ushort value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, uint value) { }
         public bool SetPropertyValue(TEntity entity, string propertyName, ulong value) { }
+        public bool SetPropertyValue(TEntity entity, string propertyName, ushort value) { }
         public bool SetPropertyValue<TValue>(object entity, string propertyName, TValue value) { }
+        public bool TryGetFieldValue(TEntity entity, string fieldName, out System.DateTime item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out bool item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out byte item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out char item) { }
-        public bool TryGetFieldValue(TEntity entity, string fieldName, out System.DateTime item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out decimal item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out double item) { }
-        public bool TryGetFieldValue(TEntity entity, string fieldName, out short item) { }
+        public bool TryGetFieldValue(TEntity entity, string fieldName, out float item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out int item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out long item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out object item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out sbyte item) { }
-        public bool TryGetFieldValue(TEntity entity, string fieldName, out float item) { }
+        public bool TryGetFieldValue(TEntity entity, string fieldName, out short item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out string item) { }
-        public bool TryGetFieldValue(TEntity entity, string fieldName, out ushort item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out uint item) { }
         public bool TryGetFieldValue(TEntity entity, string fieldName, out ulong item) { }
+        public bool TryGetFieldValue(TEntity entity, string fieldName, out ushort item) { }
         public bool TryGetFieldValue<TValue>(object entity, string fieldName, out TValue value) { }
+        public bool TryGetPropertyValue(TEntity entity, string propertyName, out System.DateTime item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out bool item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out byte item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out char item) { }
-        public bool TryGetPropertyValue(TEntity entity, string propertyName, out System.DateTime item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out decimal item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out double item) { }
-        public bool TryGetPropertyValue(TEntity entity, string propertyName, out short item) { }
+        public bool TryGetPropertyValue(TEntity entity, string propertyName, out float item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out int item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out long item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out object item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out sbyte item) { }
-        public bool TryGetPropertyValue(TEntity entity, string propertyName, out float item) { }
+        public bool TryGetPropertyValue(TEntity entity, string propertyName, out short item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out string item) { }
-        public bool TryGetPropertyValue(TEntity entity, string propertyName, out ushort item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out uint item) { }
         public bool TryGetPropertyValue(TEntity entity, string propertyName, out ulong item) { }
+        public bool TryGetPropertyValue(TEntity entity, string propertyName, out ushort item) { }
         public bool TryGetPropertyValue<TValue>(object entity, string propertyName, out TValue value) { }
     }
     public interface IFastMemberInvoker
