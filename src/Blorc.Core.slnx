@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/misc/" />
+  <Folder Name="/src/" />
+  <Folder Name="/src/Core/">
+    <Project Path="Blorc.Core/Blorc.Core.csproj" />
+  </Folder>
+  <Folder Name="/src/Example/">
+    <Project Path="Blorc.Core.Example/Blorc.Core.Example.csproj" />
+  </Folder>
+  <Folder Name="/src/Tests/">
+    <Project Path="Blorc.Core.Tests/Blorc.Core.Tests.csproj" />
+  </Folder>
+</Solution>
